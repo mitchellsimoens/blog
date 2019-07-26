@@ -57,13 +57,15 @@ jobs:
           fingerprints:
             - "01:19:71:d8:d5:e9:f2:fd:75:ba:dc:b5:e1:6c:cc:99"
       - run:
-          name: Test
-          command: |
-            ls -ln
-            ls -ln public
-      - run:
           name: Deploy Blog
           command: gh-pages --dotfiles --message "[skip ci] Updates" --dist public
+      - run:
+          name: Invalidate Cloudflare Cache
+          command: |
+            curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+              -H "Authorization: Bearer $CLOUDFLARE_AUTH_TOKEN" \
+              -H "Content-Type: application/json" \
+              --data '{"files":["http://mitchellsimoens.com/index.html"]}'
 
 workflows:
   version: 2
