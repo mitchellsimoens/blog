@@ -8,11 +8,12 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
+// @ts-ignore
 import { TwitterFollowButton } from 'react-twitter-embed';
 
 import { rhythm } from '../utils/typography';
 
-const Bio = () => {
+const Bio = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.png/" }) {
@@ -34,6 +35,7 @@ const Bio = () => {
   `);
 
   const { author, social } = data.site.siteMetadata;
+
   return (
     <div
       style={{

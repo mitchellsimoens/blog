@@ -4,12 +4,17 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { rhythm, scale } from '../utils/typography';
 
-const Layout = ({ children, location, title }) => {
-  const rootPath = `${__PATH_PREFIX__}/`;
-  let header;
+interface Props {
+  children: JSX.Element | JSX.Element[];
+  location: any;
+  title: string;
+}
 
-  if (location.pathname === rootPath) {
-    header = (
+const Layout = ({ children, location, title }: Props): JSX.Element => {
+  // @ts-ignore
+  const rootPath = `${__PATH_PREFIX__}/`;
+  const header =
+    location.pathname === rootPath ? (
       <h1
         style={{
           ...scale(1.5),
@@ -28,9 +33,7 @@ const Layout = ({ children, location, title }) => {
           {title}
         </Link>
       </h1>
-    );
-  } else {
-    header = (
+    ) : (
       <h3
         style={{
           fontFamily: `Montserrat, sans-serif`,
@@ -49,7 +52,7 @@ const Layout = ({ children, location, title }) => {
         </Link>
       </h3>
     );
-  }
+
   return (
     <div
       style={{

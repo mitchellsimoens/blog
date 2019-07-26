@@ -40,6 +40,14 @@
     "typography-theme-wordpress-2016": "0.16.19"
   },
   "devDependencies": {
+    "@types/classnames": "2.2.9",
+    "@types/node": "12.6.8",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.5",
+    "@types/react-helmet": "5.0.8",
+    "@types/typography": "0.16.2",
+    "@typescript-eslint/eslint-plugin": "1.13.0",
+    "@typescript-eslint/parser": "1.13.0",
     "babel-eslint": "10.0.2",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "17.1.1",
@@ -49,9 +57,11 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.3",
+    "gatsby-plugin-typescript": "2.1.2",
     "husky": "3.0.1",
     "lint-staged": "9.2.1",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "typescript": "3.5.3"
   },
   "keywords": [
     "mitchell",
@@ -64,17 +74,18 @@
     }
   },
   "lint-staged": {
-    "*.js,src/**/*.{js,jsx}": [
+    "*.js,src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "git add"
     ]
   },
   "scripts": {
     "build": "gatsby build",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "lint": "eslint 'src/**/*.{js,jsx}' '*.js'",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' '*.js'",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "type-check": "tsc --noEmit"
   }
 }

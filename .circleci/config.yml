@@ -76,6 +76,15 @@ jobs:
           name: ESLint
           command: yarn lint
 
+  type-check:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-npm-cache
+      - run:
+          name: TypeScript Type Check
+          command: yarn type-check
+
 workflows:
   version: 2
   build-and-test:
@@ -84,9 +93,13 @@ workflows:
       - lint:
           requires:
             - install-dependencies
+      - type-check:
+          requires:
+            - install-dependencies
       - build:
           requires:
             - lint
+            - type-check
       - deploy:
           requires:
             - build

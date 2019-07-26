@@ -1,13 +1,12 @@
 import Typography from 'typography';
+// @ts-ignore
 import Wordpress2016 from 'typography-theme-wordpress-2016';
 
-Wordpress2016.overrideThemeStyles = () => {
-  return {
-    'a.gatsby-resp-image-link': {
-      boxShadow: `none`,
-    },
-  };
-};
+Wordpress2016.overrideThemeStyles = (): any => ({
+  'a.gatsby-resp-image-link': {
+    boxShadow: `none`,
+  },
+});
 
 delete Wordpress2016.googleFonts;
 
