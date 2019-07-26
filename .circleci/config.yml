@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Install and configure dependencies
           command: |
-            npm install -g --silent gh-pages
+            sudo npm install -g --silent gh-pages
             git config user.email "mitchellsimoens@gmail.com"
             git config user.name "mitchellsimoens"
       - add_ssh_keys:
