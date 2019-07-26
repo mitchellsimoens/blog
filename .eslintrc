@@ -1,0 +1,42 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "globals": {
+    "__PATH_PREFIX__": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["prettier", "import", "react"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
+    "react/no-danger": "off",
+    "strict": 0,
+    "class-methods-use-this": "off",
+    "curly": ["error", "all"],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true
+      }
+    ],
+    "no-console": "error"
+  }
+}

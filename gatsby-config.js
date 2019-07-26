@@ -10,10 +10,22 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-eslint',
+      options: {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|.cache|public)/,
+        stages: ['develop'],
+        options: {
+          emitWarning: true,
+          failOnError: false,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `mitchellsimoensblog`
-      }
+        shortname: `mitchellsimoensblog`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -39,17 +51,19 @@ module.exports = {
               usePrefix: true,
               providers: {
                 settings: {
-                  Twitter: { theme: 'dark' },
+                  Twitter: {
+                    theme: 'dark',
+                  },
                 },
               },
-            }
+            },
           },
           {
             resolve: `@weknow/gatsby-remark-twitter`,
             options: {
               align: `center`,
               theme: `dark`,
-            }
+            },
           },
           {
             resolve: `gatsby-remark-images`,
@@ -70,7 +84,7 @@ module.exports = {
             },
           },
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`
+          `gatsby-remark-smartypants`,
         ],
       },
     },
@@ -106,4 +120,4 @@ module.exports = {
       },
     },
   ],
-}
+};
