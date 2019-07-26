@@ -1,0 +1,63 @@
+aliases:
+  - &restore-npm-cache
+    key: v1-dependencies-{{ checksum "yarn.lock" }}
+    name: Restoring node_modules cache
+  - &restore-webpack-cache
+    key: v1-webpackcache-{{ checksum "yarn.lock" }}
+    name: Restoring webpack cache
+  - &restore-dist-cache
+    key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
+    name: Restoring build
+  - &save-npm-cache
+    key: v1-dependencies-{{ checksum "yarn.lock" }}
+    name: Saving node_modules cache
+    paths:
+      - node_modules
+  - &save-webpack-cache
+    key: v1-webpackcache-{{ checksum "yarn.lock" }}
+    name: Saving webpack cache
+    paths:
+      - node_modules/.cache
+  - &save-dist-cache
+    key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
+    name: Saving build
+    paths:
+      - build
+
+defaults: &defaults
+  working_directory: /home/circleci/repo
+  docker:
+    - image: circleci/node:10-browsers
+
+version: 2.1
+jobs:
+  install-dependencies:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-npm-cache
+      - run:
+          name: Install Node modules
+          command: yarn
+      - save_cache: *save-npm-cache
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-npm-cache
+      - restore_cache: *restore-webpack-cache
+      - run:
+          name: Build Blog
+          command: yarn build
+      - save_cache: *save-dist-cache
+      - save_cache: *save-webpack-cache
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - install-dependencies
+      - build:
+          requires:
+            - install-dependencies
