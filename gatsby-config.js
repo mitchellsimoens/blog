@@ -10,14 +10,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-csp`,
-      options: {
-        directives: {
-          'default-src': `'self' https://disqus.com https://*.disqus.com https://*.disquscdn.com`
-        }
-      }
-    },
-    {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `mitchellsimoensblog`
