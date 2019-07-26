@@ -34,6 +34,24 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `@raae/gatsby-remark-oembed`,
+            options: {
+              usePrefix: true,
+              providers: {
+                settings: {
+                  Twitter: { theme: 'dark' },
+                },
+              },
+            }
+          },
+          {
+            resolve: `@weknow/gatsby-remark-twitter`,
+            options: {
+              align: `center`,
+              theme: `dark`,
+            }
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 590,
@@ -47,7 +65,7 @@ module.exports = {
           },
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
+          `gatsby-remark-smartypants`
         ],
       },
     },

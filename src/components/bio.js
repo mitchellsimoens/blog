@@ -8,6 +8,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
+import { TwitterFollowButton } from 'react-twitter-embed'
 
 import { rhythm } from "../utils/typography"
 
@@ -53,13 +54,14 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <p>
-        Written by <strong>{author}</strong> who is a long time nerd developing software and building computers and gadgets. Anything expressed on this website are Mitchell's alone and do not represent his employer.
-        {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          You should follow him on Twitter
-        </a>
-      </p>
+
+      <div>
+        <p>
+          Written by <strong>{author}</strong> who is a long time nerd developing software and building computers and gadgets. Anything expressed on this website are Mitchell's alone and do not represent his employer.
+        </p>
+
+        <TwitterFollowButton screenName={social.twitter} options={{size: 'large'}} />
+      </div>
     </div>
   )
 }
