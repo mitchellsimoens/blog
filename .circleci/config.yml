@@ -57,8 +57,13 @@ jobs:
           fingerprints:
             - "01:19:71:d8:d5:e9:f2:fd:75:ba:dc:b5:e1:6c:cc:99"
       - run:
+          name: Test
+          command: |
+            ls -ln
+            ls -ln public
+      - run:
           name: Deploy Blog
-          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist /home/circleci/repo/public
+          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist public
 
 workflows:
   version: 2
