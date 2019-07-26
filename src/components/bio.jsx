@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
-import { TwitterFollowButton } from 'react-twitter-embed'
+import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import Image from 'gatsby-image';
+import { TwitterFollowButton } from 'react-twitter-embed';
 
-import { rhythm } from "../utils/typography"
+import { rhythm } from '../utils/typography';
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -31,13 +31,13 @@ const Bio = () => {
         }
       }
     }
-  `)
+  `);
 
-  const { author, social } = data.site.siteMetadata
+  const { author, social } = data.site.siteMetadata;
   return (
     <div
       style={{
-        display: `flex`,
+        display: 'flex',
         marginBottom: rhythm(2.5),
       }}
     >
@@ -48,22 +48,24 @@ const Bio = () => {
           marginRight: rhythm(1 / 2),
           marginBottom: 0,
           minWidth: 50,
-          borderRadius: `100%`,
+          borderRadius: '100%',
         }}
         imgStyle={{
-          borderRadius: `50%`,
+          borderRadius: '50%',
         }}
       />
 
       <div>
         <p>
-          Written by <strong>{author}</strong> who is a long time nerd developing software and building computers and gadgets. Anything expressed on this website are Mitchell's alone and do not represent his employer.
+          Written by {author} who is a long time nerd developing software and building computers and gadgets. Anything
+          expressed on this website are {author}
+          {`'`}s alone and do not represent his employer.
         </p>
 
-        <TwitterFollowButton screenName={social.twitter} options={{size: 'large'}} />
+        <TwitterFollowButton screenName={social.twitter} options={{ size: 'large' }} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;
