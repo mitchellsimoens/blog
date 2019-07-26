@@ -11,7 +11,14 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-function SEO({ description, lang, meta, title }) {
+interface Props {
+  description: string;
+  lang: string;
+  meta: any;
+  title: string;
+}
+
+function SEO({ description, lang, meta, title }: Props): JSX.Element {
   const { site } = useStaticQuery(
     graphql`
       query {

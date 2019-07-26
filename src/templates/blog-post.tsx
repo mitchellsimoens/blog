@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+// @ts-ignore
 import { Disqus } from 'gatsby-plugin-disqus';
 
 import Bio from '../components/bio';
@@ -11,7 +12,13 @@ import { rhythm, scale } from '../utils/typography';
 
 import './blog-post.css';
 
-const BlogPostTemplate = ({ data, location, pageContext }) => {
+interface Props {
+  data: any;
+  location: any;
+  pageContext: any;
+}
+
+const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;

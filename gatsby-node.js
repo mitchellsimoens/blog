@@ -1,10 +1,14 @@
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const path = require(`path`);
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const { createFilePath } = require(`gatsby-source-filesystem`);
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const webpack = require(`webpack`);
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const blogPost = path.resolve(`./src/templates/blog-post.jsx`);
+  const blogPost = path.resolve(`./src/templates/blog-post.tsx`);
   const result = await graphql(
     `
       {
@@ -62,4 +66,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     });
   }
+};
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new webpack.ProvidePlugin({
+        React: 'react',
+      }),
+    ],
+  });
 };

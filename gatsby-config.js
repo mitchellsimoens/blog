@@ -10,11 +10,19 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-eslint',
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: true, // defaults to false
+        jsxPragma: `jsx`, // defaults to "React"
+        allExtensions: true, // defaults to false
+      },
+    },
+    {
+      resolve: `gatsby-plugin-eslint`,
       options: {
         test: /\.jsx?$/,
         exclude: /(node_modules|.cache|public)/,
-        stages: ['develop'],
+        stages: [`develop`],
         options: {
           emitWarning: true,
           failOnError: false,
@@ -52,7 +60,7 @@ module.exports = {
               providers: {
                 settings: {
                   Twitter: {
-                    theme: 'dark',
+                    theme: `dark`,
                   },
                 },
               },
@@ -103,9 +111,13 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Gatsby Starter Blog`,
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         short_name: `GatsbyJS`,
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         start_url: `/`,
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         background_color: `#ffffff`,
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,

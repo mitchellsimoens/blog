@@ -1,5 +1,12 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "env": {
     "browser": true,
     "es6": true,
@@ -10,18 +17,24 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "airbnb",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
     "prettier/react",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
-  "plugins": ["prettier", "import", "react"],
+  "plugins": ["@typescript-eslint", "prettier", "import", "react"],
   "rules": {
     "prettier/prettier": "error",
     "react/prop-types": "off",
     "react/no-danger": "off",
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".js", ".jsx", ".ts", ".tsx"]
+    }],
     "strict": 0,
     "class-methods-use-this": "off",
     "curly": ["error", "all"],
