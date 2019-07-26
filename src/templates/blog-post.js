@@ -24,7 +24,7 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <Link style={{ boxShadow: `none` }} to="/">&larr; Back</Link>
+        <Link style={{ boxShadow: `none` }} to="/">← Back</Link>
         <h1
           style={{
             marginTop: rhythm(1),
