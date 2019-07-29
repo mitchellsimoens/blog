@@ -8,7 +8,8 @@ module.exports = {
       twitter: `LikelyMitch`,
     },
   },
-  plugins: [{
+  plugins: [
+    {
       resolve: `gatsby-plugin-typescript`,
       options: {
         isTSX: true, // defaults to false
@@ -45,7 +46,8 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [{
+        plugins: [
+          {
             resolve: `@raae/gatsby-remark-oembed`,
             options: {
               usePrefix: true,
