@@ -8,8 +8,7 @@ module.exports = {
       twitter: `LikelyMitch`,
     },
   },
-  plugins: [
-    {
+  plugins: [{
       resolve: `gatsby-plugin-typescript`,
       options: {
         isTSX: true, // defaults to false
@@ -30,12 +29,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: `mitchellsimoensblog`,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
@@ -52,8 +45,7 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [
-          {
+        plugins: [{
             resolve: `@raae/gatsby-remark-oembed`,
             options: {
               usePrefix: true,

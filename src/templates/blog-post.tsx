@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-// @ts-ignore
-import { Disqus } from 'gatsby-plugin-disqus';
+import { DiscussionEmbed } from 'disqus-react';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
@@ -23,9 +22,12 @@ const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element =
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;
   const disqusConfig = {
-    url: `${data.site.siteMetadata.siteUrl}${post.fields.slug}`,
-    identifier: post.id,
-    title: post.frontmatter.title,
+    shortname: process.env.GATSBY_DISQUS_NAME as string,
+    config: {
+      identifier: post.fields.slug as string,
+      title: post.frontmatter.title as string,
+      url: `${data.site.siteMetadata.siteUrl}${post.fields.slug}`,
+    },
   };
 
   return (
@@ -84,7 +86,7 @@ const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element =
         </li>
       </ul>
 
-      <Disqus config={disqusConfig} />
+      <DiscussionEmbed {...disqusConfig} />
     </Layout>
   );
 };
