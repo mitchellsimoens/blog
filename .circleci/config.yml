@@ -50,7 +50,6 @@ jobs:
       - run:
           name: Install and configure dependencies
           command: |
-            sudo npm install -g --silent gh-pages
             git config user.email "mitchellsimoens@gmail.com"
             git config user.name "mitchellsimoens"
       - add_ssh_keys:
@@ -58,7 +57,7 @@ jobs:
             - "01:19:71:d8:d5:e9:f2:fd:75:ba:dc:b5:e1:6c:cc:99"
       - run:
           name: Deploy Blog
-          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist public
+          command: yarn gh-pages --dotfiles --message "[skip ci] Updates" --dist public
       - run:
           name: Invalidate Cloudflare Cache
           command: |
