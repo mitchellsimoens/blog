@@ -42,6 +42,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache: *restore-npm-cache
       - attach_workspace:
           at: /home/circleci/repo
       - run:
