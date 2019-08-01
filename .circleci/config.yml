@@ -58,7 +58,8 @@ jobs:
             - "01:19:71:d8:d5:e9:f2:fd:75:ba:dc:b5:e1:6c:cc:99"
       - run:
           name: Deploy Blog
-          command: yarn gh-pages --dotfiles --message "[skip ci] Updates" --dist public
+          # need --git for this bug: https://github.com/tschaub/gh-pages/issues/308
+          command: yarn gh-pages --dotfiles --message "[skip ci] Updates" --dist public --git $(which git)
       - run:
           name: Invalidate Cloudflare Cache
           command: |
