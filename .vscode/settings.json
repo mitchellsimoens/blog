@@ -3,6 +3,9 @@
   "[json]": {
     "editor.formatOnSave": false,
   },
+  "[markdown]": {
+    "editor.formatOnSave": false,
+  },
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
