@@ -25,7 +25,7 @@ const BlogList = (props: Props): JSX.Element => {
 
   return (
     <Layout location={location} title={title}>
-      <SEO title={`Posts Page ${currentPage}`} />
+      <SEO title={currentPage === 1 ? undefined : `Posts Page ${currentPage}`} />
       <Bio />
 
       {posts.map(
@@ -43,7 +43,11 @@ const BlogList = (props: Props): JSX.Element => {
                   {postTitle}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
+              <small style={{ display: `flex` }}>
+                <span>{node.frontmatter.date}</span>
+                <span style={{ flex: `1` }} />
+                <span>{node.fields.readingTime.text}</span>
+              </small>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
@@ -57,8 +61,7 @@ const BlogList = (props: Props): JSX.Element => {
       <div className="blog-list-navigation">
         {currentPage > 1 && (
           <Link style={{ boxShadow: `none` }} to={currentPage === 2 ? '' : `/page/${currentPage - 1}`}>
-            {/* <Link style={{ boxShadow: `none` }} to={`/page/${currentPage === 2 ? '' : currentPage - 1}`}> */}← Newer
-            Posts
+            ← Newer Posts
           </Link>
         )}
         <div className="blog-list-navigation-spacer" />
@@ -81,6 +84,9 @@ export const blogListQuery = graphql`
         node {
           excerpt
           fields {
+            readingTime {
+              text
+            }
             slug
           }
           frontmatter {
