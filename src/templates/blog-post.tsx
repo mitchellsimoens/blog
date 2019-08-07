@@ -48,10 +48,19 @@ const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element =
         style={{
           ...scale(-1 / 5),
           display: `block`,
-          marginBottom: rhythm(1),
+          marginBottom: 0,
         }}
       >
         {post.frontmatter.date}
+      </p>
+      <p
+        style={{
+          ...scale(-1 / 5),
+          display: `block`,
+          marginBottom: rhythm(1),
+        }}
+      >
+        {post.fields.readingTime.text}
       </p>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
       <hr
@@ -106,6 +115,9 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       fields {
+        readingTime {
+          text
+        }
         slug
       }
       frontmatter {
