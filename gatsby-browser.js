@@ -1,6 +1,6 @@
 // custom typefaces
-import 'typeface-montserrat';
-import 'typeface-merriweather';
+require('typeface-montserrat');
+require('typeface-merriweather');
 
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+require('prismjs/themes/prism-tomorrow.css');
+require('prismjs/plugins/line-numbers/prism-line-numbers.css');

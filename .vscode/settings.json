@@ -1,16 +1,12 @@
 {
-  "editor.formatOnSave": true,
-  "[json]": {
-    "editor.formatOnSave": false,
-  },
-  "[markdown]": {
-    "editor.formatOnSave": false,
-  },
-  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
