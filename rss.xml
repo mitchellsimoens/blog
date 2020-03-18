@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Mitchell Simoens Blog]]></title><description><![CDATA[Blog articles about myself and tech topics!]]></description><link>https://mitchellsimoens.com</link><generator>RSS for Node</generator><lastBuildDate>Wed, 07 Aug 2019 20:28:56 GMT</lastBuildDate><item><title><![CDATA[Why TypeScript Paths Failed Me]]></title><description><![CDATA[This year has really been the year of Typescript for me, I’ve been using is anywhere and everywhere I can. While there are some annoyances…]]></description><link>https://mitchellsimoens.com/2019/08/07/why-typescript-paths-failed-me/</link><guid isPermaLink="false">https://mitchellsimoens.com/2019/08/07/why-typescript-paths-failed-me/</guid><pubDate>Wed, 07 Aug 2019 19:08:03 GMT</pubDate><content:encoded>&lt;p&gt;This year has really been the year of &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;Typescript&lt;/a&gt; for me, I’ve been using is anywhere and everywhere I can. While there are some annoyances, I love it and I didn’t think I would. At the same time, I’ve been using React more and more and on larger projects, using &lt;a href=&quot;https://webpack.js.org/configuration/resolve/#resolvealias&quot;&gt;aliases&lt;/a&gt; that &lt;a href=&quot;https://webpack.js.org/&quot;&gt;Webpack&lt;/a&gt; provides has been great. When importing files, relative paths could get ugly but with aliases they can be relative to your &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; directory. But when working with Typescript, I didn’t have this feature… so I thought.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Your Site's RSS Feed]]></title><description><![CDATA[Blog articles about myself and tech topics!]]></description><link>https://mitchellsimoens.com</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 18 Mar 2020 19:49:50 GMT</lastBuildDate><item><title><![CDATA[Health Update]]></title><description><![CDATA[About 7 years ago, I started working out. My eating habits finally caught up with me and I needed to change. So I started
+working out with a…]]></description><link>https://mitchellsimoens.com/2020/03/18/health-update/</link><guid isPermaLink="false">https://mitchellsimoens.com/2020/03/18/health-update/</guid><pubDate>Wed, 18 Mar 2020 17:58:03 GMT</pubDate><content:encoded>&lt;p&gt;About 7 years ago, I started working out. My eating habits finally caught up with me and I needed to change. So I started
+working out with a couple different personal trainers over a couple years, I did many off-road obstacle courses including
+several &lt;a href=&quot;https://toughmudder.com/&quot;&gt;Tough Mudders&lt;/a&gt;. I started getting bored so decided to train for a full marathon and I
+got up to running 18 miles at one time which was meant to be my max training length but I was having lots of pain in my
+feet with my left being the worse. My wife got pregnant and figuring I needed to rest (was coming off another Tough Mudder
+in Chicago) I stopped running. After a long time, the pain lessened but it never went away. I had to change the way I slept
+and I bought myself a medical boot off Amazon for when I would aggravate it.&lt;/p&gt;
+&lt;h2&gt;First Doctor Visit&lt;/h2&gt;
+&lt;p&gt;In October of 2018, I decided enough of my self healing that wasn’t working, I needed a doctor’s assistance. Got some
+X-Rays taken and was diagnosed with Retrocalcaneal Bursitis and was told to get some heel lifts to put in my shoes and
+I could get cortisone shots in my heel and there is a surgical option. Got the heel lifts and went on my way… to not
+use the lifts because they were uncomfortable.&lt;/p&gt;
+&lt;p&gt;Back to self managing I went. I would aggravate my left heel often as I did anything physical it seemed, like re-side my
+house and replace all 25 windows. I’d be known to randomly walk around wearing this medical boot and would have to wear
+a shoe on my right foot because hobbling around on just the boot was killing my back.&lt;/p&gt;
+&lt;h2&gt;Second Doctor Visit&lt;/h2&gt;
+&lt;p&gt;Ok, self managing wasn’t working. I could get by but I was always hurting and I never wanted to do too much and I have
+a four year old that wants to be active and play outside. So about a month ago, back to the orthopedic doctor again
+where I got more X-Rays taken (since the others were too long ago) and I was told I had Haglund’s deformity. This time,
+I asked about the surgery because I’d like to take care of this once and never have to worry about it again. But I was
+told the recovery was 5-6 months and he didn’t want to go into detail ont he recovery since that wasn’t his deal, he
+wasn’t going to be the one operating or managing my recovery and so I got a referral to their surgeon that was a couple
+weeks after.&lt;/p&gt;
+&lt;p&gt;I wanted to try the cortisone shot out even though it would be temporary, I wasn’t sure if I would be getting the surgery
+done now since the recovery could be long and wasn’t sure what that’d actually mean. I got two shots in my left heel
+which hurt like a bitch! Must have been the largest needle they had.&lt;/p&gt;
+&lt;h2&gt;Surgery Consult&lt;/h2&gt;
+&lt;p&gt;Went in for my next appointment with the surgeon. Nurse took my vitals and luckily my blood pressure was pretty normal
+(I tend to have high blood pressure from my lifestyle of not doing anything and drinking energy drinks). Next came in
+a PA (Physician Assistant) which did go in depth on what the recovery would mean. Basically, first two weeks would be
+non-weight bearing and I’d have a splint in. I’d get that taken out and then spend 4 weeks still non-weight bearing in
+a cast. After that I’m in a medical boot for a couple months till I’m back to normal. During the first 6 weeks of
+non-weight bearing, I could scoot around in a knee scooter. This recovery didn’t sound bad at all, I was quite relieved.&lt;/p&gt;
+&lt;p&gt;So then I got to talk to the surgeon about the surgery. He asked if there was ever a specific moment that I went from
+little-to-no pain to a lot of pain because the back of my heal where I had the extra calcium growth, there was a little
+piece that had broken off. He further went in to what he was going to have to do. Since the Achilles tendon was calcifying,
+he was going to have to remove about 1.5 inches of the tendon. This means that my Achilles tendon wasn’t going to be long
+enough so he was going to have to basically supplement it with another tendon. There are two tendons going to your big toe
+and the one for the furthest knuckle could be used although this would be I wouldn’t be able to curl that toe but I’d still
+be able to bend the toe, no biggie.&lt;/p&gt;
+&lt;p&gt;So the surgery was going to be a bit more involved than I had previously known and the recovery was going to be much
+better than I expected. Let’s schedule it! Right?&lt;/p&gt;
+&lt;h2&gt;All Hell Broke Loose&lt;/h2&gt;
+&lt;p&gt;Before I tell you what happened, I’ll tell you some more of my history. Two decades ago, when I was a teenager, there
+were a couple times I just randomly passed out. Yes, randomly. I didn’t have to do bunch of physical things (I was very
+active with different spots). There was one time, I stood up, walked over to where my mom was cooking breakfast and next
+thing I know I’m waking up on the couch my dad carried me to. I’d be out for 15-20 seconds but when I came to I was all good.
+Did bunch of tests (stress test, echo, tilt table, etc) but the doctors never knew what was wrong. I was told to eat more
+salt and keep my electrolytes up.&lt;/p&gt;
+&lt;p&gt;I bet you can guess what I’m about to tell you happened when talking to the surgeon. Yes, I got very hot, started sweating,
+got dizzy and passed out. When I came too, I was all sweaty and was told I said a few things I don’t remember and I was
+out for a couple minutes this time.&lt;/p&gt;
+&lt;p&gt;Yep, great to be talking to a surgeon about having surgery when you faint. So now I have to see another doctor before
+I go back to see the surgeon in a month. Tomorrow I go in to get a monitor I have to wear for 24hrs (may be 48hrs, don’t
+remember). Then on the 31st I go back to talk to the actual Cardiologist.&lt;/p&gt;
+&lt;h2&gt;What Is It?&lt;/h2&gt;
+&lt;p&gt;Over the last couple decades, I’ve had those tests and some followup tests (just had another echo about 5 years ago).
+Everything checks out with these tests so I’m not sure what this round will find. I do know each doctor has different
+experience and this doctor may have had something similar before, I go along with things and keep a notebook about these
+to tell the next doctor. But is it a cardiovascular issue or is it more mental? Are these just anxiety attacks? Course,
+the first couple times it happened were in situations where there shouldn’t have been any anxiety but there also wasn’t
+anything that would require lots of blood flow.&lt;/p&gt;
+&lt;p&gt;Hopefully, when I see my orthopedic doctor next month my surgery isn’t delayed because of the cardiologist. If it is,
+then ok. I’m really hoping to be back to walking without any assistance by October/November time. I promised my daughter
+that we could go to Disney World (which should be reopened by then) and I don’t like breaking promises even if there
+is a good reason. I also really want to get back to working out and getting on a diet so lots of reasons I want to get
+things taken care of.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Why TypeScript Paths Failed Me]]></title><description><![CDATA[This year has really been the year of Typescript for me, I’ve been using is anywhere and everywhere I can. While there are some annoyances…]]></description><link>https://mitchellsimoens.com/2019/08/07/why-typescript-paths-failed-me/</link><guid isPermaLink="false">https://mitchellsimoens.com/2019/08/07/why-typescript-paths-failed-me/</guid><pubDate>Wed, 07 Aug 2019 19:08:03 GMT</pubDate><content:encoded>&lt;p&gt;This year has really been the year of &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;Typescript&lt;/a&gt; for me, I’ve been using is anywhere and everywhere I can. While there are some annoyances, I love it and I didn’t think I would. At the same time, I’ve been using React more and more and on larger projects, using &lt;a href=&quot;https://webpack.js.org/configuration/resolve/#resolvealias&quot;&gt;aliases&lt;/a&gt; that &lt;a href=&quot;https://webpack.js.org/&quot;&gt;Webpack&lt;/a&gt; provides has been great. When importing files, relative paths could get ugly but with aliases they can be relative to your &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; directory. But when working with Typescript, I didn’t have this feature… so I thought.&lt;/p&gt;
 &lt;h2&gt;Enter paths&lt;/h2&gt;
 &lt;p&gt;I don’t remember where I saw it first but I saw that TypeScript has a &lt;a href=&quot;https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping&quot;&gt;paths&lt;/a&gt; feature. Ok, so this looked very similar to Webpack aliases and in development, it worked. Now instead of this code:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-typescript line-numbers&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Foo &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;../../../components/Foo&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -120,10 +187,10 @@
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; EmailProvider &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./state/Email.tsx&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Props&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  children&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ReactNode&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  children&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ReactNode&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; Providers&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; FunctionComponent&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Props&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt; = ({ children }) =&gt; (
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; Providers&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; FunctionComponent&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Props&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt; = ({ children }) =&gt; (
   &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;AddressBookProvider&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;EmailProvider&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
       &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
@@ -154,7 +221,7 @@ export default Providers;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;tr
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; EmailContext&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; ContextArray&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Email &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./state/Email.tsx&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;EmailList&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setState&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ContextArray &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useContext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;EmailContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setState&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ContextArray &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useContext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;EmailContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
   &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;// data hasn&apos;t been loaded yet&lt;/span&gt;
@@ -166,7 +233,7 @@ export default Providers;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;tr
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;No emails!&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
-  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;email&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Email&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;email&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Email&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;email&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;subject&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -181,11 +248,11 @@ export default Providers;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;tr
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Email&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// more fields...&lt;/span&gt;
-  subject&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subject&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;State&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  data&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Email&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  data&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Email&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; ContextArray &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;State&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Dispatch&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;SetStateAction&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;State&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;&gt;];
@@ -193,7 +260,7 @@ export default Providers;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;tr
 export const EmailContext: Context&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt; = createContext([&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;, Function]);
 
 interface Props &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  children&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ReactNode&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  children&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ReactNode&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
 
 const EmailProvider: FunctionComponent&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Props&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt; = ({ children }) =&gt; &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -215,7 +282,7 @@ export default EmailProvider;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quo
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; ContextArray&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Email&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; useEmails &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./state/Email.tsx&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;EmailList&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setState&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ContextArray &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useEmails&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setState&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ContextArray &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useEmails&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
   &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;// data hasn&apos;t been loaded yet&lt;/span&gt;
@@ -227,7 +294,7 @@ export default EmailProvider;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quo
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;No emails!&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
-  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;email&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Email&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;email&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Email&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;email&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;subject&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -316,35 +383,9 @@ export default EmailProvider;&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quo
 &lt;h2&gt;Pre 2.0&lt;/h2&gt;
 &lt;p&gt;I was working on a few things that I actually scrapped.&lt;/p&gt;
 &lt;p&gt;First was a mock data inspector which was basically what you have in the browser dev tools but worked with the client mock data feature. This was removed since I moved to using real network requests but I was very excited about this! Here is a preview of what it was:&lt;/p&gt;
-
-          &lt;div
-            class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
-          &gt;
-            &lt;iframe src=&quot;https://player.vimeo.com/video/121247419&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen style=&quot;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          &quot;&gt;&lt;/iframe&gt;
-          &lt;/div&gt;
-          
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://player.vimeo.com/video/121247419&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
 &lt;p&gt;I also had a form of Sencha Test before Sencha Test was a thing. It could record the user interactions and play them back while running unit tests also. Here is a simple test of it:&lt;/p&gt;
-
-          &lt;div
-            class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
-          &gt;
-            &lt;iframe src=&quot;https://player.vimeo.com/video/121037209&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen style=&quot;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          &quot;&gt;&lt;/iframe&gt;
-          &lt;/div&gt;
-          
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://player.vimeo.com/video/121037209&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
 &lt;h2&gt;New Stuff&lt;/h2&gt;
 &lt;p&gt;There were many things that I did just because I wanted to. I mean, I was a major user of the tool also and there were things I wanted that others wouldn’t want. For example, did you know in the settings you can control where code was run? You can have it open a new tab or window and run code within it which allowed for device emulation and multiple monitor support (if you know me and my workstation, multiple monitor support is important). In fact, this affected how code was run also. When you press &lt;em&gt;Run&lt;/em&gt; in Fiddle, it’s the same exact thing as when the code snippets is run in the api docs! Any site can run code against Fiddle, I don’t block non sencha.com requests iirc.&lt;/p&gt;
 &lt;p&gt;Since Fiddle uses real network requests, you can actually load code from one fiddle in another fiddle. I’ve had a base fiddle that had common code and just loaded those like I would in an Ext JS in other fiddles. This was more of a byproduct of how code is now running but it turned out to be handy.&lt;/p&gt;
@@ -845,23 +886,25 @@ proxy_set_header Connection &amp;quot;upgrade&amp;quot;;&lt;/code&gt;&lt;span ar
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/cbeb6/220px-LampFlowchart.svg.png&quot;
+    href=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/c8042/220px-LampFlowchart.svg.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 136.36363636363637%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAbCAYAAAB836/YAAAACXBIWXMAAAsSAAALEgHS3X78AAAFT0lEQVRIx5VVDUxTVxR+LQUGIlE3UAtzEw1RZlxgI8yJRERFBYMgDlFB3SzSQv/7XqGlpbVUEUSGKAZRJ+iUTSkyRStQqyIIygAFRSxkjLiBbouOCJlCOLv3aXFumdabnJxz/753zj3fOY8I8fvUwbR7X1xr0dHk6/u/4f5YWMxrPlDCQzbv2r5DeC6szMwNI9AAAGJjKG3+/+CEr5prOVYGP50oh/snz0D3cQN0fYvnp+FhuRF+O30BruYf6F8dFDwOnz+hymC8FjBhZeRHXQjwAbr8e0UVDdJvOA8DlRfh0ZkaGDJegabC4vtTJr3rjM8Xp6a/3sOwzwLtKjKyl1fvyo8xZuVFIzvmgJCMQ/OoH/S71lzI2hP7Xbr+c2vIsSFLibcd74THRv/nFgazaWyJWkbU5RQzTUf1Dng+bSLpmiJXpz8HGWZdPJhlX7+7hImm9Nut1K0iOAYuU3BRyuRXi5n8GgktSUaRXVTOFwzCx2cyuphrZ/2A2ZygsFgk7adOxcVa11paRKwxT3tt9FSjWeLX0SFrANiNotuDJBuam4Ung4K82HjfxcVpNlL0h788nrCAb5Is4lYKghPP8oMFJmkwp4wbsli21J3w9WW71tXxsh8/1g4D5ENPT+qwyZQw0turGMHA/f2qP4zGLXyE4xWzJNpPVkjxqWYlpLaoQdmmgbTbWiAbFbC9bxckV4lziICAaZ63b0tvYI/q65NGq6s5w2bz1tGGhuRnfX0q5GkumM2JpQjQmeRIQ6iClP2a3u2Q0qyC1FY1bOvJBEmdHLIf5YG4Vl40FnJp6Xr+vXvU4NCQHp48yRjFoXd1yXuKiqJfLQ0fwoF3TkiR1xUqBKQU11JKZCuEZql2dW6MLyEWL2BYKSGVBnlZLHLj4KAebt4Uf42WHJ9nuxpnmdAXZDJtSggKm7BYSGsmmfPmuQYg7Y6EDdD4CkiocgWRZBSyJFflLNEVkiXGUkuxhJdkrHUH4xmEQDAfeZCFjs6hLwiF69xFIjLC399zqpMTC4MSHh6uBJvt+nblcfhw/AsP14wTiag067pWu4L20NGRRRObPdeT+Or7rZjITN45AZN3XjgmGw5vYhALF3q9Quza2kR1d7e0w2CI32hde/p0x9h+VUMVwyYPdbrQgM5OsgkgB+Uoz0rsisjIOZ4viD0TqfHYji3YELDhyKbQuCObF68riscSEle8edlydfh0IjDww4mIf/kDA7pRTGxEneGaGs7I4GAGIvZeePBA/WdVFUeGcLzDQ8OWynaQMXyz5JG2ezso2zWgQVp1Vwe6nzMRD6lKws/Pg42IfW1kJBNu3RJDYyN/GBMc1e8zVDW0p5cucY8hQIf0FFUIuYOSi+rJv5RtWpBdS6UrRXErHdSdGZjgV8ZCLimJSbxzRzaAMg6Y3KOjO6GtTdJVWBgV+u/n4Z4VJKLL6Yg6CtFlUolEgext6w9tXEzw+fPHiC0UBk67e5c8OzCQAe3tkqyXxDbQmRbJpEyb+qKHmzNRaUqwtxJ71myWP9If4PoFeMj4Z4P1XjSLSK4W25HXlSxZQ6odElqjBsHaUsZ9XgTkZdnLf0zsWtekRHHY1PH2kzA4Xps8043ec5vh9mbvEsp5tGb7eEyYEek9JWLzKt8UtXzv9OUz3D+O8PXAXuJ9d+/JtlfJJ2v9J6CHbUbt6HHaHe2vZKuiR9mu7VN36obQY5e+CJnhNMHJNsBwXcT7CtQsMa/kTWmgsejpXqf/JRvQBzqsb+jynovNTjqgbpuX0qKqRL3NQDWllVNNyjLqhtK4tSJJig80QCvD3tn+jUB/A2jZs3IdQTU1AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 136.48648648648648%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAbCAYAAAB836/YAAAACXBIWXMAAAsSAAALEgHS3X78AAAFT0lEQVRIx5VVDUxTVxR+LQUGIlE3UAtzEw1RZlxgI8yJRERFBYMgDlFB3SzSQv/7XqGlpbVUEUSGKAZRJ+iUTSkyRStQqyIIygAFRSxkjLiBbouOCJlCOLv3aXFumdabnJxz/753zj3fOY8I8fvUwbR7X1xr0dHk6/u/4f5YWMxrPlDCQzbv2r5DeC6szMwNI9AAAGJjKG3+/+CEr5prOVYGP50oh/snz0D3cQN0fYvnp+FhuRF+O30BruYf6F8dFDwOnz+hymC8FjBhZeRHXQjwAbr8e0UVDdJvOA8DlRfh0ZkaGDJegabC4vtTJr3rjM8Xp6a/3sOwzwLtKjKyl1fvyo8xZuVFIzvmgJCMQ/OoH/S71lzI2hP7Xbr+c2vIsSFLibcd74THRv/nFgazaWyJWkbU5RQzTUf1Dng+bSLpmiJXpz8HGWZdPJhlX7+7hImm9Nut1K0iOAYuU3BRyuRXi5n8GgktSUaRXVTOFwzCx2cyuphrZ/2A2ZygsFgk7adOxcVa11paRKwxT3tt9FSjWeLX0SFrANiNotuDJBuam4Ung4K82HjfxcVpNlL0h788nrCAb5Is4lYKghPP8oMFJmkwp4wbsli21J3w9WW71tXxsh8/1g4D5ENPT+qwyZQw0turGMHA/f2qP4zGLXyE4xWzJNpPVkjxqWYlpLaoQdmmgbTbWiAbFbC9bxckV4lziICAaZ63b0tvYI/q65NGq6s5w2bz1tGGhuRnfX0q5GkumM2JpQjQmeRIQ6iClP2a3u2Q0qyC1FY1bOvJBEmdHLIf5YG4Vl40FnJp6Xr+vXvU4NCQHp48yRjFoXd1yXuKiqJfLQ0fwoF3TkiR1xUqBKQU11JKZCuEZql2dW6MLyEWL2BYKSGVBnlZLHLj4KAebt4Uf42WHJ9nuxpnmdAXZDJtSggKm7BYSGsmmfPmuQYg7Y6EDdD4CkiocgWRZBSyJFflLNEVkiXGUkuxhJdkrHUH4xmEQDAfeZCFjs6hLwiF69xFIjLC399zqpMTC4MSHh6uBJvt+nblcfhw/AsP14wTiag067pWu4L20NGRRRObPdeT+Or7rZjITN45AZN3XjgmGw5vYhALF3q9Quza2kR1d7e0w2CI32hde/p0x9h+VUMVwyYPdbrQgM5OsgkgB+Uoz0rsisjIOZ4viD0TqfHYji3YELDhyKbQuCObF68riscSEle8edlydfh0IjDww4mIf/kDA7pRTGxEneGaGs7I4GAGIvZeePBA/WdVFUeGcLzDQ8OWynaQMXyz5JG2ezso2zWgQVp1Vwe6nzMRD6lKws/Pg42IfW1kJBNu3RJDYyN/GBMc1e8zVDW0p5cucY8hQIf0FFUIuYOSi+rJv5RtWpBdS6UrRXErHdSdGZjgV8ZCLimJSbxzRzaAMg6Y3KOjO6GtTdJVWBgV+u/n4Z4VJKLL6Yg6CtFlUolEgext6w9tXEzw+fPHiC0UBk67e5c8OzCQAe3tkqyXxDbQmRbJpEyb+qKHmzNRaUqwtxJ71myWP9If4PoFeMj4Z4P1XjSLSK4W25HXlSxZQ6odElqjBsHaUsZ9XgTkZdnLf0zsWtekRHHY1PH2kzA4Xps8043ec5vh9mbvEsp5tGb7eEyYEek9JWLzKt8UtXzv9OUz3D+O8PXAXuJ9d+/JtlfJJ2v9J6CHbUbt6HHaHe2vZKuiR9mu7VN36obQY5e+CJnhNMHJNsBwXcT7CtQsMa/kTWmgsejpXqf/JRvQBzqsb+jynovNTjqgbpuX0qKqRL3NQDWllVNNyjLqhtK4tSJJig80QCvD3tn+jUB/A2jZs3IdQTU1AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;simple flowchart&quot;
         title=&quot;simple flowchart&quot;
-        src=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/cbeb6/220px-LampFlowchart.svg.png&quot;
-        srcset=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/cf440/220px-LampFlowchart.svg.png 148w,
-/static/20007e4298bd7280ca9dc677ee8e22d5/cbeb6/220px-LampFlowchart.svg.png 220w&quot;
+        src=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/c8042/220px-LampFlowchart.svg.png&quot;
+        srcset=&quot;/static/20007e4298bd7280ca9dc677ee8e22d5/12f09/220px-LampFlowchart.svg.png 148w,
+/static/20007e4298bd7280ca9dc677ee8e22d5/c8042/220px-LampFlowchart.svg.png 220w&quot;
         sizes=&quot;(max-width: 220px) 100vw, 220px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -1103,23 +1146,25 @@ new Sub();&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-nu
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/5039d/bad-number-formatting_zqjzot.png&quot;
+    href=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/63868/bad-number-formatting_zqjzot.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 36.8%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAAAwUlEQVQoz62P2QqDMBBF/f8fEloE10Kpe9q3KmoR7RcYl+Q2CZha+lKkA4eZMJkziQER0zQpOOdYlgWMMY08b9G95X1Hzq0Yq3AcR+yN7UIllDLOGeqqBslz9P0Tj6ZG1/Ug5IYsSZEIojhGUZZ4VA2Ke4lK5LbtPuRaCHCQLEcYRoguIQLfxVXITsEZvuPAcT3YtoM0JwhsD9bBgmkexSKiRH/98tcLpXAYBiWllP7GQNWMrOXcihbKxjzPqpZ5Ly/XtRuCBod7XgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 36.486486486486484%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAAAwUlEQVQoz62P2QqDMBBF/f8fEloE10Kpe9q3KmoR7RcYl+Q2CZha+lKkA4eZMJkziQER0zQpOOdYlgWMMY08b9G95X1Hzq0Yq3AcR+yN7UIllDLOGeqqBslz9P0Tj6ZG1/Ug5IYsSZEIojhGUZZ4VA2Ke4lK5LbtPuRaCHCQLEcYRoguIQLfxVXITsEZvuPAcT3YtoM0JwhsD9bBgmkexSKiRH/98tcLpXAYBiWllP7GQNWMrOXcihbKxjzPqpZ5Ly/XtRuCBod7XgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;bad number formatting&quot;
         title=&quot;bad number formatting&quot;
-        src=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/5039d/bad-number-formatting_zqjzot.png&quot;
-        srcset=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/cf440/bad-number-formatting_zqjzot.png 148w,
-/static/d7477e20ac6e713c749e98f890c89bd4/5039d/bad-number-formatting_zqjzot.png 250w&quot;
+        src=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/63868/bad-number-formatting_zqjzot.png&quot;
+        srcset=&quot;/static/d7477e20ac6e713c749e98f890c89bd4/12f09/bad-number-formatting_zqjzot.png 148w,
+/static/d7477e20ac6e713c749e98f890c89bd4/63868/bad-number-formatting_zqjzot.png 250w&quot;
         sizes=&quot;(max-width: 250px) 100vw, 250px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -1867,20 +1912,7 @@ Ext.require([
 &lt;p&gt;Of course I expected it to be hot but this has had an immense affect on my running. Missouri still got hot and humid during the summer but it wasn’t for as long as in Florida. I live in the northern part of Florida so for 3 months it was in the 30s and 40s which is perfect weather for me, especially for running. The other 9 months it’s hot and humid. In Missouri, it still got hot but was only for a couple months in the summer. So I have summer a half a year extra now.&lt;/p&gt;
 &lt;p&gt;So why does this matter? Do you get used to it? Current, I start running between 8am and 9am trying to get running before the heat of the day, except it’s already hot and humid at that time. I have to take more breaks to rehydrate, within the first mile my hat is already soaked.&lt;/p&gt;
 &lt;p&gt;Today’s run was 6 miles and I drank an entire gallon of water but I still achieved my goal. This is my Endomondo recording of today’s running:&lt;/p&gt;
-
-          &lt;div
-            class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 63.1578947368421%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
-          &gt;
-            &lt;iframe src=&quot;https://www.endomondo.com/embed/workouts?w=lDwfVxKp4N8&amp;amp;width=580&amp;amp;height=600&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          &quot;&gt;&lt;/iframe&gt;
-          &lt;/div&gt;
-          
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 63.1578947368421%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://www.endomondo.com/embed/workouts?w=lDwfVxKp4N8&amp;amp;width=580&amp;amp;height=600&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
 &lt;p&gt;As you can see, I run in circles with each circle being just under a mile (for my training, I’m ok with rounding up). But each lap has a good sized hill and some smaller ones, this is the reason I do love running on a trail.&lt;/p&gt;
 &lt;h2&gt;Type of soil&lt;/h2&gt;
 &lt;p&gt;The type of soil is quite different between Missouri and Florida. In Missouri you would find a more clay like soil; in Florida it’s a sandy soil. Florida’s soil is much harder to run on as it’s often more loose. The looser the soil, the more effort it takes to push off on which makes the run harder.&lt;/p&gt;
@@ -1962,20 +1994,7 @@ Ext.define(&amp;#39;MyApp.store.Foo&amp;#39;, {
 &lt;p&gt;There is always a better way to do things and always many different ways to do things. There are more performant ways to do this but I like this approach as it’s very logical to me in how it works. I can come back to this code in 2 years and easily pick up what I was doing.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Tough Mudder 2015 - Gulf Coast]]></title><description><![CDATA[Last year, I decided to set some goals for myself (read more). I decided to sign up for several Tough Mudders throughout the year in order…]]></description><link>https://mitchellsimoens.com/2015/03/09/tough-mudder-2015-gulf-coast/</link><guid isPermaLink="false">https://mitchellsimoens.com/2015/03/09/tough-mudder-2015-gulf-coast/</guid><pubDate>Mon, 09 Mar 2015 19:37:03 GMT</pubDate><content:encoded>&lt;p&gt;Last year, I decided to set some goals for myself (&lt;a href=&quot;https://mitchellsimoens.com/tough-mudder-looking-ahead-for-2015/&quot;&gt;read more&lt;/a&gt;). I decided to sign up for several Tough Mudders throughout the year in order to push my health, I need goals and deadlines and nothing matches signing up for something and paying cold, hard earned cash to motivate you.&lt;/p&gt;
 &lt;p&gt;This last weekend was the first Tough Mudder of the 2015 season and I was excited. I ran a Warrior Dash (5K OCR) a month ago and to be honest, I didn’t do as well as I wish I would have. The reason, I didn’t workout for nearly 2 months over the winter! But since mid-January I was in cardio mode getting my mileage back up. I found a nearby trail that is a mile loop and even has a very good sized hill. I average about 11 minute miles which I’m fine with. I don’t need to be faster, I just need to make 8 mile trainings easier. Found another trail but I decided I don’t like being within 20 feet of these &lt;a href=&quot;https://scontent-dfw.xx.fbcdn.net/hphotos-xpf1/t31.0-8/1939590_575706843357_4309501008577952709_o.jpg&quot;&gt;guys&lt;/a&gt;. Yes, that’s an actual picture taken from my phone, first ran by them and was 10 feet away and scared the crap out of me. You would have laughed at me jumping away at first sight. Not sure if I screamed like a teenage girl at a Bieber concert but I sure as hell did internally. :)&lt;/p&gt;
 &lt;p&gt;Tough Mudder announced some new obstacles and improvements to current ones. I’ll tell you about my experience with some of the new ones in a minute. If you want to see their promo video:&lt;/p&gt;
-
-          &lt;div
-            class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
-          &gt;
-            &lt;iframe src=&quot;https://www.youtube.com/embed/Jim-ksScOoc&quot; frameborder=&quot;0&quot; allowfullscreen style=&quot;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          &quot;&gt;&lt;/iframe&gt;
-          &lt;/div&gt;
-          
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://www.youtube.com/embed/Jim-ksScOoc&quot; frameborder=&quot;0&quot; allowfullscreen style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;The Day&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Link to course map &lt;a href=&quot;https://toughmudder.cachefly.net/sites/default/files/Gulf%20Coast%20Spectator%20Map%20Front%20V2.pdf&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I booked a hotel that was just a mile away. To warm up, I almost just ran the mile but didn’t want to get carried away with it. I got there at 9am and got signed in, registered for the legion (Tough Mudder thinks I’ve done 8 mudders, I corrected them) and dropped by bag off. Got to the start area where they had an MC I hadn’t seen before but once he was done doing his warmup talk they told us to go to the warm up area. This is where you climb a wall to get into the real start line and lucky enough, the man himself, Sean Corvelle was the MC! Love that guy! HOORAH! (he doesn’t actually say “OOH-RAH”, he doesn’t feel like he should as he isn’t or has not served in the military).&lt;/p&gt;
