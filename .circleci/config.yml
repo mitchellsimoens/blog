@@ -94,13 +94,13 @@ workflows:
       - lint:
           requires:
             - install-dependencies
-      - type-check:
-          requires:
-            - install-dependencies
+      # - type-check:
+      #     requires:
+      #       - install-dependencies
       - build:
           requires:
             - lint
-            - type-check
+            # - type-check
       - deploy:
           requires:
             - build
