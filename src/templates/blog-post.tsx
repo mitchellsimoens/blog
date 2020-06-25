@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import { DiscussionEmbed } from 'disqus-react';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
@@ -21,14 +20,6 @@ const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element =
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;
-  const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_NAME as string,
-    config: {
-      identifier: post.fields.slug as string,
-      title: post.frontmatter.title as string,
-      url: `${data.site.siteMetadata.siteUrl}${post.fields.slug}`,
-    },
-  };
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -94,8 +85,6 @@ const BlogPostTemplate = ({ data, location, pageContext }: Props): JSX.Element =
           )}
         </li>
       </ul>
-
-      <DiscussionEmbed {...disqusConfig} />
     </Layout>
   );
 };
