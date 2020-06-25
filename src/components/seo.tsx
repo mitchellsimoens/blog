@@ -36,6 +36,8 @@ function SEO({ description, lang, meta, title }: Props): JSX.Element {
   const metaDescription = description || site.siteMetadata.description;
 
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <Helmet
       htmlAttributes={{
         lang,

@@ -1,18 +1,16 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   globals: {
-    "__PATH_PREFIX__": true
+    __PATH_PREFIX__: true,
   },
   overrides: [
     // typescript
     {
-      files: ["*.ts", "*.tsx"],
-      excludedFiles: ["*.test.js", "gatsby-browser.js",  "gatsby-node.js", "gatsby-config.js"],
+      files: ['*.ts', '*.tsx'],
+      excludedFiles: ['*.test.js', 'gatsby-browser.js', 'gatsby-node.js', 'gatsby-config.js'],
       plugins: ['@typescript-eslint'],
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
@@ -30,33 +28,31 @@ module.exports = {
 
     // gatsby config files
     {
-      files: ["gatsby-browser.js", "gatsby-node.js", "gatsby-config.js", "./scripts/**"],
+      files: ['gatsby-browser.js', 'gatsby-node.js', 'gatsby-config.js', './scripts/**'],
       env: {
-        "node": true,
-      }
+        node: true,
+      },
     },
 
     // test files
     {
-      files: ["*.test.js"],
+      files: ['*.test.js'],
       plugins: ['jest'],
       env: {
-        "es6": true,
-        "node": true,
-        "jest/globals": true,
+        es6: true,
+        node: true,
+        'jest/globals': true,
       },
-      extends: [
-        "plugin:jest/recommended"
-      ],
+      extends: ['plugin:jest/recommended'],
       parserOptions: {
         ecmaVersion: 2019,
-        sourceType: "module",
-      }
-    }
+        sourceType: 'module',
+      },
+    },
   ],
   settings: {
     react: {
-      version: "detect",
-    }
-  }
+      version: 'detect',
+    },
+  },
 };

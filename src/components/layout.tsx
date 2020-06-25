@@ -11,8 +11,6 @@ interface Props {
 }
 
 const Layout = ({ children, location, title }: Props): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
   const rootPath = `${__PATH_PREFIX__}/`;
   const header =
     location.pathname === rootPath ? (

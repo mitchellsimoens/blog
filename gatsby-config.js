@@ -117,7 +117,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+              return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
@@ -158,13 +158,9 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Gatsby Starter Blog`,
-        /* eslint-disable-next-line @typescript-eslint/camelcase */
         short_name: `GatsbyJS`,
-        /* eslint-disable-next-line @typescript-eslint/camelcase */
         start_url: `/`,
-        /* eslint-disable-next-line @typescript-eslint/camelcase */
         background_color: `#ffffff`,
-        /* eslint-disable-next-line @typescript-eslint/camelcase */
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,

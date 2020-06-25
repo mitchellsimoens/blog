@@ -8,8 +8,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import { TwitterFollowButton } from 'react-twitter-embed';
 
 import { rhythm } from '../utils/typography';
