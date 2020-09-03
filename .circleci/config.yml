@@ -22,7 +22,7 @@ jobs:
       - restore_cache: *restore-npm-cache
       - run:
           name: Install Node modules
-          command: yarn
+          command: npm ci
       - save_cache: *save-npm-cache
 
   build:
@@ -32,7 +32,7 @@ jobs:
       - restore_cache: *restore-npm-cache
       - run:
           name: Build Blog
-          command: yarn build
+          command: npm run build
       - persist_to_workspace:
           root: /home/circleci/repo
           paths:
@@ -59,7 +59,7 @@ jobs:
       - run:
           name: Deploy Blog
           # need --git for this bug: https://github.com/tschaub/gh-pages/issues/308
-          command: yarn gh-pages --dotfiles --message "[skip ci] Updates" --dist public --git $(which git)
+          command: npm run deploy
       - run:
           name: Invalidate Cloudflare Cache
           command: |
@@ -75,7 +75,7 @@ jobs:
       - restore_cache: *restore-npm-cache
       - run:
           name: ESLint
-          command: yarn lint
+          command: npm run lint
 
   type-check:
     <<: *defaults
@@ -84,7 +84,7 @@ jobs:
       - restore_cache: *restore-npm-cache
       - run:
           name: TypeScript Type Check
-          command: yarn type-check
+          command: npm run type-check
 
 workflows:
   version: 2
@@ -94,13 +94,13 @@ workflows:
       - lint:
           requires:
             - install-dependencies
-      # - type-check:
-      #     requires:
-      #       - install-dependencies
+      - type-check:
+          requires:
+            - install-dependencies
       - build:
           requires:
             - lint
-            # - type-check
+            - type-check
       - deploy:
           requires:
             - build

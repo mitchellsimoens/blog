@@ -74,7 +74,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint-staged"
+      "pre-commit": "npm run lint-staged"
     }
   },
   "lint-staged": {
@@ -85,8 +85,10 @@
   },
   "scripts": {
     "build": "gatsby build",
+    "deploy": "gh-pages --dotfiles --message \"[skip ci] Updates\" --dist public --git $(which git)",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' '*.js'",
+    "lint-staged": "lint-staged",
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
