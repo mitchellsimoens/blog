@@ -8,5 +8,10 @@
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "cSpell.words": [
+    "mitchellsimoens",
+    "mitchell",
+    "simoens"
+  ]
 }
