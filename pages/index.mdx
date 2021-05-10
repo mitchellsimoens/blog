@@ -1,0 +1,30 @@
+import Layout from '../components/Layout';
+import Button from '../components/button';
+import 'prismjs/themes/prism-okaidia.css';
+import 'prismjs/plugins/autolinker/prism-autolinker.css';
+import 'prismjs/plugins/command-line/prism-command-line.css';
+import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css';
+import 'prismjs/plugins/inline-color/prism-inline-color.css';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+import 'prismjs/plugins/treeview/prism-treeview.css';
+
+<Layout title="Mitchell Simoens' Blog">
+
+# MDX + Next.js
+
+Look, a button! 👇
+
+<Button>👋 Hello</Button>
+
+## Prism Test
+
+```javascript[class="line-numbers"][class="diff-highlight"]
+console.log('hello world');
+```
+
+## Emoji
+
+This is a dog - :dog:
+
+Heart - :heart:
+</Layout>
