@@ -31,6 +31,10 @@ const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
     .slice(0, 2)
     .join(' ');
 
+  if (excerpt.length > 140) {
+    excerpt = excerpt.substr(0, 140);
+  }
+
   if (excerpt.length < file.content.length) {
     if (excerpt.substr(-1) === '.') {
       // in case the excerpt ends with a period
@@ -39,10 +43,10 @@ const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
       excerpt = excerpt.substr(0, excerpt.length - 1);
     }
 
-    excerpt = `${excerpt}...`;
+    excerpt = `${excerpt.trim()}...`;
   }
 
-  file.excerpt = excerpt;
+  file.excerpt = excerpt.trim();
 };
 
 const getTimeToRead = (content: string): string => readingTime(content).text;
