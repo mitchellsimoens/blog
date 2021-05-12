@@ -17,13 +17,14 @@ export function getPostSlugs() {
 
 const parseContentsToPost = (fileContents: string, slug: string | string[]): BlogPost => {
   const { data, content } = matter(fileContents);
+  const parsedSlug = Array.isArray(slug) ? slug.join('/') : slug;
 
   const items: BlogPost = {
     author: data.author ? data.author : { ...defaultAuthor },
     content: content,
     coverImage: data.coverImage || null, // cannot be undefined
     date: data.date,
-    slug: slug,
+    slug: parsedSlug,
     title: data.title,
   };
 

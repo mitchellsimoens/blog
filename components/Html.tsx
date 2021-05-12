@@ -4,8 +4,6 @@ import { useTheme } from '../state/theme/useTheme';
 const Html = () => {
   const [theme] = useTheme();
 
-  console.log('HTML', theme);
-
   useEffect(() => {
     if (theme.mode === 'dark') {
       document.documentElement.classList.add(theme.mode);

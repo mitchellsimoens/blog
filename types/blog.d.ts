@@ -13,6 +13,6 @@ export interface BlogPost {
   coverImage: string;
   date: string;
   ogImage?: OGImage;
-  slug?: string | string[];
+  slug?: string;
   title: string;
 }
