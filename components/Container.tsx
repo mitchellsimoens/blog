@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
+import { Variants } from '../types/components/Container';
 
 interface Props {
-  variant?: 'narrow';
+  variant?: Variants;
 }
 
 const Container: FunctionComponent<Props> = ({ children, variant }) => (

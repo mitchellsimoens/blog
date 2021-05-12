@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
 import BlogLoading from '../../../components/blog/Loading';
-import Container from '../../../components/Container';
-import Header from '../../../components/Header';
 import Layout from '../../../components/Layout';
 import List from '../../../components/blog/List';
 import { getAllPosts } from '../../../lib/api';
@@ -17,16 +15,12 @@ const PostPager: FunctionComponent<Props> = props => {
   const router = useRouter();
 
   return (
-    <Layout title="Test">
-      <Container variant="narrow">
-        <Header />
-
-        {
-          router.isFallback
-            ? <BlogLoading />
-            : <List page={props.page} perPage={10} total={props.posts.length} posts={props.posts} />
-        }
-      </Container>
+    <Layout containerVariant="narrow" title="Test">
+      {
+        router.isFallback
+          ? <BlogLoading />
+          : <List page={props.page} perPage={10} total={props.posts.length} posts={props.posts} />
+      }
     </Layout>
   );
 };

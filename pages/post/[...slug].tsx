@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
 import BlogLoading from '../../components/blog/Loading';
 import BlogPost from '../../components/blog/Post';
-import Container from '../../components/Container';
-import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import { getAllPosts, getPostBySlug } from '../../lib/api';
 import markdownToHtml from '../../lib/markdownToHtml';
@@ -33,15 +31,11 @@ const Post: FunctionComponent<Props> = ({ post }) => {
 
   return (
     <Layout title="Test">
-      <Container>
-        <Header />
-
-        {
-          router.isFallback
-            ? <BlogLoading />
-            : <BlogPost post={post} />
-        }
-      </Container>
+      {
+        router.isFallback
+          ? <BlogLoading />
+          : <BlogPost post={post} />
+      }
     </Layout>
   );
 };

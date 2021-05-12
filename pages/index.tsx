@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
 import BlogLoading from '../components/blog/Loading';
-import Container from '../components/Container';
-import Header from '../components/Header';
 import Layout from '../components/Layout';
 import List from '../components/blog/List';
 import { getAllPosts } from '../lib/api';
@@ -23,16 +21,12 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
   const router = useRouter();
 
   return (
-    <Layout title="Test">
-      <Container variant="narrow">
-        <Header />
-
-        {
-          router.isFallback
-            ? <BlogLoading />
-            : <List page={1} perPage={10} total={allPosts.length} posts={allPosts} />
-        }
-      </Container>
+    <Layout containerVariant="narrow" title="Test">
+      {
+        router.isFallback
+          ? <BlogLoading />
+          : <List page={1} perPage={10} total={allPosts.length} posts={allPosts} />
+      }
     </Layout>
   );
 };
