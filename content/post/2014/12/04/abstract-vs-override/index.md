@@ -19,131 +19,133 @@ A simple example I could provide is in my grids I tend to want a couple differen
 
 Normally I would extend `Ext.grid.Panel` for all my grids but for those common UI features I'd have to implement them in each grid which is not optimal.  There's an better way to do it, create an abstract grid class that extends `Ext.grid.Panel` and has configs to turn on/off the UI features. Here is an example abstract grid class (please don't get overwhelmed by the amount of code):
 
-    Ext.define('MyApp.view.abstracts.Grid', {
-        extend : 'Ext.grid.Panel',
-        xtype  : 'myapp-abstracts-grid',
+```js
+Ext.define('MyApp.view.abstracts.Grid', {
+    extend : 'Ext.grid.Panel',
+    xtype  : 'myapp-abstracts-grid',
 
-        requires : [
-            'Ext.button.Button',
-            'Ext.form.field.Text',
-            'Ext.grid.feature.Grouping',
-            'Ext.toolbar.Paging'
-        ],
+    requires : [
+        'Ext.button.Button',
+        'Ext.form.field.Text',
+        'Ext.grid.feature.Grouping',
+        'Ext.toolbar.Paging'
+    ],
 
-        config : {
-            /**
-             * @cfg {Boolean/Object} [createNew=true] `true` to add a {@link Ext.button.Button} to create a new record.
-             *
-             * Can also be a config object for the button.
-             */
-            createNew   : true,
-            /**
-             * @cfg {Boolean/Object} [grouped=false] `true` to add the {@link Ext.grid.feature.Grouping} feature to the grid.
-             *
-             * Can be a config object that will be passed or a boolean.
-             */
-            grouped     : false,
-            /**
-             * @cfg {Boolean/Object} [pageable=true] `true` to add a {@link Ext.toolbar.Paging}. Will set the grid's
-             * store on the toolbar automatically.
-             *
-             * Can be a config object for the paging toolbar.
-             */
-            pageable    : true,
-            /**
-             * @cfg {Boolean/Object} [refreshable=true] `true` to add a refresh {@link Ext.panel.Tool} to the title bar.
-             *
-             * Can be a config object for the tool.
-             */
-            refreshable : true,
-            /**
-             * @cfg {Boolean/Object} [searchable=true] `true` to add a search {@link Ext.form.field.Text}.
-             *
-             * Can also be a config object for the text field.
-             */
-            searchable  : true
-        },
+    config : {
+        /**
+            * @cfg {Boolean/Object} [createNew=true] `true` to add a {@link Ext.button.Button} to create a new record.
+            *
+            * Can also be a config object for the button.
+            */
+        createNew   : true,
+        /**
+            * @cfg {Boolean/Object} [grouped=false] `true` to add the {@link Ext.grid.feature.Grouping} feature to the grid.
+            *
+            * Can be a config object that will be passed or a boolean.
+            */
+        grouped     : false,
+        /**
+            * @cfg {Boolean/Object} [pageable=true] `true` to add a {@link Ext.toolbar.Paging}. Will set the grid's
+            * store on the toolbar automatically.
+            *
+            * Can be a config object for the paging toolbar.
+            */
+        pageable    : true,
+        /**
+            * @cfg {Boolean/Object} [refreshable=true] `true` to add a refresh {@link Ext.panel.Tool} to the title bar.
+            *
+            * Can be a config object for the tool.
+            */
+        refreshable : true,
+        /**
+            * @cfg {Boolean/Object} [searchable=true] `true` to add a search {@link Ext.form.field.Text}.
+            *
+            * Can also be a config object for the text field.
+            */
+        searchable  : true
+    },
 
-        initComponent : function() {
-            var me          = this,
-                store       = me.store = Ext.data.StoreManager.lookup(me.store),
-                dockedItems = me.dockedItems || [],
-                features    = me.features    || [],
-                tbar        = me.tbar        || [],
-                tools       = me.tools       || [],
-                createNew   = me.getCreateNew(),
-                grouped     = me.getGrouped(),
-                pageable    = me.getPageable(),
-                refreshable = me.getRefreshable(),
-                searchable  = me.getSearchable();
+    initComponent : function() {
+        var me          = this,
+            store       = me.store = Ext.data.StoreManager.lookup(me.store),
+            dockedItems = me.dockedItems || [],
+            features    = me.features    || [],
+            tbar        = me.tbar        || [],
+            tools       = me.tools       || [],
+            createNew   = me.getCreateNew(),
+            grouped     = me.getGrouped(),
+            pageable    = me.getPageable(),
+            refreshable = me.getRefreshable(),
+            searchable  = me.getSearchable();
 
-            if (createNew) {
-                tbar.unshift(Ext.apply({
-                    text    : 'Create',
-                    iconCls : 'fa fa-plus',
-                    handler : 'onCreateClick'
-                }, createNew));
-            }
-
-            if (searchable) {
-                //add it first
-                tbar.unshift(Ext.apply({
-                    xtype           : 'textfield',
-                    enableKeyEvents : true,
-                    emptyText       : 'search...',
-                    width           : 300,
-                    triggers        : {
-                        search : {
-                            cls     : 'fa fa-search',
-                            handler : 'doSearch'
-                        }
-                    },
-                    listeners       : {
-                        keydown : 'onSearchKeyDown'
-                    }
-                }, searchable));
-            }
-
-            if (grouped) {
-                features.push(Ext.apply({
-                    ftype : 'grouping'
-                }, grouped));
-            }
-
-            if (pageable) {
-                dockedItems.push(Ext.apply({
-                    xtype       : 'pagingtoolbar',
-                    dock        : 'bottom',
-                    displayInfo : true,
-                    store       : store
-                }, pageable));
-            }
-
-            if (refreshable) {
-                tools.push(Ext.apply({
-                    type    : 'refresh',
-                    tooltip : 'Refresh Grid',
-                    scope   : me,
-                    handler : 'refreshStore'
-                }, refreshable));
-            }
-
-            if (tbar.length) {
-                docks.push({
-                    xtype : 'toolbar',
-                    dock  : 'top',
-                    items : tbar
-                });
-            }
-
-            me.dockedItems = docks;
-            me.features    = features;
-            me.tools       = tools;
-            me.tbar        = null;
-
-            me.callParent();
+        if (createNew) {
+            tbar.unshift(Ext.apply({
+                text    : 'Create',
+                iconCls : 'fa fa-plus',
+                handler : 'onCreateClick'
+            }, createNew));
         }
-    });
+
+        if (searchable) {
+            //add it first
+            tbar.unshift(Ext.apply({
+                xtype           : 'textfield',
+                enableKeyEvents : true,
+                emptyText       : 'search...',
+                width           : 300,
+                triggers        : {
+                    search : {
+                        cls     : 'fa fa-search',
+                        handler : 'doSearch'
+                    }
+                },
+                listeners       : {
+                    keydown : 'onSearchKeyDown'
+                }
+            }, searchable));
+        }
+
+        if (grouped) {
+            features.push(Ext.apply({
+                ftype : 'grouping'
+            }, grouped));
+        }
+
+        if (pageable) {
+            dockedItems.push(Ext.apply({
+                xtype       : 'pagingtoolbar',
+                dock        : 'bottom',
+                displayInfo : true,
+                store       : store
+            }, pageable));
+        }
+
+        if (refreshable) {
+            tools.push(Ext.apply({
+                type    : 'refresh',
+                tooltip : 'Refresh Grid',
+                scope   : me,
+                handler : 'refreshStore'
+            }, refreshable));
+        }
+
+        if (tbar.length) {
+            docks.push({
+                xtype : 'toolbar',
+                dock  : 'top',
+                items : tbar
+            });
+        }
+
+        me.dockedItems = docks;
+        me.features    = features;
+        me.tools       = tools;
+        me.tbar        = null;
+
+        me.callParent();
+    }
+});
+```
 
 We now have an abstract grid class that has 5 configs to add certain UI features that are common among grids.  Within the `initComponent` method, we go through these configs and add the classes to the grid.  The configs can be a simple `Boolean` or can be config `Object`s for the different components associated with that config.
 
@@ -159,86 +161,92 @@ I do this for many different classes that are used frequently: form panel, windo
 
 Abstracts are incredibly useful.  However, abstracts cannot solve everything.  I'm currently working on a new support portal for Sencha, employees (admins) should see different items than customers (users).  I could hook into `initComponent` and build the items array there but I wanted to use simple configs and stay away from overriding methods so I have `adminItems` and `userItems` configs I implement like this:
 
-    Ext.define('MyApp.view.Foo', {
-        extend : 'Ext.container.Container',
-        xtype  : 'myapp-foo',
+```js
+Ext.define('MyApp.view.Foo', {
+    extend : 'Ext.container.Container',
+    xtype  : 'myapp-foo',
 
-        adminItems : [
-            //...
-        ],
+    adminItems : [
+        //...
+    ],
 
-        userItems : [
-            //...
-        ]
-    });
+    userItems : [
+        //...
+    ]
+});
+```
 
 If I were to handle this in an abstract, I'd have to spread the code around to `Ext.container.Container`, `Ext.panel.Panel`, `Ext.grid.Panel`, etc abstract classes so that all components would handle the different admin/user configs.  With the abstract approach, I'd have to spread the logic which is not what I want to do.  I could create a singleton utility class and in the abstracts execute a common method on that utility class but there is a better way to do it.  Let's keep taking advantage of the class system and override certain Ext JS classes.  An example to pick certain items based on if the user is an admin or user we need to determine where the class that handles the items is, which is `Ext.container.Container`, and override it like so:
 
-    Ext.define('Override.container.Container', {
-        override : 'Ext.container.Container',
+```js
+Ext.define('Override.container.Container', {
+    override : 'Ext.container.Container',
 
-        adminItems : null,
-        userItems  : null,
+    adminItems : null,
+    userItems  : null,
 
-        buildItems      : null,
-        buildAdminItems : null,
-        buildUserItems  : null,
+    buildItems      : null,
+    buildAdminItems : null,
+    buildUserItems  : null,
 
-        initComponent : function() {
-            var me      = this,
-                user    = Portal.user,
-                isAdmin = user && user.isAdmin();
+    initComponent : function() {
+        var me      = this,
+            user    = Portal.user,
+            isAdmin = user && user.isAdmin();
 
-            if (me.buildItems) {
-                me.items = me.buildItems();
-            } else if (me.buildAdminItems && isAdmin) {
-                me.items = me.buildAdminItems();
-            } else if (me.buildUserItems && user) {
-                me.items = me.buildUserItems();
-            } else if (me.adminItems && isAdmin) {
-                me.items = me.adminItems;
-            } else if (me.userItems && user) {
-                me.items = me.userItems;
-            }
-
-            me.callParent();
+        if (me.buildItems) {
+            me.items = me.buildItems();
+        } else if (me.buildAdminItems && isAdmin) {
+            me.items = me.buildAdminItems();
+        } else if (me.buildUserItems && user) {
+            me.items = me.buildUserItems();
+        } else if (me.adminItems && isAdmin) {
+            me.items = me.adminItems;
+        } else if (me.userItems && user) {
+            me.items = me.userItems;
         }
-    });
+
+        me.callParent();
+    }
+});
+```
 
 I also go a bit further and allow for `buildItems`, `buildAdminItems` and `buildUserItems` to be methods that I can execute and return items making this override a bit more flexible.
 
 The same process can be put into place for docked items but we need to override `Ext.panel.Panel`:
 
-    Ext.define('Override.panel.Panel', {
-        override : 'Ext.panel.Panel',
+```js
+Ext.define('Override.panel.Panel', {
+    override : 'Ext.panel.Panel',
 
-        adminDockedItems : null,
-        userDockedItems  : null,
+    adminDockedItems : null,
+    userDockedItems  : null,
 
-        buildDockedItems      : null,
-        buildAdminDockedItems : null,
-        buildUserDockedItems  : null,
+    buildDockedItems      : null,
+    buildAdminDockedItems : null,
+    buildUserDockedItems  : null,
 
-        initComponent : function() {
-            var me      = this,
-                user    = Portal.user,
-                isAdmin = user && user.isAdmin();
+    initComponent : function() {
+        var me      = this,
+            user    = Portal.user,
+            isAdmin = user && user.isAdmin();
 
-            if (me.buildDockedItems) {
-                me.dockedItems = me.buildDockedItems();
-            } else if (me.buildAdminDockedItems && isAdmin) {
-                me.dockedItems = me.buildAdminDockedItems();
-            } else if (me.buildUserDockedItems && user) {
-                me.dockedItems = me.buildUserDockedItems();
-            } else if (me.adminDockedItems && isAdmin) {
-                me.dockedItems = me.adminDockedItems;
-            } else if (me.userDockedItems && user) {
-                me.dockedItems = me.userDockedItems;
-            }
-
-            me.callParent();
+        if (me.buildDockedItems) {
+            me.dockedItems = me.buildDockedItems();
+        } else if (me.buildAdminDockedItems && isAdmin) {
+            me.dockedItems = me.buildAdminDockedItems();
+        } else if (me.buildUserDockedItems && user) {
+            me.dockedItems = me.buildUserDockedItems();
+        } else if (me.adminDockedItems && isAdmin) {
+            me.dockedItems = me.adminDockedItems;
+        } else if (me.userDockedItems && user) {
+            me.dockedItems = me.userDockedItems;
         }
-    });
+
+        me.callParent();
+    }
+});
+```
 
 I now have reusable logic for any class. Before, if I wanted to use adminDockedItems in a grid, I'd have to implement the code in `Ext.panel.Panel` and `Ext.grid.Panel` abstracts but with override I only have to impelemnt the code in the `Ext.panel.Panel` override as `Ext.grid.Panel` eventually extends `Ext.panel.Panel`.
 

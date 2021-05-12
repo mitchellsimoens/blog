@@ -9,35 +9,39 @@ Personally, I use a technology called Ext.Direct for my projects. Ext.Direct is 
 
 Lately, I've seen a few methods people are using to load the api descriptor and I'd like to show them and discuss why they are a bad idea and then of course show the proper way. First means of loading the api I recently saw is this:
 
-    Ext.define('MyApp.DirectAPI', {
-        requires: ['Ext.direct.*', 'Ext.Ajax']
-    }, function() {
-        Ext.Ajax.request({
-            url: "/DirectApi",
-            async: false,
-            success: function(xhr) {
-                Ext.globalEval(xhr.responseText);
-            },
-            failure: function(xhr) {
-                throw "Direct API load failed with error code " + xhr.status + ": " + xhr.statusText;
-            }
-        });
-        Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+```js
+Ext.define('MyApp.DirectAPI', {
+    requires: ['Ext.direct.*', 'Ext.Ajax']
+}, function() {
+    Ext.Ajax.request({
+        url: "/DirectApi",
+        async: false,
+        success: function(xhr) {
+            Ext.globalEval(xhr.responseText);
+        },
+        failure: function(xhr) {
+            throw "Direct API load failed with error code " + xhr.status + ": " + xhr.statusText;
+        }
     });
+    Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+});
+```
 
 What this is doing is if the application requires `MyApp.DirectAPI` it will then do a synchronous ajax call, eval the response and then add the provider.
 
 Another means I saw is:
 
-    Ext.define('MyApp.DirectAPI', {
-        requires: ['Ext.direct.*']
-    }, function() {
-        Ext.Loader.loadScriptsSync('api.php');
-        /*
-        Add provider. Name must match settings on serverside
-        */
-        Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
-    });
+```js
+Ext.define('MyApp.DirectAPI', {
+    requires: ['Ext.direct.*']
+}, function() {
+    Ext.Loader.loadScriptsSync('api.php');
+    /*
+    Add provider. Name must match settings on serverside
+    */
+    Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+});
+```
 
 This is basically the same thing as the first code, just uses `Ext.Loader.loadScriptsSync` instead of `Ext.Ajax.request`. The only difference is the `loadScriptsSync` does the eval for you, both use `XMLHttpRequest`.
 
@@ -49,21 +53,25 @@ So these techniques work but why are they bad? The main issue in both is the use
 
 If you are using [Sencha Cmd](https://www.sencha.com/products/extjs/#sencha-cmd) (which I would highly recommend), instead of the code ways above all you have to do is add the script to the `app.json`'s `js` array:
 
-    "js": [
-        {
-            "path": "app.js",
-            "bundle": true
-        },
-        {
-            "path": "/direct/api",
-            "remote": true
-        }
-    ]
+```json
+"js": [
+    {
+        "path": "app.js",
+        "bundle": true
+    },
+    {
+        "path": "/direct/api",
+        "remote": true
+    }
+]
+```
 
 Now, after you run a `sencha app watch` or `sencha app build`, Ext JS will automatically create a `<script>` tag to load the direct api and defer the application's `launch` method from executing until it has loaded. Then in the `launch` method you can then use the `Ext.direct.Manager.addProvider`.
 
 If you're not using Sencha Cmd, then all you have to do is add a `<script>` to your index.html and your application's `launch` method or `Ext.onReady` will defer till it loads:
 
-    <script type="text/javascript" charset="UTF-8" src="/direct/api"></script>
+```html
+<script type="text/javascript" charset="UTF-8" src="/direct/api"></script>
+```
 
 Without doing anything on the server, the application will still wait for the direct api to load so you still will have that issue to contend with but the browser will not be locked up. If the person wants to close the browser for whatever reason or open a new tab to do something else they can. So the difference is if the browser will be locked up or not, I'd choose not to lock the user's browser up. Even if the load takes < 1 second, since there is a way not to do it I wouldn't.

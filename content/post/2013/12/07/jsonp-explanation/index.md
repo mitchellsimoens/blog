@@ -13,17 +13,19 @@ JsonP is a means of transporting data from a client to a server across origins (
 
 Like I said in the second sentence of this blog, JsonP is truly a very simple concept. It has 2 parts, a Javascript function used as a callback that you define on the client and a &#60;script&#60; element you have in your HTML page. The &#60;script&#62; element will handle the transport of data and the callback function handles the data when it has been loaded. That's it. In fact here is an example:
 
-    <html>
-        <head>
-            <script type="text/javascript">
-                window.MyCallback = function(data) {
-                    //handle the data returned here
-                };
-            </script>
-        	<script type="text/javascript" src="http://mydomain.com:8080/data.php?callback=MyCallback"></script>
-        </head>
-        <body></body>
-    </html>
+```html
+<html>
+    <head>
+        <script type="text/javascript">
+            window.MyCallback = function(data) {
+                //handle the data returned here
+            };
+        </script>
+        <script type="text/javascript" src="http://mydomain.com:8080/data.php?callback=MyCallback"></script>
+    </head>
+    <body></body>
+</html>
+```
 
 Like I said, we have a Javascript function that is used as a callback, I've named mine MyCallback and you have a &#60;script&#62; element that does the actual loading. Pretty simple right? There is no smoke and mirrors, there is no Xhr request going on that you need to set up.
 
@@ -31,9 +33,11 @@ Like I said, we have a Javascript function that is used as a callback, I've name
 
 It's exactly how Ext.data.JsonP works. If you execute this code in Ext JS:
 
-    Ext.data.JsonP.request({
-        url : 'http://mydomain.com:8080/data.php'
-    });
+```js
+Ext.data.JsonP.request({
+    url : 'http://mydomain.com:8080/data.php'
+});
+```
 
 All it's doing is creating the callback function (which it will append to the url you provided so no need to worry about that) and inserting that &#60;script&#62; into the &#60;head&#62; of your HTML document. It does other things like enables a timeout, keeps track of the requests, executes a success/failure function you can provide to the request method and cleans up the &#60;script&#62; after loading.
 
@@ -41,28 +45,33 @@ All it's doing is creating the callback function (which it will append to the ur
 
 Like I said, this request no server setup, it's all handled in your server side language of choice. The request will have a callback request parameter and it's value should wrap your "Json" data which actually will execute the Javascript callback function that is supposed to be created in the client app. Let's use my first code that we used when describing JsonP in a nutshell. It's sending the callback parameter with a value of MyCallback so our "Json" needs to be wrapped in MyCallback so that we execute the MyCallback function. Here is an example of the response:
 
-    MyCallback({
-        "foo": "bar"
-    });
+```js
+MyCallback({
+    "foo": "bar"
+});
+```
 
 Looks exactly like Javascript doesn't it? That's because it is Javascript. Remember, the &#60;script&#62; does the loading which will expect Javascript. It's just like if you were loading a somefile.js with a &#60;script&#62; only it's Javascript returned from a server side language instead of some file on your server.
 
 My server side language of choice is PHP. Here is a sample PHP script that would support JsonP:
 
-    <?php
+```php
+<?php
 
-    $isJsonP = isset($_REQUEST['callback']);
-    $data    = array('foo' => 'bar');
+$isJsonP = isset($_REQUEST['callback']);
+$data    = array('foo' => 'bar');
 
-    if ($isJsonP) {
-        echo $_REQUEST['callback'] . '(';
-    }
+if ($isJsonP) {
+    echo $_REQUEST['callback'] . '(';
+}
 
-    echo json_encode($data);
+echo json_encode($data);
 
-    if ($isJsonP) {
-        echo ');';
-    }
+if ($isJsonP) {
+    echo ');';
+}
+?>
+```
 
 In this code, if there is a callback parameter the $isJsonP variable will be true which will wrap the json that is echoed out with the callback function and the needed parentheses. This will echo out the example JsonP response from above.
 

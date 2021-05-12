@@ -9,14 +9,16 @@ First thing most people do, off to search [npm](https://www.npmjs.com/). I quick
 
 I've setup a simple example GitHub [repo](https://github.com/mitchellsimoens/SFTPServer). The server is `server.js` and a test client script is in `client_test.js`. You'll have to change some configs in both scripts. You'll also need to setup the table I use, this is what I have:
 
-    CREATE TABLE `user_public_keys` (
-      `id` int(11) NOT NULL AUTO_INCREMENT,
-      `username` varchar(200) NOT NULL,
-      `name` varchar(25) NOT NULL,
-      `key` text NOT NULL,
-      `added` datetime NOT NULL,
-      PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+```sql
+  CREATE TABLE `user_public_keys` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `username` varchar(200) NOT NULL,
+    `name` varchar(25) NOT NULL,
+    `key` text NOT NULL,
+    `added` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+```
 
 Once you setup the MySQL connection details in `server.js` you'll be able to read from the table. You'll have to generate an RSA host key, check out `keys/README.md`, it's a simple command but pay attention to where it wants to save the file, I placed it at `keys/host_rsa`.
 

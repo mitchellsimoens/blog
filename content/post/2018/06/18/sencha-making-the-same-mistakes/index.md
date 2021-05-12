@@ -31,7 +31,7 @@ I saw a [blog](https://motivationalcodepro.com/sencha-npm-tooling-with-ext-js-6-
 
 One example showed generating an application. First, some constructive feedback for the blog author is that showing a long command in multilines would help readability as the command is over 300 characters long (maybe it was just a command that is missing the special code formatting so it's all thrown together). Here is my best guess at the nested nature of the command:
 
-```shell
+```sh
 ext-gen \
   app \
     –template universalclassicmodern \

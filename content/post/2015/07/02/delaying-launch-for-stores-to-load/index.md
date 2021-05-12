@@ -5,29 +5,31 @@ date: "2015-07-02T13:07:03.284Z"
 
 A common request I hear from many people is how to delay the application's `launch` method from being executed. First, let's investigate the problem. Say you have a normal `app/Application.js` that looks like:
 
-    Ext.define('Fiddle.Application', {
-        extend : 'Ext.app.Application',
+```js
+Ext.define('Fiddle.Application', {
+    extend : 'Ext.app.Application',
 
-        name : 'Fiddle',
+    name : 'Fiddle',
 
-        stores : [
-            'Store1',
-            'Store2',
-            'Store3'
-        ],
+    stores : [
+        'Store1',
+        'Store2',
+        'Store3'
+    ],
 
-        launch : function() {
-            var store1 = Ext.getStore('Store1'),
-                store2 = Ext.getStore('Store2'),
-                store3 = Ext.getStore('Store3');
+    launch : function() {
+        var store1 = Ext.getStore('Store1'),
+            store2 = Ext.getStore('Store2'),
+            store3 = Ext.getStore('Store3');
 
-            console.log('store1 isLoaded', store1.isLoaded());
-            console.log('store2 isLoaded', store2.isLoaded());
-            console.log('store3 isLoaded', store3.isLoaded());
+        console.log('store1 isLoaded', store1.isLoaded());
+        console.log('store2 isLoaded', store2.isLoaded());
+        console.log('store3 isLoaded', store3.isLoaded());
 
-            Ext.Msg.alert('Fiddle', 'All stores are loaded!');
-        }
-    });
+        Ext.Msg.alert('Fiddle', 'All stores are loaded!');
+    }
+});
+```
 
 In the `launch` method you have some code that depends on the stores being loaded. Ok, this example just has some `console.log`s so use your imagination some. I could add logic to the launch method and execute some other method on this class sure but there may be a more elegant way. If you were to run this right now, your `Ext.Msg.alert` would happen but all the `console.log`s would show `false` for the `isLoaded` method calls because the load hasn't happened yet. So what we need to do is add `load` listeners to the stores and only execute the `launch` method when all stores have loaded.
 

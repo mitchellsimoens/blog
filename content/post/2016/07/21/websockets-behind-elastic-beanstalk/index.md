@@ -25,9 +25,11 @@ For those that do not know, EB uses [nginx](https://www.nginx.com/) as a proxy, 
 
 Not all of the settings should be needed, the important bits are:
 
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
+```
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+```
 
 ## Configuring EB
 

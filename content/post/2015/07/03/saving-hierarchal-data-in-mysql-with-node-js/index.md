@@ -19,28 +19,30 @@ For saving tree data you need to deal with creating, updating and deleting nodes
 
 When using `Ext.data.TreeStore` and the related classes, Ext JS will create IDs for each node that you create on the client. I can use this to determine if the node passed to the server is a phantom (does not exist in the db) or not. Ext JS does set the `phantom` property on the model but using the ID is a single way to handle create vs update. The data I send back to the server is like this:
 
-    [
-        {
-            "id"       : "Model-1",
-            "text"     : "Parent 1.1",
-            "children" : [
-                {
-                    "id"   : "Model-3",
-                    "text" : "Leaf 1.1"
-                }
-            ]
-        },
-        {
-            "id"       : "Model-2",
-            "text"     : "Parent 1.2",
-            "children" : [
-                {
-                    "id"   : "Model-4",
-                    "text" : "Leaf 1.2"
-                }
-            ]
-        }
-    ]
+```json
+[
+    {
+        "id"       : "Model-1",
+        "text"     : "Parent 1.1",
+        "children" : [
+            {
+                "id"   : "Model-3",
+                "text" : "Leaf 1.1"
+            }
+        ]
+    },
+    {
+        "id"       : "Model-2",
+        "text"     : "Parent 1.2",
+        "children" : [
+            {
+                "id"   : "Model-4",
+                "text" : "Leaf 1.2"
+            }
+        ]
+    }
+]
+```
 
 Each node is an Object in the JSON and each node can have a `children` property and can nest as many children. If we look at the `id` property, it's in a format that has the Ext JS model's class name and an auto-incremented number joined by a hyphen. This is Ext JS creating a client side ID for a phantom record. In the database, I expect only integers for IDs so if it's a string and has a hyphen, chances are it's a phantom. Right there is how I determine if the node needs to be created or updated. In the database I also have a `parentid` field in the table so that a child can relate to its parent. You can see there is no `parentid` because on the server I can just get it from when I iterate through things. The trick there is to determine if the parent is phantom or not and getting the ID when the parent is being created.
 
@@ -48,157 +50,169 @@ Each node is an Object in the JSON and each node can have a `children` property 
 
 On the server, I pass the data to a `Tree` function and execute the `save` method on it:
 
-    var Tree = require('./Tree');
+```js
+var Tree = require('./Tree');
 
-    new Tree(data).save(function() { /* */ });
+new Tree(data).save(function() { /* */ });
+```
 
 In the `Tree.js` file, I start with code like this:
 
-    var mysql       = require('mysql'),
-        phantomIdRe = /-/g;
+```js
+var mysql       = require('mysql'),
+    phantomIdRe = /-/g;
 
-    function Tree(data) {
-        this.data    = data;
-        this.sqls    = [];
-        this.inserts = [];
-        this.vars    = {};
-        this.realIds = [];
+function Tree(data) {
+    this.data    = data;
+    this.sqls    = [];
+    this.inserts = [];
+    this.vars    = {};
+    this.realIds = [];
 
-        return this;
+    return this;
+}
+
+Tree.prototype.isArray = function(value) {
+    return Object.prototype.toString.call(value) === '[object Array]';
+};
+
+Tree.prototype.isIdPhantom = function(id) {
+    return typeof id === 'string' && id.indexOf('-') > -1;
+};
+
+Tree.prototype.parsePhantomId = function(id) {
+    return id.replace(phantomIdRe, '_');
+};
+
+Tree.prototype.save = function(callback) {
+    var data    = this.data,
+        sqls    = this.sqls,
+        inserts = this.inserts,
+        tree;
+
+    this.parseChildren(data);
+
+    if (this.realIds && this.realIds.length) {
+        //delete any nodes that were not passed
+        sqls.unshift('DELETE FROM my_table WHERE id NOT IN(?);');
+        inserts.unshift(this.realIds);
     }
 
-    Tree.prototype.isArray = function(value) {
-        return Object.prototype.toString.call(value) === '[object Array]';
-    };
+    //execute the sqls
+    console.log(mysql.format(sqls.join(''), inserts));
 
-    Tree.prototype.isIdPhantom = function(id) {
-        return typeof id === 'string' && id.indexOf('-') > -1;
-    };
+    callback();
+};
 
-    Tree.prototype.parsePhantomId = function(id) {
-        return id.replace(phantomIdRe, '_');
-    };
-
-    Tree.prototype.save = function(callback) {
-        var data    = this.data,
-            sqls    = this.sqls,
-            inserts = this.inserts,
-            tree;
-
-        this.parseChildren(data);
-
-        if (this.realIds && this.realIds.length) {
-            //delete any nodes that were not passed
-            sqls.unshift('DELETE FROM my_table WHERE id NOT IN(?);');
-            inserts.unshift(this.realIds);
-        }
-
-        //execute the sqls
-        console.log(mysql.format(sqls.join(''), inserts));
-
-        callback();
-    };
-
-    module.exports = Tree;
+module.exports = Tree;
+```
 
 Nothing special so far, the `isIdPhantom` function will do the checking if the id has a hyphen. The `parsePhantomId` will replace hyphens with underscores, more about that later. The `save` method is what really kicks things off. It first executes the `parseChildren` method which allows for recursion:
 
-    Tree.prototype.parseChildren = function(children, parent) {
-        if (!this.isArray(children)) {
-            children = children.children;
-        }
+```js
+Tree.prototype.parseChildren = function(children, parent) {
+    if (!this.isArray(children)) {
+        children = children.children;
+    }
 
-        var i        = 0,
-            length   = children.length,
-            parentid = parent && parent.id,
-            node;
+    var i        = 0,
+        length   = children.length,
+        parentid = parent && parent.id,
+        node;
 
-        if (length) {
-            for (; i < length; i++) {
-                node = children[i];
+    if (length) {
+        for (; i < length; i++) {
+            node = children[i];
 
-                this.parseNode(node, parentid);
+            this.parseNode(node, parentid);
 
-                if (node.children) {
-                    this.parseChildren(node.children, node);
-                }
+            if (node.children) {
+                this.parseChildren(node.children, node);
             }
         }
-    };
+    }
+};
+```
 
 The important part here is it'll call `parseChildren` if the current node has any children but also the new `parseNode` method which does the real "magic". Hope I'm not loosing you yet, here's `parseNode` and it's a little long:
 
-    Tree.prototype.parseNode = function(node, parentid) {
-        var sqls    = this.sqls,
-            inserts = this.inserts,
-            vars    = this.vars,
-            id      = node.id,
-            parentVar;
+```js
+Tree.prototype.parseNode = function(node, parentid) {
+    var sqls    = this.sqls,
+        inserts = this.inserts,
+        vars    = this.vars,
+        id      = node.id,
+        parentVar;
 
-        if (parentid) {
-            if (this.isIdPhantom(parentid)) {
-                parentVar = vars[parentid];
+    if (parentid) {
+        if (this.isIdPhantom(parentid)) {
+            parentVar = vars[parentid];
 
-                if (!parentVar) {
-                    //no variable means it wasn't a phantom
-                    parentVar = '?';
-                    inserts.push(parentid);
-                }
-            } else {
-                //wasn't a phantom
+            if (!parentVar) {
+                //no variable means it wasn't a phantom
                 parentVar = '?';
                 inserts.push(parentid);
             }
         } else {
-            //is a root child node
+            //wasn't a phantom
             parentVar = '?';
-            inserts.push(null);
+            inserts.push(parentid);
         }
+    } else {
+        //is a root child node
+        parentVar = '?';
+        inserts.push(null);
+    }
 
-        if (this.isIdPhantom(id)) {
-            sqls.push('INSERT INTO my_table (`parentid`, `text`) VALUES (' + parentVar + ', ?);');
+    if (this.isIdPhantom(id)) {
+        sqls.push('INSERT INTO my_table (`parentid`, `text`) VALUES (' + parentVar + ', ?);');
 
-            inserts.push(
-                node.text
-            );
+        inserts.push(
+            node.text
+        );
 
-            if (node.children) {
-                id = this.parsePhantomId(id);
+        if (node.children) {
+            id = this.parsePhantomId(id);
 
-                //create the mapping of the phantom id to the SQL variable
-                vars[node.id] = '@' + id;
+            //create the mapping of the phantom id to the SQL variable
+            vars[node.id] = '@' + id;
 
-                //use SET query to set the variable to the last inserted id
-                sqls.push('SET @' + id + ' = LAST_INSERT_ID();');
-            }
-        } else {
-            this.realIds.push(id);
-
-            sqls.push('UPDATE my_table SET `parentid` = ' + parentVar + ', `text` = ?  WHERE id = ?;');
-
-            inserts.push(
-                node.text,
-                id
-            );
+            //use SET query to set the variable to the last inserted id
+            sqls.push('SET @' + id + ' = LAST_INSERT_ID();');
         }
-    };
+    } else {
+        this.realIds.push(id);
+
+        sqls.push('UPDATE my_table SET `parentid` = ' + parentVar + ', `text` = ?  WHERE id = ?;');
+
+        inserts.push(
+            node.text,
+            id
+        );
+    }
+};
+```
 
 So let's take this slowly. First, we have to check if the `parentid` exists for the sake of if the node has a parent or if it's a root child. This is also where we check if the parent is being created or updated. This also exposes the trick of handling create vs update, I use SQL variables. We'll talk about that more in a bit. If the parent wasn't a phantom (it already exists in the db) then we can set the `parentVar` variable to the `?` so that the mysql module can insert the parent's id into the ending SQL query. If the parent is a phantom, then we are going to use the assigned SQL query for the parent node.
 
 Next, we handle the current node. We first check if the node's `id` designates it as a phantom or not. If it does then we add the INSERT SQL query to the array of queries but we use that `parentVar` that is either `?` or the SQL variable. If the node has children, then we need to assign that node a SQL safe variable (using the `parsePhantomId` method that replaces hyphens with underscores), cache that SQL variable to the `vars` Object for lookup in child nodes and then add the SET SQL query that will set the SQL variable to the last insert id from the last INSERT query. So now we see something like this:
 
-    INSERT INTO my_table (`parentid`, `text`) VALUES (?, ?);
-    SET @Model_1 = LAST_INSERT_ID();
-    INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_1, ?);
-    SET @Model_3 = LAST_INSERT_ID();
-    INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_3, ?);
+```sql
+INSERT INTO my_table (`parentid`, `text`) VALUES (?, ?);
+SET @Model_1 = LAST_INSERT_ID();
+INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_1, ?);
+SET @Model_3 = LAST_INSERT_ID();
+INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_3, ?);
+```
 
 So now you can start to understand what I'm building. Using SQL variables to cache that real last insert id in the db will allow the whole tree data to be saved to the db in a single transaction. Of course if the node already exists I use an UPDATE instead of an INSERT and of course I don't need to set a SQL variable since the parent exists. So I could have something like this if the first node existed:
 
-    UPDATE my_table SET `parentid` = ?, `text` = ? WHERE id = ?;
-    INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_1, ?);
-    SET @Model_3 = LAST_INSERT_ID();
-    INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_3, ?);
+```sql
+UPDATE my_table SET `parentid` = ?, `text` = ? WHERE id = ?;
+INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_1, ?);
+SET @Model_3 = LAST_INSERT_ID();
+INSERT INTO my_table (`parentid`, `text`) VALUES (@Model_3, ?);
+```
 
 However with a node that already exists, I do cache the real id to the `realIds` array so that I can delete all existing nodes that do not match those IDs since I expect the entire tree data to be sent back to the server.
 
@@ -208,126 +222,128 @@ I hope I didn't loose you, it can be hard to blog about something like this and 
 
 Just in case the broken up code is a bit hard to follow, here is the `Tree.js` file I have:
 
-    var mysql       = require('mysql'),
-        phantomIdRe = /-/g;
+```js
+var mysql       = require('mysql'),
+    phantomIdRe = /-/g;
 
-    function Tree(data) {
-        this.data    = data;
-        this.sqls    = [];
-        this.inserts = [];
-        this.vars    = {};
-        this.realIds = [];
+function Tree(data) {
+    this.data    = data;
+    this.sqls    = [];
+    this.inserts = [];
+    this.vars    = {};
+    this.realIds = [];
 
-        return this;
+    return this;
+}
+
+Tree.prototype.isArray = function(value) {
+    return Object.prototype.toString.call(value) === '[object Array]';
+};
+
+Tree.prototype.isIdPhantom = function(id) {
+    return typeof id === 'string' && id.indexOf('-') > -1;
+};
+
+Tree.prototype.parsePhantomId = function(id) {
+    return id.replace(phantomIdRe, '_');
+};
+
+Tree.prototype.save = function(callback) {
+    var data    = this.data,
+        sqls    = this.sqls,
+        inserts = this.inserts,
+        tree;
+
+    this.parseChildren(data);
+
+    if (this.realIds && this.realIds.length) {
+        sqls.unshift('DELETE FROM my_table WHERE id NOT IN(?);');
+        inserts.unshift(this.realIds);
     }
 
-    Tree.prototype.isArray = function(value) {
-        return Object.prototype.toString.call(value) === '[object Array]';
-    };
+    //execute the sqls
+    console.log(mysql.format(sqls.join(''), inserts));
 
-    Tree.prototype.isIdPhantom = function(id) {
-        return typeof id === 'string' && id.indexOf('-') > -1;
-    };
+    callback();
+};
 
-    Tree.prototype.parsePhantomId = function(id) {
-        return id.replace(phantomIdRe, '_');
-    };
+Tree.prototype.parseChildren = function(children, parent) {
+    if (!this.isArray(children)) {
+        children = children.children;
+    }
 
-    Tree.prototype.save = function(callback) {
-        var data    = this.data,
-            sqls    = this.sqls,
-            inserts = this.inserts,
-            tree;
+    var i        = 0,
+        length   = children.length,
+        parentid = parent && parent.id,
+        node;
 
-        this.parseChildren(data);
+    if (length) {
+        for (; i < length; i++) {
+            node = children[i];
 
-        if (this.realIds && this.realIds.length) {
-            sqls.unshift('DELETE FROM my_table WHERE id NOT IN(?);');
-            inserts.unshift(this.realIds);
-        }
+            this.parseNode(node, parentid);
 
-        //execute the sqls
-        console.log(mysql.format(sqls.join(''), inserts));
-
-        callback();
-    };
-
-    Tree.prototype.parseChildren = function(children, parent) {
-        if (!this.isArray(children)) {
-            children = children.children;
-        }
-
-        var i        = 0,
-            length   = children.length,
-            parentid = parent && parent.id,
-            node;
-
-        if (length) {
-            for (; i < length; i++) {
-                node = children[i];
-
-                this.parseNode(node, parentid);
-
-                if (node.children) {
-                    this.parseChildren(node.children, node);
-                }
+            if (node.children) {
+                this.parseChildren(node.children, node);
             }
         }
-    };
+    }
+};
 
-    Tree.prototype.parseNode = function(node, parentid) {
-        var sqls    = this.sqls,
-            inserts = this.inserts,
-            vars    = this.vars,
-            id      = node.id,
-            parentVar;
+Tree.prototype.parseNode = function(node, parentid) {
+    var sqls    = this.sqls,
+        inserts = this.inserts,
+        vars    = this.vars,
+        id      = node.id,
+        parentVar;
 
-        if (parentid) {
-            if (this.isIdPhantom(parentid)) {
-                parentVar = vars[parentid];
+    if (parentid) {
+        if (this.isIdPhantom(parentid)) {
+            parentVar = vars[parentid];
 
-                if (!parentVar) {
-                    //no variable means it wasn't a phantom
-                    parentVar = '?';
-                    inserts.push(parentid);
-                }
-            } else {
-                //wasn't a phantom
+            if (!parentVar) {
+                //no variable means it wasn't a phantom
                 parentVar = '?';
                 inserts.push(parentid);
             }
         } else {
-            //is a root child node
+            //wasn't a phantom
             parentVar = '?';
-            inserts.push(null);
+            inserts.push(parentid);
         }
+    } else {
+        //is a root child node
+        parentVar = '?';
+        inserts.push(null);
+    }
 
-        if (this.isIdPhantom(id)) {
-            sqls.push('INSERT INTO my_table (`parentid`, `text`) VALUES (' + parentVar + ', ?);');
+    if (this.isIdPhantom(id)) {
+        sqls.push('INSERT INTO my_table (`parentid`, `text`) VALUES (' + parentVar + ', ?);');
 
-            inserts.push(
-                node.text
-            );
+        inserts.push(
+            node.text
+        );
 
-            if (node.children) {
-                id = this.parsePhantomId(id);
+        if (node.children) {
+            id = this.parsePhantomId(id);
 
-                //create the mapping of the phantom id to the SQL variable
-                vars[node.id] = '@' + id;
+            //create the mapping of the phantom id to the SQL variable
+            vars[node.id] = '@' + id;
 
-                //use SET query to set the variable to the last inserted id
-                sqls.push('SET @' + id + ' = LAST_INSERT_ID();');
-            }
-        } else {
-            this.realIds.push(id);
-
-            sqls.push('UPDATE my_table SET `parentid` = ' + parentVar + ', `text` = ? WHERE id = ?;');
-
-            inserts.push(
-                node.text,
-                id
-            );
+            //use SET query to set the variable to the last inserted id
+            sqls.push('SET @' + id + ' = LAST_INSERT_ID();');
         }
-    };
+    } else {
+        this.realIds.push(id);
 
-    module.exports = Tree;
+        sqls.push('UPDATE my_table SET `parentid` = ' + parentVar + ', `text` = ? WHERE id = ?;');
+
+        inserts.push(
+            node.text,
+            id
+        );
+    }
+};
+
+module.exports = Tree;
+```

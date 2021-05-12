@@ -5,30 +5,32 @@ date: "2015-07-29T16:56:03.284Z"
 
 I've been seeing something a lot lately and I wanted to take a quick second to talk about it. This is creating instances and placing them on the prototype and all the issues this can cause and it may not be obvious to the developer. Let's take a look at such a case:
 
-    Ext.define('MyApp.view.Main', {
-        extend : 'Ext.grid.Panel',
-        xtype  : 'myapp-main',
+```js
+Ext.define('MyApp.view.Main', {
+    extend : 'Ext.grid.Panel',
+    xtype  : 'myapp-main',
 
-        requires : [
-            'MyApp.store.Foo',
-            'MyApp.store.Bar'
-        ],
+    requires : [
+        'MyApp.store.Foo',
+        'MyApp.store.Bar'
+    ],
 
-        store : Ext.create('MyApp.store.Foo'),
+    store : Ext.create('MyApp.store.Foo'),
 
-        columns : [
-            {
-                text      : 'Foo',
-                dataIndex : 'foo',
-                flex      : 1,
-                editor    : new Ext.form.field.ComboBox({
-                    store : {
-                        type : 'myapp-bar'
-                    }
-                })
-            }
-        ]
-    });
+    columns : [
+        {
+            text      : 'Foo',
+            dataIndex : 'foo',
+            flex      : 1,
+            editor    : new Ext.form.field.ComboBox({
+                store : {
+                    type : 'myapp-bar'
+                }
+            })
+        }
+    ]
+});
+```
 
 Here, I am creating two store instances and placing them on the prototype; yes, this code does have missing bits to not have super long code. I use `Ext.create` to create an instance of the `MyApp.store.Foo` class and using the `new` keyword to create a `ComboBox` instance as the editor of a column and in the `ComboBox` I specify the store using a config object that will use the `MyApp.store.Bar` via it's alias.
 
@@ -39,10 +41,12 @@ Let's first look at the `store : Ext.create('MyApp.store.Foo'),` line and why it
 
 To fix this part of the code, it should be using a config object:
 
-    store : {
-        type : 'myapp-foo'
-        //xclass : 'MyApp.store.Foo' //or using xclass
-    }
+```js
+store : {
+    type : 'myapp-foo'
+    //xclass : 'MyApp.store.Foo' //or using xclass
+}
+```
 
 This way, each time an instance of `MyApp.view.Main` is created, a new instance of `MyApp.store.Foo` is created. If you do want to share a store instance, I'd suggest adding the store to your application's `stores` config and then setting the `store` config on `MyApp.view.Main` to the appropriate `storeId` your global store is given.
 
@@ -54,19 +58,21 @@ This error is basically saying the `MyApp.store.Bar` store has not been defined 
 
 To fix this part of the code, you simply use a config object for the `ComboBox`:
 
-            columns : [
-            {
-                text      : 'Foo',
-                dataIndex : 'foo',
-                flex      : 1,
-                editor    : {
-                    xtype  : 'combobox',
-                    store  : {
-                        type : 'myapp-bar'
-                    }
-                }
+```js
+columns : [
+    {
+        text      : 'Foo',
+        dataIndex : 'foo',
+        flex      : 1,
+        editor    : {
+            xtype  : 'combobox',
+            store  : {
+                type : 'myapp-bar'
             }
-        ]
+        }
+    }
+]
+```
 
 Now, when the `MyApp.view.Main` is instantiated, when that `Foo` column is instantiated it will create an instance of the `ComboBox` properly.
 

@@ -27,41 +27,53 @@ What it does now is when Sencha Command builds the `index.html` it will create `
 
 Enough backstory, I know you are craving some code! Diving into the Sencha Touch 2.0.3 directory I created a simple app:
 
-    cd ~/Sites/sencha-touch-2.0.3
-    sencha app create MyApp ../MyApp
+```sh
+cd ~/Sites/sencha-touch-2.0.3
+sencha app create MyApp ../MyApp
+```
 
 Simple to create an app isn't it? Hell yeah it is (I was a doubter but now I'm a promoter)! I then edited the `MyApp.view.Main` class to add an `Ext.Map` item as the 2nd item so I opened the `~/Sites/MyApp/view/Main.js` in my editor (IntelliJ IDEA if you were wondering) and added this code as index 1:
 
-    {
-        xtype   : 'map',
-        title   : 'Map',
-        iconCls : 'maps'
-    },
+```js
+{
+    xtype   : 'map',
+    title   : 'Map',
+    iconCls : 'maps'
+},
+```
 
 and of course added `Ext.Map` to the `requires` array at the top of the file. So now we have our view using `Ext.Map` which will use the Google Maps API so we need to add the JavaScript file in `app.json` so I opened `app.json` and made 2 edits. First I added this code after the `sencha-touch.js` asset in the `js` property array:
 
-    {
-        "path": "http://maps.google.com/maps/api/js?sensor=true",
-        "remote": true
-    },
+```json
+{
+    "path": "http://maps.google.com/maps/api/js?sensor=true",
+    "remote": true
+},
+```
 
 and then at the bottom to get around a current error I changed the `logger` config to `false`:
 
-    "buildOptions": {
-        "product": "touch",
-        "minVersion": 3,
-        "debug": false,
-        "logger": false
-    },
+```json
+"buildOptions": {
+    "product": "touch",
+    "minVersion": 3,
+    "debug": false,
+    "logger": false
+},
+```
 
 So now `app.json` is going to tell Sencha Command to include the Google Maps' remote JavaScript file and the display the map in my `MyApp.view.Main` tab panel. First I need to test to make sure everything is working so I do a testing build:
 
-    cd ~/Sites/MyApp
-    sencha app build testing
+```sh
+cd ~/Sites/MyApp
+sencha app build testing
+```
 
 Launched <a href="http://localhost/MyApp/build/testing/" target="_blank">http://localhost/MyApp/build/testing/</a> in Chrome (my browser of choice) and everything displayed just fine, my map shows correctly (centered South-East of San Jose California because I didn't tell it to center anywhere and that's default). More importantly I checked out the console and there were not errors! Great, so from everything I know thus far my app is working perfectly so now I can deploy with a production build:
 
-    sencha app build production
+```sh
+sencha app build production
+```
 
 Launched <a href="http://localhost/MyApp/build/production/" target="_blank">http://localhost/MyApp/build/production/</a> in Chrome (yup, still my favorite browser) and everything works perfectly!
 

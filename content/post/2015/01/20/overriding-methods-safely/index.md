@@ -13,23 +13,29 @@ There are a couple use cases for overriding, most popular is to globally change 
 
 First, let's look at the anatomy of how to override. In previous Ext JS versions you could use `Ext.override`:
 
-    Ext.override(Ext.Component, {
-        foo : 'bar'
-    });
+```js
+Ext.override(Ext.Component, {
+    foo : 'bar'
+});
+```
 
 Or the class has a static `override` method also:
 
-    Ext.Component.override({
-        foo : 'bar'
-    });
+```js
+Ext.Component.override({
+    foo : 'bar'
+});
+```
 
 And while this still works, it's better to use `Ext.define`:
 
-    Ext.define('Override.Component', {
-        override : 'Ext.Component',
+```js
+Ext.define('Override.Component', {
+    override : 'Ext.Component',
 
-        foo : 'bar'
-    });
+    foo : 'bar'
+});
+```
 
 While this is more characters, it comes with two benefits:
 
@@ -42,11 +48,13 @@ It's recommended to use `Ext.define` and defining one override per file. Cmd has
 
 One of the basic and simplest usages of an override is overriding properties. Looking at the previous code snippets, we actually see how to override properties. Of course in that snippet the override didn't actually override anything, it added a property onto `Ext.Component`. Looking at the API documentation for `Ext.Component` we can see many properties/configs such as the `hideMode` config which will control how the component is hidden. By default it's value is `display` which will hide the component but using the CSS `display:none` style which will cause the space taken up by the component not to be reserved. If we change `hideMode` to `visibility` then when the component is hidden the space is still reserved for the component it's just not visible due to now using the CSS `visibility:hidden` style. We can override this to affect any `Ext.Component` or subclass like so:
 
-    Ext.define('Override.Component', {
-        override : 'Ext.Component',
+```js
+Ext.define('Override.Component', {
+    override : 'Ext.Component',
 
-        hideMode : 'visibility'
-    });
+    hideMode : 'visibility'
+});
+```
 
 Now when we hide a component, the space where the component was is still reserved for the component, you just cannot visually see the component anymore. Of course beware, this will override every single `Ext.Component` and subclass.
 
@@ -54,23 +62,27 @@ Now when we hide a component, the space where the component was is still reserve
 
 Let's say we have a `Foo` class that has a `someMethod` method defined on it:
 
-    Ext.define('Foo', {
-        someMethod : function() {
-            console.log('Foo', 'someMethod');
-        }
-    });
+```js
+Ext.define('Foo', {
+    someMethod : function() {
+        console.log('Foo', 'someMethod');
+    }
+});
+```
 
 If we instantiate `Foo` and execute the `someMethod`, we will get `Foo someMethod` logged out to the console.
 
 We find that there is a bug in it but we don't have control over the `Foo` class, say it's in some third party code where we cannot edit the source so we need to override the `someMethod` method. We can do this just like how we overrode a property:
 
-    Ext.define('Override.Foo', {
-        override : 'Foo',
+```js
+Ext.define('Override.Foo', {
+    override : 'Foo',
 
-        someMethod : function() {
-            console.log('Override.Foo', 'someMethod');
-        }
-    });
+    someMethod : function() {
+        console.log('Override.Foo', 'someMethod');
+    }
+});
+```
 
 Now if we instantiate `Foo` and execute `someMethod`, we will only get `Override.Foo someMethod` logged out to the console. We will **not** see the `Foo someMethod` logged because we overrode the method; it's like the `someMethod` defined in the `Foo` class never existed.
 
@@ -78,15 +90,17 @@ Now if we instantiate `Foo` and execute `someMethod`, we will only get `Override
 
 In the last override, we overrode the `someMethod` method on the `Foo` class to fix a bug. It's possible that the fix to the bug still needs to call the method that is being overridden, maybe we need to still have the `Foo someMethod` logged out. This is where the `callParent` method comes in, it tracks what method was overridden to make it still executable:
 
-    Ext.define('Override.Foo', {
-        override : 'Foo',
+```js
+Ext.define('Override.Foo', {
+    override : 'Foo',
 
-        someMethod : function() {
-            console.log('Override.Foo', 'someMethod');
+    someMethod : function() {
+        console.log('Override.Foo', 'someMethod');
 
-            this.callParent();
-        }
-    });
+        this.callParent();
+    }
+});
+```
 
 So now if we instantiate `Foo` and execute `someMethod` we will get `Override.Foo someMethod` logged to the console but we will also get `Foo someMethod` logged out thanks to the `this.callParent();` call.
 
@@ -94,29 +108,33 @@ So now if we instantiate `Foo` and execute `someMethod` we will get `Override.Fo
 
 Ext JS has a large class system where there are multiple levels of inheritance. There may be a time when one class extends another class and the subclass calls it's superclass' method. Say we need to override the subclass' method to fix a bug but instead of calling the overridden method using `callParent` we need to skip that method and call the superclass' method. This is where `callSuper` comes in handy. First, let's look at a `Bar` class that extends `Foo` and uses `callParent`:
 
-    Ext.define('Bar', {
-        extend : 'Foo',
+```js
+Ext.define('Bar', {
+    extend : 'Foo',
 
-        someMethod : function() {
-            console.log('Bar', 'someMethod');
+    someMethod : function() {
+        console.log('Bar', 'someMethod');
 
-            this.callParent();
-        }
-    });
+        this.callParent();
+    }
+});
+```
 
 If we instantiate `Bar` and execute `someMethod` we will get all `Bar someMethod`, `Override.Foo someMethod` and `Foo someMethod` logged out to the console. Remember, we still have `Override.Foo` override in place.
 
 Let's see what `callSuper` does when we override the `someMethod` on `Bar` with this override:
 
-    Ext.define('Override.Bar', {
-        override : 'Bar',
+```js
+Ext.define('Override.Bar', {
+    override : 'Bar',
 
-        someMethod : function() {
-            console.log('Override.Bar', 'someMethod');
+    someMethod : function() {
+        console.log('Override.Bar', 'someMethod');
 
-            this.callSuper();
-        }
-    });
+        this.callSuper();
+    }
+});
+```
 
 Now if we instantiate `Bar` and execute `someMethod` we should **not** see the `Bar someMethod` logged to the console because `this.callSuper();` should skip that method. And sure enough, we see `Override.Bar someMethod`, `Override.Foo someMethod` and `Foo someMethod` logged to the console.
 
@@ -128,48 +146,54 @@ The difference between `callParent` and `callSuper` is what method ends up being
 
 I'm a big fan of having a singleton class to manage certain things like application configs. Let's say we have something like this for a singleton (simplified than what I have):
 
-    Ext.define('MyApp.Config', {
-        singleton : true,
+```js
+Ext.define('MyApp.Config', {
+    singleton : true,
 
-        config : {
-            configs : null
-        },
+    config : {
+        configs : null
+    },
 
-        constructor : function() {
-            this.initConfig();
-            this.callParent();
-        },
+    constructor : function() {
+        this.initConfig();
+        this.callParent();
+    },
 
-        get : function(key) {
-            return this.getConfigs()[key];
-        }
-    });
+    get : function(key) {
+        return this.getConfigs()[key];
+    }
+});
+```
 
 Without our code we can do things like `MyApp.Config.get('foo')`. But there in an issue with the `get` method, what if `this.getConfigs()` returns a non-Object such as the `get` method was executed before an Xhr call finishes and therefore `this.getConfigs()` will return `null`. We need to handle this case.
 
 For demonstration purposes, say we cannot edit the source for `MyApp.Config` and therefore we need to use an override. Of course, if you have control over the file, edit the source instead of creating an override.
 
-    Ext.define('Override.Config', {
-        override : 'MyApp.Config',
+```js
+Ext.define('Override.Config', {
+    override : 'MyApp.Config',
 
-        get : function(key) {
-            var configs = this.getConfigs();
+    get : function(key) {
+        var configs = this.getConfigs();
 
-            return configs ? configs[key] : null;
-        }
-    });
+        return configs ? configs[key] : null;
+    }
+});
+```
 
 Now when we use `MyApp.Config.get('foo')` we are protected from whether or not there are configs. `callParent` and `callSuper` work just like overrides on class definitions:
 
-    Ext.define('Override.Config', {
-        override : 'MyApp.Config',
+```js
+Ext.define('Override.Config', {
+    override : 'MyApp.Config',
 
-        get : function(key) {
-            return this.getConfigs() ?
-                this.callParent([key]) :
-                null;
-        }
-    });
+    get : function(key) {
+        return this.getConfigs() ?
+            this.callParent([key]) :
+            null;
+    }
+});
+```
 
 This override will execute `this.callParent([key])` if `this.getConfigs()` returns truthy else will return `null`.
 

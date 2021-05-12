@@ -9,15 +9,17 @@ Once in a while the topic of using the `var me = this;` convention is brought up
 
 Let's look at a control method that you may have somewhere in your code:
 
-    saveSomething : function(foo, status, scope) {
-        this.foo = foo;
+```js
+saveSomething : function(foo, status, scope) {
+    this.foo = foo;
 
-        this.myObj = {
-            mitch : status
-        };
+    this.myObj = {
+        mitch : status
+    };
 
-        this.onSave.call(scope);
-    }
+    this.onSave.call(scope);
+}
+```
 
 If we look at this, we use `this` 4 times. All looks great so far! We have a method that saves the first two arguments and then calls a method.
 
@@ -25,21 +27,23 @@ If we look at this, we use `this` 4 times. All looks great so far! We have a met
 
 So our control `saveSomething` method has been working quite well but we realize that we should do some error checking, we can make the `scope` argument optional and we decide we need to pass a method in the `onSave` method call. Let's look at an example of how we can do it and then circle back to see if we can do a little better:
 
-    saveSomething : function(foo, status, scope) {
-        var myObj = this.myObj;
+```js
+saveSomething : function(foo, status, scope) {
+    var myObj = this.myObj;
 
-        scope = scope || this;
+    scope = scope || this;
 
-        if (!myObj) {
-            myObj = this.myObj = {};
-        }
-
-        this.foo = foo;
-
-        myObj.mitch = status;
-
-        this.onSave.call(scope, this.saveSomethingCallback);
+    if (!myObj) {
+        myObj = this.myObj = {};
     }
+
+    this.foo = foo;
+
+    myObj.mitch = status;
+
+    this.onSave.call(scope, this.saveSomethingCallback);
+}
+```
 
 So here we created a variable `myObj` to equate to `this.myObj`. However, `this.myObj` may be undefined so we added an `if` statement to check and if it is undefined (or falsey) set the `myObj` variable and `this.myObj` property to an Object. Also, we made `scope` default to `this` with the `scope = scope || this;` so if the `scope` argument is undefined (or falsey) it will then equate to `this` making it an optional argument (IMO a little more robust). Lastly we pass the `saveSomethingCallback` method in the `onSave` call as an argument to be executed later in our code.
 
@@ -47,30 +51,36 @@ So here we created a variable `myObj` to equate to `this.myObj`. However, `this.
 
 So now we have a little better of a method but it can get better! When we deploy our code we should always minify our code so it's as small as can be reducing what the client has to download but still maintain code functionality. This does many things but what I want to talk about is how it minifies variables. This small example:
 
-  var foo = 'bar';
+```js
+var foo = 'bar';
+```
 
 can get minified to
 
-  var a='bar';
+```js
+var a='bar';
+```
 
 which saves 4 bytes as `foo` got renamed to `a` and the spaces before and after the equal sign got trimmed. Thinking back to our `saveSomething` method we can think that `this` will get minified to something like `a` just like the foo variable got renamed. Unfortunately, `this` (and other JavaScript keywords like `delete` or `new`) will not get minified. To combat this, we can create a variable to cache this and that variable can then get minified. This is where the `var me = this;` convention comes into play as we are going to cache `this` to the `me` variable and `me` will get minified:
 
-    saveSomething : function (foo, status, scope) {
-        var me    = this,
-            myObj = me.myObj;
+```js
+saveSomething : function (foo, status, scope) {
+    var me    = this,
+        myObj = me.myObj;
 
-        scope = scope || me;
+    scope = scope || me;
 
-        if (!myObj) {
-            myObj = me.myObj = {};
-        }
-
-        me.foo = foo;
-
-        myObj.mitch = status;
-
-        me.onSave.call(scope, me.saveSomethingCallback);
+    if (!myObj) {
+        myObj = me.myObj = {};
     }
+
+    me.foo = foo;
+
+    myObj.mitch = status;
+
+    me.onSave.call(scope, me.saveSomethingCallback);
+}
+```
 
 We put the `me = this` in the variable block at the beginning of the method and replaced all `this` instances with `me`. We can now minify it and save 3 bytes per `this` instance for a total of 18 bytes (`this` was used 6 times in the `saveSomething` method before we applied the `me = this` convention and 6 x 3 = 18). However `me = this` also costs us some bytes, in fact in this example it cost us 8 bytes not including the spaces between `me` and `this` as they will get trimmed when it's minified. So in total we saved 10 bytes after the `var me = this` convention which doesn't account for much but if you have a sizable app it can add up and if you ask me, every bit saved counts.
 
@@ -78,17 +88,19 @@ We put the `me = this` in the variable block at the beginning of the method and 
 
 This convention doesn't come without a dark side. Applying this convention without counting the bytes that the `me = this` takes up and what you will save after minification will cost you bytes. If we go way back to the first `saveSomething` method and applied the `var me = this;` convention we will have costed some bytes:
 
-    saveSomething : function(foo, status, scope) {
-        var me = this;
+```js
+saveSomething : function(foo, status, scope) {
+    var me = this;
 
-        me.foo = foo;
+    me.foo = foo;
 
-        me.myObj = {
-            mitch : status
-        };
+    me.myObj = {
+        mitch : status
+    };
 
-        me.onSave.call(scope);
-    }
+    me.onSave.call(scope);
+}
+```
 
 The `var me = this;` would cost us 11 bytes (it would be `var a=this;` after minification). For every instance of `this` we replaced we save 3 bytes and we had 3 instances so we save 9 bytes but the `me` variable line cost us 11 so we saved -2 bytes which is bad. We are trying to save bytes not add them.
 
@@ -96,16 +108,20 @@ The `var me = this;` would cost us 11 bytes (it would be `var a=this;` after min
 
 In these examples you saw the `me` variable get created by itself and in a variable block. If you have `me = this` in a variable block where there are other variables it costs less as we don't have to add the `var` keyword. Let's look at the byte cost:
 
-    var me = this;
-    var a=this; //minified
+```js
+var me = this;
+var a=this; //minified
+```
 
 The minified version costs 11 bytes so you would have to use this 4 or more times to save bytes in the long run.
 
-  var me  = this,
-      foo = 'bar';
-  var a=this,b='bar'; //minified
+```js
+var me  = this,
+    foo = 'bar';
+var a=this,b='bar'; //minified
+```
 
-a=this, costs 7 bytes so you would have to use this 3 or more times to save bytes in the long run.
+`a=this`, costs 7 bytes so you would have to use this 3 or more times to save bytes in the long run.
 
 ## Review
 

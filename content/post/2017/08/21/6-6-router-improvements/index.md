@@ -13,17 +13,19 @@ There are many times when you create things in response to a route being execute
 
 With Ext JS 6.6, we are going to make this easy with a new `exit` handler and the use of it is just like the `action` and `before` handler:
 
-    routes : {
-        'foo/bar' : {
-            action : 'onFoo',
-            exit   : 'onExit',
-            name   : 'foo'
-        }
-    },
+```js
+routes : {
+    'foo/bar' : {
+        action : 'onFoo',
+        exit   : 'onExit',
+        name   : 'foo'
+    }
+},
 
-    onFoo : function () {},
+onFoo : function () {},
 
-    onExit : function () {}
+onExit : function () {}
+```
 
 So now your route can handle when the route no longer recognizes anything in the hash. Internally, each route keeps track of the last token it was executed on which allows it to know if it was being exited which is needed if you use multiple tokens as is the case in my apps like Sencha Fiddle.
 
@@ -33,26 +35,30 @@ This improvement comes from a need for Sencha Fiddle.
 
 At the start of Sencha Fiddle (and the support portal) I have to check user session and I also wait for certain stores to load before I want to continue with showing views and such. Currently, I have a global route with a before, here is a small example:
 
-    routes : {
-        '*' : {
-            before : 'onBeforeGlobal'
-        }
-    },
-
-    onBeforeGlobal : function () {
-        return new Ext.Promise(function (resolve, reject) {
-            // check if things have finished loading
-        });
+```js
+routes : {
+    '*' : {
+        before : 'onBeforeGlobal'
     }
+},
+
+onBeforeGlobal : function () {
+    return new Ext.Promise(function (resolve, reject) {
+        // check if things have finished loading
+    });
+}
+```
 
 I have an array of stores I go through and check if it has [loaded](https://docs.sencha.com/extjs/latest/classic/Ext.data.ProxyStore.html#method-isLoaded). However, I felt like this was wasteful because it's going to check if these stores are loaded for each route as the `*` wildcard route fires before all other routes; I only needed it to check upfront. Taking a page out of the Observable listeners where you can pass `single: true`, routes will be able to define their singleness:
 
-    routes : {
-        '*' : {
-            before : 'onBeforeGlobal',
-            single : true
-        }
+```js
+routes : {
+    '*' : {
+        before : 'onBeforeGlobal',
+        single : true
     }
+}
+```
 
 Tough syntax huh? This will remove the route from the router after the `before` and `action` handlers have been executed. Once removed, the route will not longer be connected and will not execute anymore. Perfect!
 
@@ -72,13 +78,15 @@ This feature came out from the [coworkee app](https://github.com/sencha-extjs-ex
 
 One issue with using routes in ViewControllers is that the ViewController may not be instantiated when the route was already executed. I personally don't spread routes around too much but people have been asking for this and it was easy to implement so ok. People asked for the routes defined on their ViewController to execute if it matches a current hash. We are calling this `lazy` and it can be defined like so:
 
-    routes : {
-        'user/:id' : {
-            action  : 'onUser',
-            lazy    : true,
-            name    : 'user'
-        }
+```js
+routes : {
+    'user/:id' : {
+        action  : 'onUser',
+        lazy    : true,
+        name    : 'user'
     }
+}
+```
 
 This means, if the hash is already `#user/1234` when the ViewController is instantiated, this route will execute.
 
@@ -92,41 +100,47 @@ Ok, I teased this on Twitter and here is what this was about.
 
 The first "problem" is people currently have to define custom matching RegExp strings to control the format of a url parameter. What I mean is say you have a user route that accepts an ID but that ID will only be numeric so you can define it as such:
 
-    routes : {
-        'user/:id' : {
-            action     : 'onUser',
-            name       : 'user',
-            conditions : {
-                ':id' : '([0-9]+)'
-            }
+```js
+routes : {
+    'user/:id' : {
+        action     : 'onUser',
+        name       : 'user',
+        conditions : {
+            ':id' : '([0-9]+)'
         }
-    },
+    }
+},
 
-    onUser : function (id) {}
+onUser : function (id) {}
+```
 
 Now, this route will only execute for hashes where `:id` is numeric such as `user/1234` but will not execute if there are other characters such as `user/1234abc`. One important note to make here is the [defaultMatcher](https://docs.sencha.com/extjs/latest/classic/Ext.route.Route.html#property-defaultMatcher) of a route is `([%a-zA-Z0-9\\-\\_\\s,]+)` so it will accept a few different characters that you may or may not want.
 
 My initial proof of concept had a syntax such as :
 
-    routes : {
-        'user/:num' : {
-            action : 'onUser',
-            name   : 'user'
-        }
+```js
+routes : {
+    'user/:num' : {
+        action : 'onUser',
+        name   : 'user'
     }
+}
+```
 
 And that `:num` would automatically use the `([0-9]+)` RegExp. This is pretty simple right? The issue with this syntax is what if you had a `:num` parameter in a route but didn't want that exact RegExp? There was also `:alpha` and `:alphanum`. The chance of collision here was very tiny but if you were one of the unlucky people that would have a name conflict, it likely would be a silent failure and you'd find out about it in production which is not good at all. So we discussed how we can prevent this and a couple different ideas came up like `:$num` or some character to signify this was to be treated as a named type. But we decided on this format:
 
-    routes : {
-        'user/:{id:num}' : {
-            action : 'onUser',
-            name   : 'user'
-        }
-    },
-
-    onUser : function (params) {
-        var id = params.id;
+```js
+routes : {
+    'user/:{id:num}' : {
+        action : 'onUser',
+        name   : 'user'
     }
+},
+
+onUser : function (params) {
+    var id = params.id;
+}
+```
 
 So we surround the parameter name and type in curly braces. Quick note, the type (`:num` in this case) is optional so you can have `:{id}` and the `defaultMatcher` will then be used. Other default types are `:alpha` and `:alphanum`. Also, for `:num` and `:alphanum`, numbers will be cast using `parseFloat` so you can have `#foo/10.4` and 10.4 will be a float instead of just a string.
 
@@ -148,173 +162,195 @@ A couple thoughts here on the duplicate parameters. Right now, you cannot have d
 
 You can define your own custom named types via an override. For example, in Sencha Fiddle a fiddle id will only be `[a-z0-9]` and I can have the route defined in a couple places so having a central place to have this and be able to be used anywhere would be a big pro. So you can add one:
 
-    Ext.define('Override.route.Route', {
-        override : 'Ext.route.Route',
+```js
+Ext.define('Override.route.Route', {
+    override : 'Ext.route.Route',
 
-        config : {
-            types : {
-                'fiddleid' : {
-                    re : '([a-z0-9]+)'
-                }
+    config : {
+        types : {
+            'fiddleid' : {
+                re : '([a-z0-9]+)'
             }
         }
-    });
+    }
+});
+```
 
 Now I can define routes such as:
 
-    routes : {
-        'fiddle/:{id:fiddleid}' : {
-            action : 'onFiddle',
-            name   : 'fiddle'
-        }
-    },
-
-    onFiddle : function (params) {
-        Ext.Ajax
-            .request({
-                url : '/fiddle/get/' + params.id
-            })
-            .then(function (fiddle) {
-                // ...
-            });
+```js
+routes : {
+    'fiddle/:{id:fiddleid}' : {
+        action : 'onFiddle',
+        name   : 'fiddle'
     }
+},
+
+onFiddle : function (params) {
+    Ext.Ajax
+        .request({
+            url : '/fiddle/get/' + params.id
+        })
+        .then(function (fiddle) {
+            // ...
+        });
+}
+```
 
 So since we are now parsing parameters and their types, there is one thing that I've seen people ask for and that would be supporting an arbitrary number of parameters in a hash. For example, say you want to support hashes like `#view/foo` and `#view/foo/bar/baz` in a single route. Before, you'd have to do something complex with conditions and if you didn't want to get too complex, you'd have a static number of parameters defined in your pattern like `view/:foo/:bar/:baz` (this isn't a very good, full example of what would be needed). So we are attempting to handle this with this syntax:
 
-    routes : {
-        'view/:{args...}' : {
-            action : 'onView',
-            name   : 'view'
-        }
-    },
-
-    onView : function (params) {
-        // Ext.isArray(params.args) === true
+```js
+routes : {
+    'view/:{args...}' : {
+        action : 'onView',
+        name   : 'view'
     }
+},
+
+onView : function (params) {
+    // Ext.isArray(params.args) === true
+}
+```
 
 By default, this syntax will match everything (uses `(.+)?`) and split on `/` so that you get an array of values. Like the `:num` and `:alphanum`, this will also attempt to cast numbers into floats. So if you have this hash `#view/foo/12.45/bar`, this is what the params object would be:
 
-    {
-        args : [ 'foo', 12.45, 'bar' ]
-    }
+```js
+{
+    args : [ 'foo', 12.45, 'bar' ]
+}
+```
 
 As you would expect, you don't need to have just the one parameter, you can have other parameters with their own types:
 
-    routes : {
-        'view/:{which}/:{amount:num}:{args...}' : {
-            action : 'onView',
-            name   : 'view'
-        }
+```js
+routes : {
+    'view/:{which}/:{amount:num}:{args...}' : {
+        action : 'onView',
+        name   : 'view'
     }
+}
+```
 
 The params object would then be:
 
-    {
-        amount : 12.45,
-        args   : [ 'bar' ],
-        which  : 'foo'
-    }
+```js
+{
+    amount : 12.45,
+    args   : [ 'bar' ],
+    which  : 'foo'
+}
+```
 
 Most people would be fine with splitting by `/` but if you wanted another character you can override this via:
 
-    Ext.define('Override.route.Route', {
-        override : 'Ext.route.Route',
+```js
+Ext.define('Override.route.Route', {
+    override : 'Ext.route.Route',
 
-        config : {
-            types : {
-                '...' : {
-                    split : '-'
-                }
+    config : {
+        types : {
+            '...' : {
+                split : '-'
             }
         }
-    });
+    }
+});
+```
 
 This also shows there are 3 things you can use when defining your own type. The `...` is just a type defined as such:
 
-    '...': {
-        re: '(.+)?',
-        split: '/',
-        parse: function (values) {
-            var length, i, value;
+```js
+'...': {
+    re: '(.+)?',
+    split: '/',
+    parse: function (values) {
+        var length, i, value;
 
-            if (values) {
-                length = values.length;
+        if (values) {
+            length = values.length;
 
-                for (i = 0; i < length; i++) {
-                    value = parseFloat(values[i]);
+            for (i = 0; i < length; i++) {
+                value = parseFloat(values[i]);
 
-                    if (!isNaN(value)) {
-                        values[i] = value;
-                    }
+                if (!isNaN(value)) {
+                    values[i] = value;
                 }
-            } else if (Ext.isString(values)) {
-                // IE8 may have values as an empty string
-                // if there was no args that were matched
-                values = undefined;
             }
-
-            return values;
+        } else if (Ext.isString(values)) {
+            // IE8 may have values as an empty string
+            // if there was no args that were matched
+            values = undefined;
         }
+
+        return values;
     }
+}
+```
 
 Simple to understand, the `re` is the string that will control what pattern will be matched, `split` will turn the value into an array (or undefined if no matches) and `parse` allows you to parse the value into something else.
 
 One type that could be useful and has come up a couple times in the last couple weeks is supporting query parameters in a hash. So you could use something like `#foo?bar&baz=2` and the query string like part would be turned into a nested object. You coul duse this override to support this:
 
-    Ext.define('Override.route.Route', {
-        override : 'Ext.route.Route',
+```js
+Ext.define('Override.route.Route', {
+    override : 'Ext.route.Route',
 
-        config : {
-            types : {
-                queryString : {
-                    re    : '(?:\\?(.+))?',
-                    parse : function (params) {
-                        var name, value;
+    config : {
+        types : {
+            queryString : {
+                re    : '(?:\\?(.+))?',
+                parse : function (params) {
+                    var name, value;
 
-                        if (params) {
-                            params = Ext.Object.fromQueryString(params);
+                    if (params) {
+                        params = Ext.Object.fromQueryString(params);
 
-                            for (name in params) {
-                                value = params[name];
+                        for (name in params) {
+                            value = params[name];
 
-                                if (value) {
-                                    if (/^[0-9]+$/.test(value)) {
-                                        // let's turn this into a float
-                                        params[name] = parseFloat(value);
-                                    }
-                                }
-                                // an empty string would be ?foo
-                                // which can be seen as truthy
-                                else if (Ext.isString(value)) {
-                                    params[name] = true;
+                            if (value) {
+                                if (/^[0-9]+$/.test(value)) {
+                                    // let's turn this into a float
+                                    params[name] = parseFloat(value);
                                 }
                             }
+                            // an empty string would be ?foo
+                            // which can be seen as truthy
+                            else if (Ext.isString(value)) {
+                                params[name] = true;
+                            }
                         }
-
-                        return params;
                     }
+
+                    return params;
                 }
             }
         }
-    });
+    }
+});
+```
 
 You'd then defined your route as:
 
-    routes : {
-        'foo:{query:queryString}'   : {
-            action : 'onFoo',
-            name   : 'foo'
-        }
+```js
+routes : {
+    'foo:{query:queryString}'   : {
+        action : 'onFoo',
+        name   : 'foo'
     }
+}
+```
 
 So if you had the hash as `#foo?bar&baz=2.1` then the params send to the `onFoo` method would be:
 
-    {
-        query : {
-            bar : true,
-            baz : 2.1
-        }
+```js
+{
+    query : {
+        bar : true,
+        baz : 2.1
     }
+}
+```
 
 # Summary
 

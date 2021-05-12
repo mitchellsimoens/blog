@@ -25,52 +25,56 @@ Any of these are bad and will happen if you have overnesting in your application
 
 Let's look at a sample of overnesting:
 
-    Ext.create('Ext.tab.Panel', {
-        items : [
-            {
-                xtype  : 'panel',
-                title  : 'Users',
-                layout : 'fit',
-                tbar   : [
-                    { text : 'Create User' }
-                ],
-                items  : [
-                    {
-                        xtype   : 'gridpanel',
-                        store   : 'Users',
-                        columns : [
-                            {
-                                text      : 'Name',
-                                dataIndex : 'name',
-                                flex      : 1
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    });
+```js
+Ext.create('Ext.tab.Panel', {
+    items : [
+        {
+            xtype  : 'panel',
+            title  : 'Users',
+            layout : 'fit',
+            tbar   : [
+                { text : 'Create User' }
+            ],
+            items  : [
+                {
+                    xtype   : 'gridpanel',
+                    store   : 'Users',
+                    columns : [
+                        {
+                            text      : 'Name',
+                            dataIndex : 'name',
+                            flex      : 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+```
 
 In this example, we create a tab panel with a single tab that is a panel. The panel has a top docked toolbar with a Create User button and also a grid that is laid out using fit layout. While this will work and look as you would expect, it's overnesting. The panel is a layer that is not needed just to have a top docked toolbar, the grid can have a top docked toolbar and will look exactly the same:
 
-    Ext.create('Ext.tab.Panel', {
-        items : [
-            {
-                xtype   : 'gridpanel',
-                store   : 'Users',
-                tbar    : [
-                    { text : 'Create User' }
-                ],
-                columns : [
-                    {
-                        text      : 'Name',
-                        dataIndex : 'name',
-                        flex      : 1
-                    }
-                ]
-            }
-        ]
-    });
+```js
+Ext.create('Ext.tab.Panel', {
+    items : [
+        {
+            xtype   : 'gridpanel',
+            store   : 'Users',
+            tbar    : [
+                { text : 'Create User' }
+            ],
+            columns : [
+                {
+                    text      : 'Name',
+                    dataIndex : 'name',
+                    flex      : 1
+                }
+            ]
+        }
+    ]
+});
+```
 
 #### Spotting "overnesting"
 

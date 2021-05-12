@@ -18,7 +18,7 @@ Pretty simple requirements. The issue with the solution I saw was the second req
 
 I mentioned before about the other solution not using functionality that Ext JS already has. When the reader (the `Ext.data.reader.*`) is asked to read the data (readRecords method), it checks to see if there is a `metaData` field in the raw response and if so will execute it's `onMetaChange` method which will then define a new model with the fields returned among other things. Here is the `onMetaChange` method, the code speaks for itself:
 
-```
+```js
 onMetaChange : function(meta) {
     var me = this,
         fields = meta.fields || me.getFields(),
@@ -65,7 +65,7 @@ onMetaChange : function(meta) {
 
 As you can see, the `metaData` allows you to set the root, total, success and message properties but also is going to define a model. Here is an example JSON response that will make the reader execute this method:
 
-```
+```json
 {
     "metaData" : {
         fields : [...]

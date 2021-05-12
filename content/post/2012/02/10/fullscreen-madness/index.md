@@ -17,22 +17,24 @@ To sum `Ext.Viewport` up... `Ext.Viewport` is an `Ext.Container` and by default 
 
 First, let's look at a small code snippet and then break it down:
 
-    new Ext.Container({
-        fullscreen : true,
-        html       : 'Do you seem my size?',
-        items      : [
-            {
-                xtype  : 'toolbar',
-                docked : 'top',
-                title  : 'Top Toolbar'
-            },
-            {
-                xtype  : 'toolbar',
-                docked : 'bottom',
-                title  : 'Bottom Toolbar'
-            }
-        ]
-    });
+```js
+new Ext.Container({
+    fullscreen : true,
+    html       : 'Do you seem my size?',
+    items      : [
+        {
+            xtype  : 'toolbar',
+            docked : 'top',
+            title  : 'Top Toolbar'
+        },
+        {
+            xtype  : 'toolbar',
+            docked : 'bottom',
+            title  : 'Bottom Toolbar'
+        }
+    ]
+});
+```
 
 I added the two toolbars so you can visually see the size of the `Ext.Container` we created. The important part we need to talk about is that `fullscreen` config. So you noticed that the `Ext.Container` took 100% of the height and width but how did it do that? Remember `Ext.Viewport`? When you create a component (using the `new` keyword like I did or `Ext.create`) with the `fullscreen` config set to `true` (defaults to `false`) it actually fires a `fullscreen` event on itself. Within `Ext.viewport.Default`, it has a listener for `fullscreen` events and when it captures one, it will take that component and add it as an item of `Ext.Viewport`. Since by default `Ext.Viewport` uses card layout the `Ext.Container` that was just added as an item will take up 100% of the height and width because that's what card layout does.
 
@@ -42,36 +44,38 @@ To recap this, `Ext.Viewport` listens for `fullscreen` events and adds that `Ext
 
 What happens when we have two or more components using `fullscreen` set to `true`? Well, it keeps adding those components and adds them as a child item but you will only be able to see one at a time as that is how card layout works. You can use the `setActiveItem` method on `Ext.Viewport` to navigate through your "fullscreen" components:
 
-    new Ext.Container({
-        fullscreen : true,
-        html       : 'Do you seem my size?',
-        items      : [
-            {
-                xtype  : 'toolbar',
-                docked : 'top',
-                title  : 'Top Toolbar',
-                items  : [
-                    {
-                        text    : 'Go 2nd',
-                        ui      : 'confirm',
-                        handler : function() {
-                            Ext.Viewport.setActiveItem(1);
-                        }
+```js
+new Ext.Container({
+    fullscreen : true,
+    html       : 'Do you seem my size?',
+    items      : [
+        {
+            xtype  : 'toolbar',
+            docked : 'top',
+            title  : 'Top Toolbar',
+            items  : [
+                {
+                    text    : 'Go 2nd',
+                    ui      : 'confirm',
+                    handler : function() {
+                        Ext.Viewport.setActiveItem(1);
                     }
-                ]
-            },
-            {
-                xtype  : 'toolbar',
-                docked : 'bottom',
-                title  : 'Bottom Toolbar'
-            }
-        ]
-    });
+                }
+            ]
+        },
+        {
+            xtype  : 'toolbar',
+            docked : 'bottom',
+            title  : 'Bottom Toolbar'
+        }
+    ]
+});
 
-    new Ext.Container({
-        fullscreen : true,
-        html       : 'Second One'
-    });
+new Ext.Container({
+    fullscreen : true,
+    html       : 'Second One'
+});
+```
 
 So we have two `Ext.Containers` using `fullscreen` set to `true`. The active item will be the first container as `Ext.Viewport` won't change the active item, it will just add it as an item. I added a button to the top toolbar of the first container that simple executes `Ext.Viewport.setActiveItem(1)` which will switch to the item at index 1 of `Ext.Viewport` which is the second container.
 

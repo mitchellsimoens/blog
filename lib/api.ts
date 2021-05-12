@@ -58,7 +58,7 @@ const parseContentsToPost = (fileContents: string, slug: string | string[]): Blo
 
   const items: BlogPost = {
     author: data.author ? data.author : { ...defaultAuthor },
-    content: content,
+    content,
     coverImage: data.coverImage || null, // cannot be undefined
     date: data.date,
     excerpt,

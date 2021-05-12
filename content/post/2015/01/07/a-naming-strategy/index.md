@@ -77,25 +77,27 @@ For the `ViewController`s, I alias them like so:
 
 Here I did pretty much the same thing as the views' xtype. I removed the `.view` portion, lowercased the name, replaced periods with dashes only with a `ViewController` I moved the controller part to the beginning of the alias as you have to use the `alias` property and therefor need to give it the `controller` prefix. This gets confusing without seeing the actual code so here is the few lines for the user grid view and controller:
 
-    Ext.define('Email.view.user.Grid', {
-        extend : 'Ext.grid.Panel',
-        xtype  : 'email-user-grid',
+```js
+Ext.define('Email.view.user.Grid', {
+    extend : 'Ext.grid.Panel',
+    xtype  : 'email-user-grid',
 
-        requires : [
-            'Email.view.user.GridController
-        ],
+    requires : [
+        'Email.view.user.GridController
+    ],
 
-        controller : 'email-user-grid',
+    controller : 'email-user-grid',
 
-        //...
-    });
+    //...
+});
 
-    Ext.define('Email.view.user.GridController', {
-    	extend : 'Ext.app.ViewController',
-        alias  : 'controller.email-user-grid',
+Ext.define('Email.view.user.GridController', {
+    extend : 'Ext.app.ViewController',
+    alias  : 'controller.email-user-grid',
 
-        //...
-    });
+    //...
+});
+```
 
 Hopefully the code makes a bit more sense about what I mean. If you look at the `Email.view.user.Grid` source and you see the `controller` property, you should be able to immediately know where to look at for the `ViewController`. The reason why I remove the controller from the end of the `controller.email-user-grid` alias is because it's redundant, the prefix is telling you what the alias is so `controller.email-user-gridcontroller` is redundant but if you want it on your alias there is nothing wrong with it.
 

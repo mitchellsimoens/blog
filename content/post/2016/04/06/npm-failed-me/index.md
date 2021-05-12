@@ -9,9 +9,11 @@ After trying 15 different configurations, we took a look at the logs and noticed
 
 The server is running Ubuntu 14.0.4 LTS. Normally vendors do a decent job adhering to the LTS standing but doing an `apt-get install -y npm` would install npm 1.3 but that version is not supported anymore. What npm should do is update what is installable in apt. To work around this, we installed Node v5:
 
-    apt-get update
-    apt-get install -y build-essential curl
-    curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-    apt-get install -y nodejs
+```sh
+apt-get update
+apt-get install -y build-essential curl
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+apt-get install -y nodejs
+```
 
 Now we have Node 5 and npm v3. So thanks npm!

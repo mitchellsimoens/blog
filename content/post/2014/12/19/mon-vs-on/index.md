@@ -15,15 +15,19 @@ Ext JS allows many different ways to add listeners but today I want to speak abo
 
 The simplest of the two is the `on` method which can simply add an event listener:
 
-    component.on('foo', someFunc, component);
+```js
+component.on('foo', someFunc, component);
+```
 
 You can also pass an object for a convenient way to add multiple listeners:
 
-    component.on({
-        scope : component,
-        foo   : someFunc,
-        bar   : someOtherFunc
-    });
+```js
+component.on({
+    scope : component,
+    foo   : someFunc,
+    bar   : someOtherFunc
+});
+```
 
 This will add listeners for the `foo` and `bar` events and scope them to the `component` variable. In Ext JS 4 and newer, listeners defined this way will automatically get removed when the component is destroyed thanks to the `clearListeners` method being executed in the `destroy` method of `Ext.Component`.
 
@@ -31,7 +35,9 @@ This will add listeners for the `foo` and `bar` events and scope them to the `co
 
 `mon` works just like `on` when defining a listener only the first argument must be a class to add the listeners too. That's a bit confusing of a statement right? Let's look at an example:
 
-    component.mon(subClass, 'foo', someFunc, component);
+```js
+component.mon(subClass, 'foo', someFunc, component);
+```
 
 What this is doing, is adding a listener for the `foo` event that will be fired on the `subClass` variable. Once fired, it will execute the `someFunc` function scoped to the `component` variable but the listener is added to the `component` but the event will be fired on the `subClass`.
 
@@ -39,20 +45,26 @@ The benefit here is the component can listen to an event on something else but w
 
 Like the `on` method, you can also pass an object:
 
-    component.mon(subClass, {
-        scope : component,
-        foo   : someFunc,
-        bar   : someOtherFunc
-    });
+```js
+component.mon(subClass, {
+    scope : component,
+    foo   : someFunc,
+    bar   : someOtherFunc
+});
+```
 
 ### Difference
 
 Let's think of an `Ext.Component` instance that wants to listen to a `store` load. You can use `on` like this:
 
-    store.on('load', this.onStoreLoad, this);
+```js
+store.on('load', this.onStoreLoad, this);
+```
 
 However, when the `Ext.Component` is destroyed, the listener will not be removed because the event listener is on the `store` not the `Ext.Component`. This causes a memory leak and the next `store` load after the component is destroyed will likely throw an error, both bad things. This is where `mon` would be a better use:
 
-    this.mon(store, 'load', this.onStoreLoad, this);
+```js
+this.mon(store, 'load', this.onStoreLoad, this);
+```
 
 This adds a `load` listener on the store but is being managed by the `Ext.Component`. When the `Ext.Component` is destroyed, the listener is removed. The `store` is then free to live on and fire it's `load` event without errors being thrown and no memory leaks are present.

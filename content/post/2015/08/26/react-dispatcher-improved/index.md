@@ -9,78 +9,90 @@ date: "2015-08-26T19:41:03.284Z"
 
 Luckily, [Facebook](https://www.facebook.com/) also has [Flux](https://facebook.github.io/flux/) which has a [dispatcher](https://facebook.github.io/flux/docs/dispatcher.html#content) class where you can register callback listeners for when something is dispatched. Here's a simple example of this (taken from their documentation):
 
-    var flightDispatcher = new Dispatcher();
+```js
+var flightDispatcher = new Dispatcher();
 
-    flightDispatcher.register(function(payload) {
-        if (payload.actionType === 'city-update') {
-            CityStore.city = payload.selectedCity;
-        }
-    });
+flightDispatcher.register(function(payload) {
+    if (payload.actionType === 'city-update') {
+        CityStore.city = payload.selectedCity;
+    }
+});
 
-    flightDispatcher.dispatch({
-        actionType: 'city-update',
-        selectedCity: 'paris'
-    });
+flightDispatcher.dispatch({
+    actionType: 'city-update',
+    selectedCity: 'paris'
+});
+```
 
 Ok, that's pretty simple. However, in practice I don't like one thing and that is when something is dispatched, **ALL** registered callbacks will execute. Each callback has to check if they care about the dispatched event. This seams quite wasteful and unneeded logic in the callback especially since you will likely have lots of registered callbacks. Sure, you can build something on top of it:
 
-    function callbackCreatorThing(property, value, callback) {
-        return function(payload) {
-            if (payload[property] === value) {
-                callback(payload);
-            }
+```js
+function callbackCreatorThing(property, value, callback) {
+    return function(payload) {
+        if (payload[property] === value) {
+            callback(payload);
         }
     }
+}
 
-    flightDispatcher.register(
-        callbackCreatorThing('actionType', 'city-update', function(payload) {
-            CityStore.city = payload.selectedCity;
-        })
-    );
+flightDispatcher.register(
+    callbackCreatorThing('actionType', 'city-update', function(payload) {
+        CityStore.city = payload.selectedCity;
+    })
+);
+```
 
 So I created a function factory that will call the actual callback when `payload.actionType` is equal to `city-update`. Ok, so that's not the end of the world and of course there are many other ways to do it but still... more work than you should have to do. I come from an [Ext JS](https://www.sencha.com/products/extjs/) world where things are event driven meaning you add a listener for when a certain event is driven. So I'd do something like this in Ext JS:
 
-    cls.on('city-update', function(payload) {
-        CityStore.city = payload.selectedCity;
-    });
+```js
+cls.on('city-update', function(payload) {
+    CityStore.city = payload.selectedCity;
+});
 
-    cls.fireEvent('city-update', payload);
+cls.fireEvent('city-update', payload);
+```
 
 So when the `fireEvent` is called, only those listeners listening to that event will be fired. So I need this:
 
-    flightDispatcher.register('city-update', function(payload) {
-        CityStore.city = payload.selectedCity;
-    });
+```js
+flightDispatcher.register('city-update', function(payload) {
+    CityStore.city = payload.selectedCity;
+});
 
-    flightDispatcher.dispatch('city-update', {
-        selectedCity: 'paris'
-    });
+flightDispatcher.dispatch('city-update', {
+    selectedCity: 'paris'
+});
+```
 
 So I have to create my own dispatcher class (which is very easy). While I'm at it, why not extend this and allow certain actions to be dispatched and registered so a user can really get fine grained:
 
-    flightDispatcher.register('city', 'update', function(payload, listener) {
-        CityStore.city = payload.selectedCity;
-    });
+```js
+flightDispatcher.register('city', 'update', function(payload, listener) {
+    CityStore.city = payload.selectedCity;
+});
 
-    flightDispatcher.dispatch('city', 'update', {
-        selectedCity: 'paris'
-    });
+flightDispatcher.dispatch('city', 'update', {
+    selectedCity: 'paris'
+});
+```
 
 Here, the event is `city` and the action being taken is `update`. I even get access to the listener. In fact, we could support all three cases:
 
-    flightDispatcher.register('city', 'update', function(payload, listener) {
-        CityStore.city = payload.selectedCity;
-    });
-    flightDispatcher.register('city', function(payload, listener) {
-        //something happened to a city
-    });
-    flightDispatcher.register(function(payload, listener) {
-        //something happened
-    });
+```js
+flightDispatcher.register('city', 'update', function(payload, listener) {
+    CityStore.city = payload.selectedCity;
+});
+flightDispatcher.register('city', function(payload, listener) {
+    //something happened to a city
+});
+flightDispatcher.register(function(payload, listener) {
+    //something happened
+});
 
-    flightDispatcher.dispatch('city', 'update', {
-        selectedCity: 'paris'
-    });
+flightDispatcher.dispatch('city', 'update', {
+    selectedCity: 'paris'
+});
+```
 
 There are valid reasons to have catch all listeners like what Flux has.
 
@@ -88,12 +100,14 @@ There are valid reasons to have catch all listeners like what Flux has.
 
 So the listening to dispatched events has been improved. However, there is one more thing that I like in Ext JS: the separate event (`Ext.event.Event`) class. This class holds many things but one thing I use a lot is the ability to stop an event in a listener. Maybe some business logic says that the user isn't able to update a city, then you should be able to stop an event from firing other listeners. For this, I created a separate Event class which the Dispatcher creates when it finds all the listeners for the event and action being dispatched. So now you can do this:
 
-    flightDispatcher.register('city', 'update', function(e) {
-        e.stop();
-    });
-    flightDispatcher.register('city', function(e) {
-        //something happened to a city
-    });
+```js
+flightDispatcher.register('city', 'update', function(e) {
+    e.stop();
+});
+flightDispatcher.register('city', function(e) {
+    //something happened to a city
+});
+```
 
 In the first registered callback, I stop the event from firing so the second registered callback will not be executed. This gives further control over the flow of the events in an application.
 

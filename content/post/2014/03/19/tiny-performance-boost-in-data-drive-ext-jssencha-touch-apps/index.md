@@ -7,48 +7,54 @@ If you're like me, you probably try to squeeze every bit of performance out of y
 
 In an application, most of the time you will have data models in your application with something like:
 
-    Ext.define('MyApp.model.User', {
-        extend : 'Ext.data.Model',
+```js
+Ext.define('MyApp.model.User', {
+    extend : 'Ext.data.Model',
 
-        fields : [
-            { name : 'firstName', type : 'string'                     },
-            { name : 'lastName',  type : 'string'                     },
-            { name : 'email',     type : 'string'                     },
-            { name : 'phone',     type : 'string'                     },
-            { name : 'age',       type : 'int'                        },
-            { name : 'dob',       type : 'date', dateFormat : 'Y-m-d' }
-        ]
-    });
+    fields : [
+        { name : 'firstName', type : 'string'                     },
+        { name : 'lastName',  type : 'string'                     },
+        { name : 'email',     type : 'string'                     },
+        { name : 'phone',     type : 'string'                     },
+        { name : 'age',       type : 'int'                        },
+        { name : 'dob',       type : 'date', dateFormat : 'Y-m-d' }
+    ]
+});
+```
 
 Ok, likely you have many more fields but you get the point. I'm sure your application may still perform very well but you may not actually know what's going on behind the scenes. When you define the type config within your field, you are telling the Model to convert the data coming in to that format. But couldn't you expect firstName and lastName to always be a string so why convert it? If you do not specify a type, it will not do any conversion at all. If you specify your model like the next code snippet, functionality may be exactly the same but perform a little better:
 
-    Ext.define('MyApp.model.User', {
-        extend : 'Ext.data.Model',
+```js
+Ext.define('MyApp.model.User', {
+    extend : 'Ext.data.Model',
 
-        fields : [
-            { name : 'firstName'                                },
-            { name : 'lastName'                                 },
-            { name : 'email'                                    },
-            { name : 'phone'                                    },
-            { name : 'age', type : 'int'                        },
-            { name : 'dob', type : 'date', dateFormat : 'Y-m-d' }
-        ]
-    });
+    fields : [
+        { name : 'firstName'                                },
+        { name : 'lastName'                                 },
+        { name : 'email'                                    },
+        { name : 'phone'                                    },
+        { name : 'age', type : 'int'                        },
+        { name : 'dob', type : 'date', dateFormat : 'Y-m-d' }
+    ]
+});
+```
 
 In fact you can shorten that code down even more:
 
-    Ext.define('MyApp.model.User', {
-        extend : 'Ext.data.Model',
+```js
+Ext.define('MyApp.model.User', {
+    extend : 'Ext.data.Model',
 
-        fields : [
-            'firstName',
-            'lastName',
-            'email',
-            'phone',
-            { name : 'age', type : 'int'                        },
-            { name : 'dob', type : 'date', dateFormat : 'Y-m-d' }
-        ]
-    });
+    fields : [
+        'firstName',
+        'lastName',
+        'email',
+        'phone',
+        { name : 'age', type : 'int'                        },
+        { name : 'dob', type : 'date', dateFormat : 'Y-m-d' }
+    ]
+});
+```
 
 Here, we care about the age and dob fields be a certain type, an Integer and Date. Now when the model instances are created, firstName, lastName, email and phone fields will not try to convert the value and will simple apply the value on the data object within your model. Ext.data.Field will turn your string into an Object for you.
 

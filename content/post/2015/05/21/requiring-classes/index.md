@@ -9,62 +9,66 @@ Since Ext JS 4 came out, Ext JS supported loading classes on demand during devel
 
 As mentioned, when using `Ext.define` you should use the `requires` property to require classes. Let's look at a sample class without the requires property:
 
-    Ext.define('MyApp.view.user.Form', {
-        extend : 'Ext.form.Panel',
-        xtype  : 'myapp-user-form',
+```js
+Ext.define('MyApp.view.user.Form', {
+    extend : 'Ext.form.Panel',
+    xtype  : 'myapp-user-form',
 
-        items : [
-            {
-                xtype : 'fieldset',
-                title : 'Details',
-                items : [
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Name',
-                        name       : 'name'
-                    },
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Email',
-                        name       : 'email',
-                        vtype      : 'email'
-                    }
-                ]
-            }
-        ]
-    });
+    items : [
+        {
+            xtype : 'fieldset',
+            title : 'Details',
+            items : [
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Name',
+                    name       : 'name'
+                },
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Email',
+                    name       : 'email',
+                    vtype      : 'email'
+                }
+            ]
+        }
+    ]
+});
+```
 
 If we use this class in our application things may work depending on if the classes are required elsewhere. However, your application will be changing as time goes on so this may work now but may break a production build later. For this reason, I tend to make sure each class requires that classes it uses. The requires property would then look like this:
 
-    Ext.define('MyApp.view.user.Form', {
-        extend : 'Ext.form.Panel',
-        xtype  : 'myapp-user-form',
+```js
+Ext.define('MyApp.view.user.Form', {
+    extend : 'Ext.form.Panel',
+    xtype  : 'myapp-user-form',
 
-        requires : [
-            'Ext.form.field.Text',
-            'Ext.form.FieldSet'
-        ],
+    requires : [
+        'Ext.form.field.Text',
+        'Ext.form.FieldSet'
+    ],
 
-        items : [
-            {
-                xtype : 'fieldset',
-                title : 'Details',
-                items : [
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Name',
-                        name       : 'name'
-                    },
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Email',
-                        name       : 'email',
-                        vtype      : 'email'
-                    }
-                ]
-            }
-        ]
-    });
+    items : [
+        {
+            xtype : 'fieldset',
+            title : 'Details',
+            items : [
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Name',
+                    name       : 'name'
+                },
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Email',
+                    name       : 'email',
+                    vtype      : 'email'
+                }
+            ]
+        }
+    ]
+});
+```
 
 Now I know that no matter what else goes on in my application, this class will be safe as far as what it needs.
 
@@ -74,46 +78,50 @@ Remember, your `MyApp.Application` class can use the requires property also for 
 
 If you're not using MVC/MVVM and therefore don't have an Application class, well, first shame on you! Ext JS doesn't require the MVC/MVVM pattern but I very much recommend it. Anyway, to require classes before `Ext.onReady` executes you can use `Ext.require` to require classes much the same way:
 
-    Ext.require('Ext.form.FieldSet');
-    // or use an array:
-    Ext.require([
-        'Ext.form.field.Text',
-        'Ext.form.FieldSet'
-    ]);
+```js
+Ext.require('Ext.form.FieldSet');
+// or use an array:
+Ext.require([
+    'Ext.form.field.Text',
+    'Ext.form.FieldSet'
+]);
+```
 
 ### `requires` vs `uses`
 
 The `requires` property will ensure those classes are loaded and defined before the class being required is defined. Cmd will use the `requires` to build a dependency map and include the files in order based on the requires. However, in development the `requires` property may cause synchronous loading so that your code will work (this depends on if `Ext.onReady` or `Ext.application`'s [`launch`](http://docs.sencha.com/extjs/latest/apidocs/#!/api/Ext.app.Application-method-launch) method has executed) which can slow things down. This is where the [`uses`](http://docs.sencha.com/extjs/latest/apidocs/#!/api/Ext.Class-cfg-uses) property can be used. This is what the `uses` property looks like:
 
-    Ext.define('MyApp.view.user.Form', {
-        extend : 'Ext.form.Panel',
-        xtype  : 'myapp-user-form',
+```js
+Ext.define('MyApp.view.user.Form', {
+    extend : 'Ext.form.Panel',
+    xtype  : 'myapp-user-form',
 
-        uses : [
-            'Ext.form.field.Text',
-            'Ext.form.FieldSet'
-        ],
+    uses : [
+        'Ext.form.field.Text',
+        'Ext.form.FieldSet'
+    ],
 
-        items : [
-            {
-                xtype : 'fieldset',
-                title : 'Details',
-                items : [
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Name',
-                        name       : 'name'
-                    },
-                    {
-                        xtype      : 'textfield',
-                        fieldLabel : 'Email',
-                        name       : 'email',
-                        vtype      : 'email'
-                    }
-                ]
-            }
-        ]
-    });
+    items : [
+        {
+            xtype : 'fieldset',
+            title : 'Details',
+            items : [
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Name',
+                    name       : 'name'
+                },
+                {
+                    xtype      : 'textfield',
+                    fieldLabel : 'Email',
+                    name       : 'email',
+                    vtype      : 'email'
+                }
+            ]
+        }
+    ]
+});
+```
 
 The difference between `uses` and `requires` is unlike how `requires` will load it's classes before the `MyApp.view.user.Form` is defined, `uses` will define `MyApp.view.user.Form` even if the classes are not loaded. `Ext.form.field.Text` and `Ext.form.FieldSet` may be loaded and defined after `MyApp.view.user.Form` is defined since `MyApp.view.user.Form` doesn't require them to be loaded before it is defined.
 

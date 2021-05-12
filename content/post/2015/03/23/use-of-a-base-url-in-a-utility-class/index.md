@@ -5,76 +5,82 @@ date: "2015-03-23T12:22:03.284Z"
 
 I had an idea the other day and I'm not sure why I hadn't thought of it sooner. For the longest time I've always advocated to have a singleton utility class that holds onto configs like a base url. Then in your store, you can get the base url and prepend it. Something like this:
 
-    Ext.define('MyApp.Util', {
-        singleton : true,
+```js
+Ext.define('MyApp.Util', {
+    singleton : true,
 
-        config : {
-        	baseUrl : 'http://foo.com/'
-        },
+    config : {
+        baseUrl : 'http://foo.com/'
+    },
 
-        constructor : function(config) {
-        	this.initConfig(config);
-        }
-    });
+    constructor : function(config) {
+        this.initConfig(config);
+    }
+});
 
-    Ext.define('MyApp.store.Foo', {
-    	extend : 'Ext.data.Store',
-        alias  : 'store.myapp-foo',
+Ext.define('MyApp.store.Foo', {
+    extend : 'Ext.data.Store',
+    alias  : 'store.myapp-foo',
 
-        requires : [
-        	'MyApp.Util',
-            'MyApp.model.Foo'
-        ],
+    requires : [
+        'MyApp.Util',
+        'MyApp.model.Foo'
+    ],
 
-        model : 'MyApp.model.Foo',
+    model : 'MyApp.model.Foo',
 
-        proxy : {
-        	type : 'ajax',
-            url  : MyApp.Util.getBaseUrl() + 'foo.json'
-        }
-    });
+    proxy : {
+        type : 'ajax',
+        url  : MyApp.Util.getBaseUrl() + 'foo.json'
+    }
+});
+```
 
 When the `MyApp.store.Foo` class is loaded by the browser, that `MyApp.Util.getBaseUrl()` is automatically evaluated and if you had `MyApp.Util` loaded prior to the store being loaded, it will concat the `http://foo.com/` and `foo.json` and everything is good. The biggest drawback to this was that you had to require the `MyApp.Uti` class in both the `Ext.application` and the store's `requires` array. (side note, Sencha Cmd may be able to detect `MyApp.Util` but I've seen where this falls down so I'm usually more explicit with my `requires` array) Also, in your code you have to spread the `MyApp.Util.getBaseUrl()` calls around everywhere.
 
 Instead, I had a thought to make this workflow much easier! What if you were able to define your store like this?
 
-    Ext.define('MyApp.store.Foo', {
-    	extend : 'Ext.data.Store',
-        alias  : 'store.myapp-foo',
+```js
+Ext.define('MyApp.store.Foo', {
+    extend : 'Ext.data.Store',
+    alias  : 'store.myapp-foo',
 
-        requires : [
-            'MyApp.model.Foo'
-        ],
+    requires : [
+        'MyApp.model.Foo'
+    ],
 
-        model : 'MyApp.model.Foo',
+    model : 'MyApp.model.Foo',
 
-        proxy : {
-        	type : 'ajax',
-            url  : 'foo.json'
-        }
-    });
+    proxy : {
+        type : 'ajax',
+        url  : 'foo.json'
+    }
+});
+```
 
 No requiring `MyApp.Util`, no `MyApp.Util.getBaseUrl()` spread everywhere. Looks like I can solve both my caveats right? But how can I get the base url in there? Just by this code, there isn't anything that will prepend it. Where's the magic?
 
 The magic is all in the `MyApp.Util` class with a small change. `Ext.data.Connection` (`Ext.Ajax` is an instance off) will fire a `beforerequest` event allowing you to cancel the request or you can also modify the request by changing the params but you can also change the url of the request. So why not have `MyApp.Util` automatically prepend the baseUrl for us? Like so:
 
-    Ext.define('MyApp.Util', {
-      	singleton : true,
+```js
+Ext.define('MyApp.Util', {
+    singleton : true,
 
-      	config : {
-          	baseUrl : 'http://foo.com/'
-      	},
+    config : {
+        baseUrl : 'http://foo.com/'
+    },
 
-      	constructor : function(config) {
-          	this.initConfig(config);
+    constructor : function(config) {
+        this.initConfig(config);
 
-          	Ext.Ajax.on('beforerequest', this.onBeforeRequest, this);
-      	},
+        Ext.Ajax.on('beforerequest', this.onBeforeRequest, this);
+    },
 
-	    onBeforeRequest : function(connection, options) {
-          	options.url = this.getBaseUrl() + options.url;
-      	}
-  	});
+    onBeforeRequest : function(connection, options) {
+        options.url = this.getBaseUrl() + options.url;
+    }
+});
+```
 
 All I did was add the `beforerequest` event listener, and then changed the `options.url` and it will automatically prepend the base url. Here it is in action:
 
