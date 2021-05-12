@@ -1,7 +1,10 @@
 import fs from 'fs';
 import { join } from 'path';
 import globby from 'globby';
-import matter from 'gray-matter';
+import matter, { GrayMatterFile } from 'gray-matter';
+import readingTime from 'reading-time';
+import remark from 'remark';
+import strip from 'strip-markdown';
 import { BlogPost } from '../types/blog';
 
 const postsDirectory = join(process.cwd(), 'content');
@@ -15,8 +18,38 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
+const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
+  let excerpt =
+    (
+      remark()
+        .use(strip)
+        .processSync(file.content)
+        .toString()
+    )
+    .split('\n')
+    .filter((line: string) => Boolean(line.trim()))
+    .slice(0, 2)
+    .join(' ');
+
+  if (excerpt.length < file.content.length) {
+    if (excerpt.substr(-1) === '.') {
+      // in case the excerpt ends with a period
+      // remove it so that the triple dot doesn't
+      // lead to quad dots and look odd
+      excerpt = excerpt.substr(0, excerpt.length - 1);
+    }
+
+    excerpt = `${excerpt}...`;
+  }
+
+  file.excerpt = excerpt;
+};
+
+const getTimeToRead = (content: string): string => readingTime(content).text;
+
 const parseContentsToPost = (fileContents: string, slug: string | string[]): BlogPost => {
-  const { data, content } = matter(fileContents);
+  const { content, data, excerpt } = matter(fileContents, { excerpt: parseExcerpt as any });
+  const timeToRead = getTimeToRead(content);
   const parsedSlug = Array.isArray(slug) ? slug.join('/') : slug;
 
   const items: BlogPost = {
@@ -24,7 +57,9 @@ const parseContentsToPost = (fileContents: string, slug: string | string[]): Blo
     content: content,
     coverImage: data.coverImage || null, // cannot be undefined
     date: data.date,
+    excerpt,
     slug: parsedSlug,
+    timeToRead,
     title: data.title,
   };
 

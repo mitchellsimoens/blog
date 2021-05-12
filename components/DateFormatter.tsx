@@ -10,7 +10,7 @@ const DateFormatter: FunctionComponent<Props> = ({ dateString }) => {
 
   return (
     <time dateTime={dateString}>
-      {format(date, 'LLLL	d, yyyy')}
+      {format(date, 'LLLL	dd, yyyy')}
     </time>
   );
 };

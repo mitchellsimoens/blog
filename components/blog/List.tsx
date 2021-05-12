@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import DateFormatter from '../DateFormatter';
 import Link from '../Link';
 import Pager from '../Pager';
 import { BlogPost } from '../../types/blog';
@@ -26,8 +27,16 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
             }
 
             return (
-              <li key={post.slug}>
+              <li key={post.slug} className="mb-14">
                 <Link as={post.slug} href="/post/[...slug]">{post.title}</Link>
+
+                <div className="flex">
+                  <div><DateFormatter dateString={post.date} /></div>
+                  <div className="flex-1" />
+                  <div>{post.timeToRead}</div>
+                </div>
+
+                <div>{post.excerpt}</div>
               </li>
             );
           })
