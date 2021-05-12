@@ -24,7 +24,7 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
 
   return (
     <Layout title="Test">
-      <Container>
+      <Container variant="narrow">
         <Header />
 
         {

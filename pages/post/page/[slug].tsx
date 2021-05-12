@@ -18,7 +18,7 @@ const PostPager: FunctionComponent<Props> = props => {
 
   return (
     <Layout title="Test">
-      <Container>
+      <Container variant="narrow">
         <Header />
 
         {
