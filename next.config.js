@@ -2,7 +2,9 @@ const emoji = require('remark-emoji');
 const images = require('remark-images');
 const oembed = require('remark-oembed');
 const prism = require('remark-prism');
-const withMDX = require('@next/mdx')({
+const mdx = require('@next/mdx');
+
+const withMDX = mdx({
   extension: /\.mdx?$/,
   commonmark: true,
   gfm: true,
