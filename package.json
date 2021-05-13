@@ -2,7 +2,6 @@
   "name": "mitchellsimoens-blog",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "gen:redirects": "node gen-redirects.js",
     "dev": "next dev",
