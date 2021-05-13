@@ -12,6 +12,7 @@ export interface BlogPost {
   content: string;
   coverImage: string;
   date: string;
+  file: string;
   excerpt?: string;
   ogImage?: OGImage;
   slug?: string;

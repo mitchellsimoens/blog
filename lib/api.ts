@@ -51,7 +51,7 @@ const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
 
 const getTimeToRead = (content: string): string => readingTime(content).text;
 
-const parseContentsToPost = (fileContents: string, slug: string | string[]): BlogPost => {
+const parseContentsToPost = (fileContents: string, slug: string | string[], fullPath: string): BlogPost => {
   const { content, data, excerpt } = matter(fileContents, { excerpt: parseExcerpt as any });
   const timeToRead = getTimeToRead(content);
   const parsedSlug = Array.isArray(slug) ? slug.join('/') : slug;
@@ -61,6 +61,7 @@ const parseContentsToPost = (fileContents: string, slug: string | string[]): Blo
     content,
     coverImage: data.coverImage || null, // cannot be undefined
     date: data.date,
+    file: fullPath,
     excerpt,
     slug: parsedSlug,
     timeToRead,
@@ -72,27 +73,43 @@ const parseContentsToPost = (fileContents: string, slug: string | string[]): Blo
 
 export function getPostBySlug(slug: string | string[]): BlogPost {
   const normalizedSlug = Array.isArray(slug) ? slug.join('/') : slug;
-  const realSlug = normalizedSlug.replace(/\.md$/, '');
+  const realSlug = normalizedSlug.replace(/\.mdx?$/, '');
   let fullPath = join(postsDirectory, `${realSlug}.md`);
+
+  if (!fs.existsSync(fullPath)) {
+    const testMdx = `${fullPath}x`;
+
+    if (fs.existsSync(testMdx)) {
+      fullPath = testMdx;
+    }
+  }
 
   if (!fs.existsSync(fullPath)) {
     fullPath = join(postsDirectory, `${realSlug}/index.md`);
   }
 
+  if (!fs.existsSync(fullPath)) {
+    const testMdx = `${fullPath}x`;
+
+    if (fs.existsSync(testMdx)) {
+      fullPath = testMdx;
+    }
+  }
+
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  return parseContentsToPost(fileContents, realSlug);
+  return parseContentsToPost(fileContents, realSlug, fullPath);
 }
 
 export function getAllPosts(): BlogPost[] {
   return globby
-    .sync([`${postsDirectory}/**/*.md`])
+    .sync([`${postsDirectory}/**/*.(md|mdx)`])
     .map((fullPath: string) => {
       const relativePath = fullPath.replace(postsDirectory, '');
-      const realSlug = relativePath.replace(/(?:\/index)?\.md$/, '');
+      const realSlug = relativePath.replace(/(?:\/index)?\.mdx?$/, '');
       const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-      return parseContentsToPost(fileContents, realSlug);
+      return parseContentsToPost(fileContents, realSlug, fullPath);
     })
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 }

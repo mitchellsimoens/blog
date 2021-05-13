@@ -48,7 +48,7 @@ export async function getStaticProps({ params }: any) {
   slug.unshift('', 'post');
 
   const post = getPostBySlug(slug);
-  const content = await markdownToHtml(post.content || '');
+  const content = await markdownToHtml(post.content || '', post.file);
 
   return {
     props: {
@@ -62,6 +62,8 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
   const paths = getAllPosts().map(item => item.slug);
+
+  // console.log(paths);
 
   return {
     paths,
