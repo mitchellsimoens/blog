@@ -1,4 +1,8 @@
 import { Component, FunctionComponent } from 'react';
+// remove the following if the JIT plugin in
+// postcss.config.js works without throwing
+// theme in undefined error
+import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 
 interface Props {

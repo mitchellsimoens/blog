@@ -33,9 +33,6 @@ const withMDX = mdx({
 });
 
 module.exports = withMDX({
-  future: {
-    webpack5: true,
-  },
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   images: {
     loader: 'cloudinary',
