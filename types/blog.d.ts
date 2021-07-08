@@ -1,6 +1,7 @@
 export interface Author {
   name: string;
   picture: string;
+  twitterHandle?: string;
 }
 
 export interface OGImage {

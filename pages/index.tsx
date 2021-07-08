@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
+import { TwitterFollowButton } from 'react-twitter-embed';
 import BlogLoading from '../components/blog/Loading';
 import Layout from '../components/Layout';
 import List from '../components/blog/List';
@@ -23,6 +24,8 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
 
   return (
     <Layout containerVariant="narrow" title={siteTitle}>
+      <TwitterFollowButton options={{size: 'large'}} screenName="LikelyMitch" />
+
       {
         router.isFallback
           ? <BlogLoading />

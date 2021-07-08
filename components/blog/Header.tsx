@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { TwitterFollowButton } from 'react-twitter-embed';
 import { BlogPost } from '../../types/blog';
 import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
@@ -37,6 +38,11 @@ const Header: FunctionComponent<Props> = ({ author, coverImage, date, title }) =
           ? (
             <div className="block md:hidden mb-6">
               <Avatar name={author.name} picture={author.picture} />
+              {
+                author.twitterHandle
+                  ? <TwitterFollowButton options={{size: 'large'}} screenName={author.twitterHandle}/>
+                  : null
+              }
             </div>
           )
           : null

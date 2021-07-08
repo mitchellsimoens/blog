@@ -12,6 +12,7 @@ const postsDirectory = join(process.cwd(), 'content');
 const defaultAuthor = {
   name: 'Mitchell Simoens',
   picture: '/assets/blog/authors/Mitchell Simoens.png',
+  twitterHandle: 'LikelyMitch',
 };
 
 export function getPostSlugs() {
