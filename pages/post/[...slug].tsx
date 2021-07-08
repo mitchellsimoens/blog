@@ -30,7 +30,7 @@ const Post: FunctionComponent<Props> = ({ post }) => {
   }
 
   return (
-    <Layout title="Test">
+    <Layout title={`${post.title} | Mitchell Simoens Blog`}>
       {
         router.isFallback
           ? <BlogLoading />

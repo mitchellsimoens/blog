@@ -11,10 +11,6 @@ interface Props {
 const BlogPost: FunctionComponent<Props> = ({ post }) => (
   <article className="prose md:prose-xl dark:prose-dark dark:md:prose-xl-dark">
     <Head>
-      <title>
-        {post.title} | Mitchell Simoens Blog
-      </title>
-
       {
         post.ogImage?.url
           ? <meta property="og:image" content={post.ogImage.url} />

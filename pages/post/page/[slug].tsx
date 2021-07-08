@@ -5,6 +5,7 @@ import Layout from '../../../components/Layout';
 import List from '../../../components/blog/List';
 import { getAllPosts } from '../../../lib/api';
 import { BlogPost } from '../../../types/blog';
+import { siteTitle } from '../../../components/constants';
 
 interface Props {
   page: number;
@@ -15,7 +16,7 @@ const PostPager: FunctionComponent<Props> = props => {
   const router = useRouter();
 
   return (
-    <Layout containerVariant="narrow" title="Test">
+    <Layout containerVariant="narrow" title={`Posts Page ${props.page} | ${siteTitle}`}>
       {
         router.isFallback
           ? <BlogLoading />

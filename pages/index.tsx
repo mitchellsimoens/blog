@@ -4,6 +4,7 @@ import BlogLoading from '../components/blog/Loading';
 import Layout from '../components/Layout';
 import List from '../components/blog/List';
 import { getAllPosts } from '../lib/api';
+import { siteTitle } from '../components/constants';
 
 import 'prismjs/themes/prism-okaidia.css';
 import 'prismjs/plugins/autolinker/prism-autolinker.css';
@@ -21,7 +22,7 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
   const router = useRouter();
 
   return (
-    <Layout containerVariant="narrow" title="Test">
+    <Layout containerVariant="narrow" title={siteTitle}>
       {
         router.isFallback
           ? <BlogLoading />
