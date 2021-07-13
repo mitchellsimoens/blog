@@ -8,24 +8,40 @@ interface Props {
 }
 
 const Author: FunctionComponent<Props> = ({ author }) => (
-  <div className="max-w-2xl mx-auto">
+  <div className="max-w-2xl">
     <div className="hidden md:block md:mb-12">
-      <Avatar name={author.name} picture={author.picture} />
+      <div className="flex items-start">
+        <Avatar alt={author.name} className="overflow-hidden rounded-3xl" picture={author.picture} />
+
+        <div className="flex-1 ml-7 text-xl">{author.shortBio}</div>
+      </div>
 
       {
         author.twitter
-          ? <TwitterFollow handle={author.twitter}/>
+          ? (
+            <div className="mt-7">
+              <TwitterFollow handle={author.twitter} />
+            </div>
+          )
           : null
       }
     </div>
 
     {
       <div className="block md:hidden mb-6">
-        <Avatar name={author.name} picture={author.picture} />
+        <div className="flex items-start">
+          <Avatar alt={author.name} className="overflow-hidden rounded-3xl" picture={author.picture} />
+
+          <div className="flex-1 ml-7 text-xl">{author.shortBio}</div>
+        </div>
 
         {
           author.twitter
-            ? <TwitterFollow handle={author.twitter}/>
+            ? (
+              <div className="mt-7">
+                <TwitterFollow handle={author.twitter} />
+              </div>
+            )
             : null
         }
       </div>

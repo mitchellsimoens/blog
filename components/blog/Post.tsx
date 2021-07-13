@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { FunctionComponent } from 'react';
 import Body from './Body';
 import Header from './Header';
+import Footer from './Footer';
 import { BlogPost as BlogPostType } from '../../types/blog';
 
 interface Props {
@@ -22,10 +23,11 @@ const BlogPost: FunctionComponent<Props> = ({ post }) => (
       title={post.title}
       coverImage={post.coverImage}
       date={post.date}
-      author={post.author}
     />
 
     <Body content={post.content} />
+
+    <Footer author={post.author} />
   </article>
 );
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import cn from 'classnames';
-import Image from 'next/image';
+import Image from './Image';
 import Link from './Link';
 
 interface Props {
@@ -19,7 +19,6 @@ const CoverImage: FunctionComponent<Props> = ({ title, src, slug, height, width 
       className={cn('shadow-sm', {
         'hover:shadow-md transition-shadow duration-200': slug,
       })}
-      layout="responsive"
       width={width}
       height={height}
     />

@@ -1,26 +1,14 @@
 import { FunctionComponent } from 'react';
 import { BlogPost } from '../../types/blog';
-import Avatar from '../Avatar';
-import Author from '../Author';
 import CoverImage from '../CoverImage';
 import DateFormatter from '../DateFormatter';
 import PostTitle from './Title';
 
-type Props = Pick<BlogPost, 'author' | 'coverImage' | 'date' | 'title'>;
+type Props = Pick<BlogPost, 'coverImage' | 'date' | 'title'>;
 
-const Header: FunctionComponent<Props> = ({ author, coverImage, date, title }) => (
+const Header: FunctionComponent<Props> = ({ coverImage, date, title }) => (
   <>
     <PostTitle>{title}</PostTitle>
-
-    {
-      author
-        ? (
-          <div className="hidden md:block md:mb-12">
-            <Avatar name={author.name} picture={author.picture} />
-          </div>
-        )
-        : null
-    }
 
     {
       coverImage
@@ -32,9 +20,7 @@ const Header: FunctionComponent<Props> = ({ author, coverImage, date, title }) =
         : null
     }
 
-    <div className="max-w-2xl mx-auto">
-      <Author author={author} />
-
+    <div className="max-w-2xl">
       <div className="mb-6 text-lg">
         <DateFormatter dateString={date} />
       </div>

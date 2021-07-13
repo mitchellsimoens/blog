@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
+import Author from '../components/Author';
 import BlogLoading from '../components/blog/Loading';
 import Layout from '../components/Layout';
 import List from '../components/blog/List';
 import { getAllPosts } from '../lib/api';
 import { siteTitle } from '../components/constants';
-import TwitterFollow from '../components/TwitterFollow';
 import { author } from '../content/authors/default';
 import { BlogPost } from '../types/blog';
 
@@ -26,11 +26,7 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
 
   return (
     <Layout containerVariant="narrow" title={siteTitle}>
-      {
-        author.twitter
-          ? <TwitterFollow handle={author.twitter} />
-          : null
-      }
+      <Author author={author} />
 
       {
         router.isFallback

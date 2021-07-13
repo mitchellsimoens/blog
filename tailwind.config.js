@@ -1,6 +1,6 @@
 const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
 const typography = require('@tailwindcss/typography');
-const aspectRation = require('@tailwindcss/aspect-ratio');
+const aspectRatio = require('@tailwindcss/aspect-ratio');
 
 module.exports = {
   mode: 'jit',
@@ -36,7 +36,7 @@ module.exports = {
             },
             code: { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
-            'blockquote p:last-of-type::after': false
+            'blockquote p:last-of-type::after': false,
           }
         },
         dark: {
@@ -79,11 +79,11 @@ module.exports = {
             }
           }
         }
-      })
+      }),
     }
   },
   variants: {
     typography: ['dark']
   },
-  plugins: [aspectRation, typography]
+  plugins: [aspectRatio, typography]
 };
