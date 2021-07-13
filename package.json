@@ -30,12 +30,13 @@
     "remark-images": "2.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "0.2.1",
     "@tailwindcss/jit": "0.1.18",
     "@tailwindcss/typography": "0.4.1",
     "@types/mime": "2.0.3",
-    "@types/node": "16.0.1",
+    "@types/node": "16.3.1",
     "@types/react": "17.0.14",
-    "autoprefixer": "10.2.6",
+    "autoprefixer": "10.3.1",
     "globby": "11.0.4",
     "mime": "2.5.2",
     "postcss": "8.3.5",

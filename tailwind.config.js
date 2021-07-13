@@ -1,5 +1,6 @@
 const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
 const typography = require('@tailwindcss/typography');
+const aspectRation = require('@tailwindcss/aspect-ratio');
 
 module.exports = {
   mode: 'jit',
@@ -84,5 +85,5 @@ module.exports = {
   variants: {
     typography: ['dark']
   },
-  plugins: [typography]
+  plugins: [aspectRation, typography]
 };
