@@ -1,7 +1,10 @@
 export interface Author {
+  email?: string;
+  linkedIn?: string;
   name: string;
   picture: string;
-  twitterHandle?: string;
+  shortBio: string;
+  twitter?: string;
 }
 
 export interface OGImage {

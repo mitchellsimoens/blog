@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
-import { TwitterFollowButton } from 'react-twitter-embed';
 import BlogLoading from '../components/blog/Loading';
 import Layout from '../components/Layout';
 import List from '../components/blog/List';
 import { getAllPosts } from '../lib/api';
 import { siteTitle } from '../components/constants';
+import TwitterFollow from '../components/TwitterFollow';
+import { author } from '../content/authors/default';
+import { BlogPost } from '../types/blog';
 
 import 'prismjs/themes/prism-okaidia.css';
 import 'prismjs/plugins/autolinker/prism-autolinker.css';
@@ -16,7 +18,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import 'prismjs/plugins/treeview/prism-treeview.css';
 
 interface Props {
-  allPosts: any[];
+  allPosts: BlogPost[];
 }
 
 const Index: FunctionComponent<Props> = ({ allPosts }) => {
@@ -24,7 +26,11 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
 
   return (
     <Layout containerVariant="narrow" title={siteTitle}>
-      <TwitterFollowButton options={{size: 'large'}} screenName="LikelyMitch" />
+      {
+        author.twitter
+          ? <TwitterFollow handle={author.twitter} />
+          : null
+      }
 
       {
         router.isFallback

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { TwitterFollowButton } from 'react-twitter-embed';
 import { BlogPost } from '../../types/blog';
 import Avatar from '../Avatar';
+import Author from '../Author';
 import CoverImage from '../CoverImage';
 import DateFormatter from '../DateFormatter';
 import PostTitle from './Title';
@@ -33,20 +33,7 @@ const Header: FunctionComponent<Props> = ({ author, coverImage, date, title }) =
     }
 
     <div className="max-w-2xl mx-auto">
-      {
-        author
-          ? (
-            <div className="block md:hidden mb-6">
-              <Avatar name={author.name} picture={author.picture} />
-              {
-                author.twitterHandle
-                  ? <TwitterFollowButton options={{size: 'large'}} screenName={author.twitterHandle}/>
-                  : null
-              }
-            </div>
-          )
-          : null
-      }
+      <Author author={author} />
 
       <div className="mb-6 text-lg">
         <DateFormatter dateString={date} />

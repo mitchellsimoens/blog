@@ -5,15 +5,10 @@ import matter, { GrayMatterFile } from 'gray-matter';
 import readingTime from 'reading-time';
 import remark from 'remark';
 import strip from 'strip-markdown';
+import { author as defaultAuthor } from '../content/authors/default';
 import { BlogPost } from '../types/blog';
 
 const postsDirectory = join(process.cwd(), 'content');
-
-const defaultAuthor = {
-  name: 'Mitchell Simoens',
-  picture: '/assets/blog/authors/Mitchell Simoens.png',
-  twitterHandle: 'LikelyMitch',
-};
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
