@@ -28,10 +28,10 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
           return (
             <li key={post.slug} className="mb-14">
               <Link as={post.slug} href="/post/[...slug]">
-                {post.title}
+                <span className="text-xl">{post.title}</span>
               </Link>
 
-              <div className="flex">
+              <div className="flex my-2 text-xs">
                 <div>
                   <DateFormatter dateString={post.date} />
                 </div>

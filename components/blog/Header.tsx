@@ -4,9 +4,14 @@ import CoverImage from '../CoverImage'
 import DateFormatter from '../DateFormatter'
 import PostTitle from './Title'
 
-type Props = Pick<BlogPost, 'coverImage' | 'date' | 'title'>
+type Props = Pick<BlogPost, 'coverImage' | 'date' | 'timeToRead' | 'title'>
 
-const Header: FunctionComponent<Props> = ({ coverImage, date, title }) => (
+const Header: FunctionComponent<Props> = ({
+  coverImage,
+  date,
+  timeToRead,
+  title,
+}) => (
   <>
     <PostTitle>{title}</PostTitle>
 
@@ -17,8 +22,9 @@ const Header: FunctionComponent<Props> = ({ coverImage, date, title }) => (
     ) : null}
 
     <div className="max-w-2xl">
-      <div className="mb-6 text-lg">
+      <div className="mb-6 text-sm">
         <DateFormatter dateString={date} />
+        <div>{timeToRead}</div>
       </div>
     </div>
   </>

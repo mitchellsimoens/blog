@@ -17,7 +17,7 @@ const Author: FunctionComponent<Props> = ({ author }) => (
           picture={author.picture}
         />
 
-        <div className="flex-1 ml-7 text-xl">{author.shortBio}</div>
+        <div className="flex-1 ml-7 text-lg">{author.shortBio}</div>
       </div>
 
       {author.twitter ? (

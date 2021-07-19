@@ -10,14 +10,19 @@ interface Props {
 }
 
 const BlogPost: FunctionComponent<Props> = ({ post }) => (
-  <article className="prose md:prose-xl dark:prose-dark dark:md:prose-xl-dark">
+  <article className="prose dark:prose-dark dark:md:prose-xl-dark">
     <Head>
       {post.ogImage?.url ? (
         <meta property="og:image" content={post.ogImage.url} />
       ) : null}
     </Head>
 
-    <Header title={post.title} coverImage={post.coverImage} date={post.date} />
+    <Header
+      title={post.title}
+      coverImage={post.coverImage}
+      date={post.date}
+      timeToRead={post.timeToRead}
+    />
 
     <Body content={post.content} />
 
