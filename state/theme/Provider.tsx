@@ -1,38 +1,47 @@
-import { FunctionComponent, useEffect, useState } from 'react';
-import { Theme } from '../../types/theme';
-import { ThemeContext } from './Context';
+import { FunctionComponent, useEffect, useState } from 'react'
+import { Theme } from '../../types/theme'
+import { ThemeContext } from './Context'
 
-const osDarkMode = typeof window !== "undefined" && window.matchMedia('(prefers-color-scheme: dark)').matches;
-const defaultTheme: Theme = { mode: 'auto', system: true  };
+const osDarkMode =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+const defaultTheme: Theme = { mode: 'auto', system: true }
 
 export const ThemeProvider: FunctionComponent = ({ children }) => {
-  const [theme, setTheme] = useState(defaultTheme);
+  const [theme, setTheme] = useState(defaultTheme)
 
   useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && osDarkMode)) {
-      setTheme({ mode: 'dark', system: false });
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && osDarkMode)
+    ) {
+      setTheme({ mode: 'dark', system: false })
     } else {
-      setTheme({ mode: 'auto', system: true });
+      setTheme({ mode: 'auto', system: true })
     }
-  }, []);
+  }, [])
 
   // manage localStorage
   useEffect(() => {
     switch (theme.mode) {
       case 'dark':
-        localStorage.theme = 'dark';
-        break;
+        localStorage.theme = 'dark'
+        break
       case 'light':
-        localStorage.theme = 'light';
-        break;
+        localStorage.theme = 'light'
+        break
       default:
         if (osDarkMode) {
-          setTheme({ mode: 'dark', system: true });
+          setTheme({ mode: 'dark', system: true })
         } else {
-          localStorage.removeItem('theme');
+          localStorage.removeItem('theme')
         }
     }
-  }, [theme]);
+  }, [theme])
 
-  return <ThemeContext.Provider value={[theme, setTheme ]}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }

@@ -1,1 +1,1 @@
-export * as author from './Mitchell Simoens';
+export * as author from './Mitchell Simoens'

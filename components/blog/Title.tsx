@@ -1,9 +1,5 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react'
 
-const BlogTitle: FunctionComponent = ({ children }) => (
-  <h1>
-    {children}
-  </h1>
-);
+const BlogTitle: FunctionComponent = ({ children }) => <h1>{children}</h1>
 
-export default BlogTitle;
+export default BlogTitle

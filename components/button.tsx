@@ -12,5 +12,5 @@ export default function Button({ children }: any) {
     >
       {children}
     </button>
-  );
-};
+  )
+}

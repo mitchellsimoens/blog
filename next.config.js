@@ -1,8 +1,8 @@
-const emoji = require('remark-emoji');
-const images = require('remark-images');
-const oembed = require('remark-oembed');
-const prism = require('remark-prism');
-const mdx = require('@next/mdx');
+const emoji = require('remark-emoji')
+const images = require('remark-images')
+const oembed = require('remark-oembed')
+const prism = require('remark-prism')
+const mdx = require('@next/mdx')
 
 const withMDX = mdx({
   extension: /\.mdx?$/,
@@ -30,7 +30,7 @@ const withMDX = mdx({
       ],
     ],
   },
-});
+})
 
 module.exports = withMDX({
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
@@ -41,6 +41,6 @@ module.exports = withMDX({
         destination: '/post/:slug', // Matched parameters can be used in the destination
         permanent: false,
       },
-    ];
+    ]
   },
-});
+})

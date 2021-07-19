@@ -1,18 +1,18 @@
-import  { useEffect } from 'react';
-import { useTheme } from '../state/theme/useTheme';
+import { useEffect } from 'react'
+import { useTheme } from '../state/theme/useTheme'
 
 const Html = () => {
-  const [theme] = useTheme();
+  const [theme] = useTheme()
 
   useEffect(() => {
     if (theme.mode === 'dark') {
-      document.documentElement.classList.add(theme.mode);
+      document.documentElement.classList.add(theme.mode)
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('dark')
     }
-  }, [theme]);
+  }, [theme])
 
-  return null;
-};
+  return null
+}
 
-export default Html;
+export default Html

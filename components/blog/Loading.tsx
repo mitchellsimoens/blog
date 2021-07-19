@@ -1,8 +1,6 @@
-import { FunctionComponent } from 'react';
-import PostTitle from './Title';
+import { FunctionComponent } from 'react'
+import PostTitle from './Title'
 
-const Loading: FunctionComponent = () => (
-  <PostTitle>Loading…</PostTitle>
-);
+const Loading: FunctionComponent = () => <PostTitle>Loading…</PostTitle>
 
-export default Loading;
+export default Loading

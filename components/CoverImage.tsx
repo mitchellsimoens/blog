@@ -1,17 +1,23 @@
-import { FunctionComponent } from 'react';
-import cn from 'classnames';
-import Image from './Image';
-import Link from './Link';
+import { FunctionComponent } from 'react'
+import cn from 'classnames'
+import Image from './Image'
+import Link from './Link'
 
 interface Props {
-  height: number;
-  slug?: string;
-  src: string;
-  title: string;
-  width: number;
+  height: number
+  slug?: string
+  src: string
+  title: string
+  width: number
 }
 
-const CoverImage: FunctionComponent<Props> = ({ title, src, slug, height, width }) => {
+const CoverImage: FunctionComponent<Props> = ({
+  title,
+  src,
+  slug,
+  height,
+  width,
+}) => {
   const image = (
     <Image
       src={src}
@@ -26,17 +32,15 @@ const CoverImage: FunctionComponent<Props> = ({ title, src, slug, height, width 
 
   return (
     <div className="sm:mx-0">
-      {
-        slug
-          ? (
-            <Link as={`/posts/${slug}`} href="/posts/[slug]">
-              <a aria-label={title}>{image}</a>
-            </Link>
-          )
-          : image
-      }
+      {slug ? (
+        <Link as={`/posts/${slug}`} href="/posts/[slug]">
+          <a aria-label={title}>{image}</a>
+        </Link>
+      ) : (
+        image
+      )}
     </div>
   )
-};
+}
 
-export default CoverImage;
+export default CoverImage

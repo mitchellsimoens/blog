@@ -1,24 +1,25 @@
-import NextImage, { ImageLoaderProps, ImageProps } from 'next/image';
-import { FunctionComponent } from 'react';
+import NextImage, { ImageLoaderProps, ImageProps } from 'next/image'
+import { FunctionComponent } from 'react'
 
-const normalizeSrc = (src: string) => {
-  return src[0] === '/' ? src.slice(1) : src;
-};
+const normalizeSrc = (src: string) => (src[0] === '/' ? src.slice(1) : src)
+
 const cloudflareLoader = ({ src, width, quality }: ImageLoaderProps) => {
-  const params = [`width=${width}`];
+  const params = [`width=${width}`]
+
   if (quality) {
-    params.push(`quality=${quality}`);
+    params.push(`quality=${quality}`)
   }
-  const paramsString = params.join(',');
-  return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
-};
 
-const Image: FunctionComponent<ImageProps> = (props) => {
-  if (process.env.NODE_ENV === 'development') {
-    return <NextImage unoptimized={true} {...props} />;
-  } else {
-    return <NextImage {...props} loader={cloudflareLoader} />;
-  }
-};
+  const paramsString = params.join(',')
 
-export default Image;
+  return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`
+}
+
+const Image: FunctionComponent<ImageProps> = (props) =>
+  process.env.NODE_ENV === 'development' ? (
+    <NextImage unoptimized={true} {...props} />
+  ) : (
+    <NextImage {...props} loader={cloudflareLoader} />
+  )
+
+export default Image

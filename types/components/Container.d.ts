@@ -1,1 +1,1 @@
-export type Variants = 'narrow';
+export type Variants = 'narrow'

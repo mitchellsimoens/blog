@@ -6,6 +6,8 @@
     "gen:redirects": "node gen-redirects.js",
     "dev": "next dev",
     "build": "next build && next export",
+    "lint": "npm run lint:prettier",
+    "lint:prettier": "prettier --check '*.{json,js,jsx,ts,tsx}' 'content/**/*.{js,jsx,ts,tsx}' 'lib/**/*.{js,jsx,ts,tsx}' 'pages/**/*.{js,jsx,ts,tsx}' 'state/**/*.{js,jsx,ts,tsx}'",
     "postbuild": "cp _redirects out/_redirects",
     "start": "next start"
   },
@@ -51,10 +53,5 @@
     "tailwindcss": "2.2.4",
     "typescript": "4.3.5",
     "unist-util-visit": "2.0.3"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
   }
 }
