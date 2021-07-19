@@ -34,6 +34,9 @@ const withMDX = mdx({
 
 module.exports = withMDX({
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+  images: {
+    type: 'custom',
+  },
   async redirects() {
     return [
       {

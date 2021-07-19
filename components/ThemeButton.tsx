@@ -8,15 +8,15 @@ const ThemeButton = () => {
 
   const goDark = useCallback(
     () => setTheme({ mode: 'dark', system: false }),
-    [],
+    [setTheme],
   )
   const goLight = useCallback(
     () => setTheme({ mode: 'light', system: false }),
-    [],
+    [setTheme],
   )
   const goSystem = useCallback(
     () => setTheme({ mode: 'auto', system: true }),
-    [],
+    [setTheme],
   )
 
   return (
