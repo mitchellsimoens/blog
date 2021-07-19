@@ -1,25 +1,20 @@
 import NextImage, { ImageLoaderProps, ImageProps } from 'next/image'
 import { FunctionComponent } from 'react'
+import { blogUrl, imageWorkersUrl } from './constants'
 
-const normalizeSrc = (src: string) => (src[0] === '/' ? src.slice(1) : src)
-
-const cloudflareLoader = ({ src, width, quality }: ImageLoaderProps) => {
-  const params = [`width=${width}`]
-
-  if (quality) {
-    params.push(`quality=${quality}`)
+const cloudflareImageLoader = ({ quality, src, width }: ImageLoaderProps) => {
+  if (!quality) {
+    quality = 75
   }
 
-  const paramsString = params.join(',')
-
-  return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`
+  return `${imageWorkersUrl}?width=${width}&quality=${quality}&image=${blogUrl}${src}`
 }
 
 const Image: FunctionComponent<ImageProps> = (props) =>
   process.env.NODE_ENV === 'development' ? (
     <NextImage unoptimized={true} {...props} />
   ) : (
-    <NextImage {...props} loader={cloudflareLoader} />
+    <NextImage {...props} loader={cloudflareImageLoader} />
   )
 
 export default Image
