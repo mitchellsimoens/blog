@@ -7,7 +7,11 @@ const cloudflareImageLoader = ({ quality, src, width }: ImageLoaderProps) => {
     quality = 75
   }
 
-  return `${imageWorkersUrl}?width=${width}&quality=${quality}&image=${blogUrl}${src}`
+  const imageUrl = new URL(global?.window?.document?.location?.href || blogUrl)
+
+  imageUrl.pathname = src
+
+  return `${imageWorkersUrl}?width=${width}&quality=${quality}&image=${imageUrl.toString()}`
 }
 
 const Image: FunctionComponent<ImageProps> = (props) =>
