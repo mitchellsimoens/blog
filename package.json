@@ -6,11 +6,24 @@
     "gen:redirects": "node gen-redirects.js",
     "dev": "next dev",
     "build": "next build && next export",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint-staged": "lint-staged",
+    "lint": "npm run lint:eslint && npm run lint:prettier -- --check",
     "lint:eslint": "eslint --max-warnings=0 '*.{json,js,jsx,ts,tsx}' 'components/**/*.{js,jsx,ts,tsx}' 'content/**/*.{js,jsx,ts,tsx}' 'lib/**/*.{js,jsx,ts,tsx}' 'pages/**/*.{js,jsx,ts,tsx}' 'state/**/*.{js,jsx,ts,tsx}'",
-    "lint:prettier": "prettier --check '*.{json,js,jsx,ts,tsx}' 'components/**/*.{js,jsx,ts,tsx}' 'content/**/*.{js,jsx,ts,tsx}' 'lib/**/*.{js,jsx,ts,tsx}' 'pages/**/*.{js,jsx,ts,tsx}' 'state/**/*.{js,jsx,ts,tsx}'",
+    "lint:prettier": "prettier '*.{json,js,jsx,ts,tsx}' 'components/**/*.{js,jsx,ts,tsx}' 'content/**/*.{js,jsx,ts,tsx}' 'lib/**/*.{js,jsx,ts,tsx}' 'pages/**/*.{js,jsx,ts,tsx}' 'state/**/*.{js,jsx,ts,tsx}'",
     "postbuild": "cp _redirects out/_redirects",
     "start": "next start"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/**/bin/**/*.{js,jsx,ts,tsx},packages/**/src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:eslint -- --fix",
+      "npm run lint:prettier -- --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.35",
@@ -45,6 +58,8 @@
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
     "globby": "11.0.4",
+    "husky": "7.0.1",
+    "lint-staged": "11.0.1",
     "mime": "2.5.2",
     "postcss": "8.3.5",
     "prettier": "2.3.2",
