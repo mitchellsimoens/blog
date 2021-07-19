@@ -8,14 +8,7 @@ interface Props {
 }
 
 const Avatar: FunctionComponent<Props> = ({ alt, className, picture }) => (
-  <Image
-    alt={alt}
-    className={className}
-    imgClassName="!m-0"
-    height="3rem"
-    src={picture}
-    width="3rem"
-  />
+  <Image alt={alt} className={className} height={48} src={picture} width={48} />
 );
 
 export default Avatar;

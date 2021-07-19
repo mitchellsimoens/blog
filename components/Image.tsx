@@ -1,45 +1,24 @@
-import { CSSProperties, FunctionComponent } from 'react';
-import { useInView } from 'react-intersection-observer';
+import NextImage, { ImageLoaderProps, ImageProps } from 'next/image';
+import { FunctionComponent } from 'react';
 
-interface Props {
-  alt: string;
-  className?: string;
-  height?: number | string;
-  imgClassName?: string;
-  src: string;
-  width?: number | string;
-}
-
-// TODO support multiple src with <picture>
-const Image: FunctionComponent<Props> = ({ alt, className, height, imgClassName, src, width }) => {
-  const { ref } = useInView();
-  let style: CSSProperties | undefined;
-
-  if (width != null || height != null) {
-    style = {};
-
-    if (width) {
-      if (Number.isFinite(width)) {
-        style.width = `${width}px`;
-      } else {
-        style.width = width;
-      }
-    }
-
-    if (height) {
-      if (Number.isFinite(height)) {
-        style.height = `${height}px`;
-      } else {
-        style.height = height;
-      }
-    }
+const normalizeSrc = (src: string) => {
+  return src[0] === '/' ? src.slice(1) : src;
+};
+const cloudflareLoader = ({ src, width, quality }: ImageLoaderProps) => {
+  const params = [`width=${width}`];
+  if (quality) {
+    params.push(`quality=${quality}`);
   }
+  const paramsString = params.join(',');
+  return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
+};
 
-  return (
-    <div ref={ref} className={className} style={style}>
-      <img alt={alt} className={imgClassName} src={src} style={style} />
-    </div>
-  );
+const Image: FunctionComponent<ImageProps> = (props) => {
+  if (process.env.NODE_ENV === 'development') {
+    return <NextImage unoptimized={true} {...props} />;
+  } else {
+    return <NextImage {...props} loader={cloudflareLoader} />;
+  }
 };
 
 export default Image;
