@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { FunctionComponent } from 'react'
 import { siteTitle } from '../../../components/constants'
+import Author from '../../../components/Author'
 import BlogLoading from '../../../components/blog/Loading'
 import Layout from '../../../components/Layout'
 import List from '../../../components/blog/List'
-import TwitterFollow from '../../../components/TwitterFollow'
 import { author } from '../../../content/authors/default'
 import { getAllPosts } from '../../../lib/api'
 import { BlogPost } from '../../../types/blog'
@@ -22,7 +22,7 @@ const PostPager: FunctionComponent<Props> = (props) => {
       containerVariant="narrow"
       title={`Posts Page ${props.page} | ${siteTitle}`}
     >
-      {author.twitter ? <TwitterFollow handle={author.twitter} /> : null}
+      <Author author={author} />
 
       {router.isFallback ? (
         <BlogLoading />
