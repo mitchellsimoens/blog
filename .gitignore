@@ -32,3 +32,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# for next-sitemap
+robots.txt
+sitemap.xml
+
+# gen-redirects.js gets called for this
+/_redirects
