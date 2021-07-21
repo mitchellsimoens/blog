@@ -125,5 +125,5 @@ export function getAllTags(): string[] {
     return tags
   }, new Set<string>())
 
-  return [...tags]
+  return [...tags].sort()
 }
