@@ -63,6 +63,7 @@ const parseContentsToPost = (
     file: fullPath,
     excerpt,
     slug: parsedSlug,
+    tags: data.tags || null,
     timeToRead,
     title: data.title,
   }
@@ -111,4 +112,18 @@ export function getAllPosts(): BlogPost[] {
       return parseContentsToPost(fileContents, realSlug, fullPath)
     })
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+}
+
+export function getAllTags(): string[] {
+  const posts = getAllPosts()
+
+  const tags = posts.reduce((tags, post) => {
+    if (post.tags) {
+      post.tags.forEach((tag) => tags.add(tag))
+    }
+
+    return tags
+  }, new Set<string>())
+
+  return [...tags]
 }

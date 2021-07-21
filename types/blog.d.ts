@@ -20,6 +20,7 @@ export interface BlogPost {
   excerpt?: string
   ogImage?: OGImage
   slug?: string
+  tags?: string[]
   timeToRead: string
   title: string
 }

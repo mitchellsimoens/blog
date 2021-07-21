@@ -1,10 +1,12 @@
 ---
 title: NPM Publish to GPR and NPM
-date: "2020-06-25T17:58:03.682Z"
+date: '2020-06-25T17:58:03.682Z'
+tags:
+  - nodejs
 ---
 
 I've seen a few blogs about publishing a node module to the [NPM] repository and
-[GitHub Package Registry (GPR)][GPR]. Some I like, some I don't. I thought, what's better than a couple
+[GitHub Package Registry (GPR)][gpr]. Some I like, some I don't. I thought, what's better than a couple
 existing blogs about it? One more. I also have some ideas for the stuff I've done that may be a bit unique to
 me but the workflow I have can be easily adjusted to remove parts if that isn't desired.
 
@@ -30,24 +32,24 @@ individually but at the end I'll still show the entire `.github/workflows/publis
 ### `build`<a name="build-job"></a>
 
 ```yml
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
-      - name: Zip lib & node_modules
-        run: zip -9qry "build.zip" "./" -i "node_modules/*" -i "lib/*"
-      - name: Upload build.zip
-        uses: actions/upload-artifact@v2
-        with:
-          name: build.zip
-          path: build.zip
+build:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - run: npm ci
+    - run: npm run lint
+    - run: npm test
+    - run: npm run build
+    - name: Zip lib & node_modules
+      run: zip -9qry "build.zip" "./" -i "node_modules/*" -i "lib/*"
+    - name: Upload build.zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: build.zip
+        path: build.zip
 ```
 
 I personally use [TypeScript] a lot so I need do need to build it. I also like to run a quick lint check and
@@ -63,23 +65,23 @@ the `lib` dir from the zipping but I still would zip and upload the `node_module
 like this:
 
 ```yml
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - name: Zip lib & node_modules
-        run: zip -9qry "build.zip" "./" -i "node_modules/*"
-      - name: Upload build.zip
-        uses: actions/upload-artifact@v2
-        with:
-          name: build.zip
-          path: build.zip
+build:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - run: npm ci
+    - run: npm run lint
+    - run: npm test
+    - name: Zip lib & node_modules
+      run: zip -9qry "build.zip" "./" -i "node_modules/*"
+    - name: Upload build.zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: build.zip
+        path: build.zip
 ```
 
 The same would be true if you didn't have or didn't want to run the lint check or tests.
@@ -87,34 +89,34 @@ The same would be true if you didn't have or didn't want to run the lint check o
 ### `release`<a name="release-job"></a>
 
 ```yml
-  release:
-    needs: build
-    name: Create GitHub Release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Download build.zip
-        uses: actions/download-artifact@v2
-        with:
-          name: build.zip
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: Stuff happened
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build.zip
-          asset_name: build.zip
-          asset_content_type: application/zip
+release:
+  needs: build
+  name: Create GitHub Release
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@master
+    - name: Download build.zip
+      uses: actions/download-artifact@v2
+      with:
+        name: build.zip
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: Stuff happened
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build.zip
+        asset_name: build.zip
+        asset_content_type: application/zip
 ```
 
 This is where things start happening. Creating GitHub releases is a great thing as it allows you to hold build
@@ -141,24 +143,24 @@ it removes it and so you'd just have `v1.0.0`.
 ### `publish-npm`<a name="publish-npm-job"></a>
 
 ```yml
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - name: Download build.zip
-        uses: actions/download-artifact@v2
-        with:
-          name: build.zip
-      - name: Unzip build.zip
-        run: unzip -q build.zip
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
+publish-npm:
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        registry-url: https://registry.npmjs.org/
+    - name: Download build.zip
+      uses: actions/download-artifact@v2
+      with:
+        name: build.zip
+    - name: Unzip build.zip
+      run: unzip -q build.zip
+    - run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
 ```
 
 Publishing to NPM step is pretty simple. We setup node setting the registry url to NPM, then download the
@@ -169,25 +171,25 @@ repo settings.
 ### `publish-gpr`<a name="publish-gpr-job"></a>
 
 ```yml
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-          registry-url: https://npm.pkg.github.com/
-          scope: '@mitchellsimoens'
-      - name: Download build.zip
-        uses: actions/download-artifact@v2
-        with:
-          name: build.zip
-      - name: Unzip build.zip
-        run: unzip -q build.zip
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
+publish-gpr:
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        registry-url: https://npm.pkg.github.com/
+        scope: '@mitchellsimoens'
+    - name: Download build.zip
+      uses: actions/download-artifact@v2
+      with:
+        name: build.zip
+    - name: Unzip build.zip
+      run: unzip -q build.zip
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
 ```
 
 The publish to GPR is very similar to the [`publish-npm`](#publish-npm-job) but there are a few differences.
@@ -304,6 +306,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
 ```
 
-[GPR]: https://github.com/features/packages
-[NPM]: https://www.npmjs.com/
-[TypeScript]: https://www.typescriptlang.org/
+[gpr]: https://github.com/features/packages
+[npm]: https://www.npmjs.com/
+[typescript]: https://www.typescriptlang.org/

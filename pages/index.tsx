@@ -4,7 +4,8 @@ import Author from '../components/Author'
 import BlogLoading from '../components/blog/Loading'
 import Layout from '../components/Layout'
 import List from '../components/blog/List'
-import { getAllPosts } from '../lib/api'
+import TagList from '../components/blog/TagList'
+import { getAllPosts, getAllTags } from '../lib/api'
 import { siteTitle } from '../components/constants'
 import { author } from '../content/authors/default'
 import { BlogPost } from '../types/blog'
@@ -19,19 +20,34 @@ import 'prismjs/plugins/treeview/prism-treeview.css'
 
 interface Props {
   allPosts: BlogPost[]
+  allTags: string[]
 }
 
-const Index: FunctionComponent<Props> = ({ allPosts }) => {
+const IndexList: FunctionComponent<Pick<Props, 'allPosts'>> = ({
+  allPosts,
+}) => <List page={1} perPage={10} total={allPosts.length} posts={allPosts} />
+
+const Index: FunctionComponent<Props> = ({ allPosts, allTags }) => {
   const router = useRouter()
+  const hasTags = allTags.length > 0
 
   return (
-    <Layout containerVariant="narrow" title={siteTitle}>
+    <Layout containerVariant={hasTags ? undefined : 'narrow'} title={siteTitle}>
       <Author author={author} />
 
       {router.isFallback ? (
         <BlogLoading />
       ) : (
-        <List page={1} perPage={10} total={allPosts.length} posts={allPosts} />
+        <div className="flex">
+          <div className="flex-1">
+            <IndexList allPosts={allPosts} />
+          </div>
+          {hasTags ? (
+            <div className="md:ml-12 sm:mt-12 md:mt-0 sm:ml-0">
+              <TagList tags={allTags} />
+            </div>
+          ) : null}
+        </div>
       )}
     </Layout>
   )
@@ -39,10 +55,11 @@ const Index: FunctionComponent<Props> = ({ allPosts }) => {
 
 export default Index
 
-export async function getStaticProps() {
+export async function getStaticProps(): StaticProps<Props> {
   const allPosts = getAllPosts()
+  const allTags = getAllTags()
 
   return {
-    props: { allPosts },
+    props: { allPosts, allTags },
   }
 }

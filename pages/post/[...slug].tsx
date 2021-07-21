@@ -38,7 +38,7 @@ const Post: FunctionComponent<Props> = ({ post }) => {
 
 export default Post
 
-export async function getStaticProps({ params }: any) {
+export async function getStaticProps({ params }: any): StaticProps<Props> {
   const slug = Array.isArray(params.slug) ? [...params.slug] : [params.slug]
 
   slug.unshift('', 'post')
@@ -58,8 +58,6 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
   const paths = getAllPosts().map((item) => item.slug)
-
-  // console.log(paths);
 
   return {
     paths,

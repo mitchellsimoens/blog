@@ -1,6 +1,8 @@
 ---
 title: NPM Install
-date: "2020-09-03T17:58:03.682Z"
+date: '2020-09-03T17:58:03.682Z'
+tags:
+  - nodejs
 ---
 
 In the world of [Node.js](https://nodejs.org/), you're gonna be using the [npm cli tool](https://www.npmjs.com/). You're

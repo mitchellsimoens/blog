@@ -1,6 +1,9 @@
 ---
 title: Health Update
-date: "2020-03-18T17:58:03.682Z"
+date: '2020-03-18T17:58:03.682Z'
+tags:
+  - personal
+  - health
 ---
 
 About 7 years ago, I started working out. My eating habits finally caught up with me and I needed to change. So I started
