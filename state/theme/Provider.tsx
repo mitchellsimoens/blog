@@ -2,22 +2,28 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Theme } from '../../types/theme'
 import { ThemeContext } from './Context'
 
-const osDarkMode =
+const osSupportsDarkMode =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-color-scheme: dark)').matches
-const defaultTheme: Theme = { mode: 'auto', system: true }
+const defaultMode = global.localStorage?.theme || 'auto'
+const defaultTheme: Theme = {
+  mode: defaultMode,
+  system: true,
+}
 
 export const ThemeProvider: FunctionComponent = ({ children }) => {
   const [theme, setTheme] = useState(defaultTheme)
 
   useEffect(() => {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && osDarkMode)
-    ) {
+    if ('theme' in localStorage) {
+      setTheme({
+        mode: localStorage.theme,
+        system: localStorage.theme === 'dark' && osSupportsDarkMode,
+      })
+    } else if (osSupportsDarkMode) {
       setTheme({ mode: 'dark', system: false })
     } else {
-      setTheme({ mode: 'auto', system: true })
+      setTheme({ mode: 'light', system: false })
     }
   }, [])
 
@@ -31,7 +37,7 @@ export const ThemeProvider: FunctionComponent = ({ children }) => {
         localStorage.theme = 'light'
         break
       default:
-        if (osDarkMode) {
+        if (osSupportsDarkMode) {
           setTheme({ mode: 'dark', system: true })
         } else {
           localStorage.removeItem('theme')

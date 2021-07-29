@@ -20,13 +20,10 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
   return (
     <>
       <ul>
-        {pagePosts.map((post) => {
-          if (!post.slug) {
-            return null
-          }
-
-          return (
-            <li key={post.slug} className="mb-14">
+        {pagePosts
+          .filter((post) => Boolean(post.slug))
+          .map((post) => (
+            <li key={post.slug} className="mb-12 px-8 py-4 backdrop-blur">
               <Link as={post.slug} href="/post/[...slug]">
                 <span className="text-xl">{post.title}</span>
               </Link>
@@ -35,14 +32,13 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
                 <div>
                   <DateFormatter dateString={post.date} />
                 </div>
-                <div className="flex-1" />
-                <div>{post.timeToRead}</div>
+
+                <div className="ml-8">{post.timeToRead}</div>
               </div>
 
               <div>{post.excerpt}</div>
             </li>
-          )
-        })}
+          ))}
       </ul>
       <Pager
         page={page}

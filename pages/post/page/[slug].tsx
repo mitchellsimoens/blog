@@ -27,7 +27,7 @@ const PostPager: FunctionComponent<Props> = ({ page, posts, tags }) => {
 
   return (
     <Layout
-      containerVariant={hasTags ? undefined : 'narrow'}
+      containerVariant="narrow"
       title={`Posts Page ${page} | ${siteTitle}`}
     >
       <Author author={author} />
@@ -35,12 +35,12 @@ const PostPager: FunctionComponent<Props> = ({ page, posts, tags }) => {
       {router.isFallback ? (
         <BlogLoading />
       ) : (
-        <div className="flex">
+        <div className="flex items-start">
           <div className="flex-1">
             <PostList page={page} posts={posts} />
           </div>
           {hasTags ? (
-            <div className="md:ml-12 sm:mt-12 md:mt-0 sm:ml-0">
+            <div className="md:ml-12 sm:mt-12 md:mt-0 sm:ml-0 px-8 py-4 backdrop-blur">
               <TagList tags={tags} />
             </div>
           ) : null}

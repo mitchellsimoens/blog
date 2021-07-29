@@ -10,7 +10,7 @@ interface Props {
 const Author: FunctionComponent<Props> = ({ author }) => (
   <div className="max-w-2xl">
     <div className="hidden md:block md:mb-12">
-      <div className="flex items-start">
+      <div className="flex items-start backdrop-blur p-4">
         <Avatar
           alt={author.name}
           className="overflow-hidden rounded-3xl"
@@ -29,7 +29,7 @@ const Author: FunctionComponent<Props> = ({ author }) => (
 
     {
       <div className="block md:hidden mb-6">
-        <div className="flex items-start">
+        <div className="flex items-start backdrop-blur p-4">
           <Avatar
             alt={author.name}
             className="overflow-hidden rounded-3xl"

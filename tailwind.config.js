@@ -14,6 +14,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        backdropFilterFallback: `0 0 30px 5px rgba(31, 41, 55, 0.9)`,
+      },
       colors: {
         'blue-opaque': 'rgb(13 42 148 / 18%)',
       },

@@ -32,18 +32,18 @@ const Index: FunctionComponent<Props> = ({ allPosts, allTags }) => {
   const hasTags = allTags.length > 0
 
   return (
-    <Layout containerVariant={hasTags ? undefined : 'narrow'} title={siteTitle}>
+    <Layout containerVariant="narrow" title={siteTitle}>
       <Author author={author} />
 
       {router.isFallback ? (
         <BlogLoading />
       ) : (
-        <div className="flex">
+        <div className="flex items-start">
           <div className="flex-1">
             <IndexList allPosts={allPosts} />
           </div>
           {hasTags ? (
-            <div className="md:ml-12 sm:mt-12 md:mt-0 sm:ml-0">
+            <div className="md:ml-12 sm:mt-12 md:mt-0 sm:ml-0 px-8 py-4 backdrop-blur">
               <TagList tags={allTags} />
             </div>
           ) : null}
