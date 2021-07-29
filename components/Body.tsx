@@ -10,11 +10,7 @@ const BodyClass = () => {
     document.body.className = ''
 
     // assign new classes
-    document.body.classList.add(
-      'bg-white',
-      'dark:bg-gray-800',
-      'text-white',
-    )
+    document.body.classList.add('bg-white', 'dark:bg-gray-800', 'text-white')
 
     if (theme.mode !== 'auto') {
       const backgrounds = theme.mode === 'dark' ? dark : light
