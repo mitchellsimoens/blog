@@ -1,5 +1,5 @@
-const emoji = require('remark-emoji')
-const images = require('remark-images')
+// const emoji = require('remark-emoji')
+// const images = require('remark-images')
 const oembed = require('remark-oembed')
 const prism = require('remark-prism')
 const mdx = require('@next/mdx')
@@ -10,8 +10,8 @@ const withMDX = mdx({
   gfm: true,
   options: {
     remarkPlugins: [
-      emoji,
-      images,
+      // emoji,
+      // images,
       oembed,
       [
         prism,
@@ -32,7 +32,8 @@ const withMDX = mdx({
   },
 })
 
-module.exports = withMDX({
+exports.default = withMDX({
+  // productionBrowserSourceMaps: true,
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   images: {
     loader: 'imgix',

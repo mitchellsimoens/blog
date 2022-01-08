@@ -1,9 +1,9 @@
 import fs from 'fs'
 import { join } from 'path'
-import globby from 'globby'
+import { globbySync } from 'globby'
 import matter, { GrayMatterFile } from 'gray-matter'
 import readingTime from 'reading-time'
-import remark from 'remark'
+import { remark } from 'remark'
 import strip from 'strip-markdown'
 import { author as defaultAuthor } from '../content/authors/default'
 import { BlogPost } from '../types/blog'
@@ -102,8 +102,7 @@ export function getPostBySlug(slug: string | string[]): BlogPost {
 }
 
 export function getAllPosts(): BlogPost[] {
-  return globby
-    .sync([`${postsDirectory}/**/*.(md|mdx)`])
+  return globbySync([`${postsDirectory}/**/*.(md|mdx)`])
     .map((fullPath: string) => {
       const relativePath = fullPath.replace(postsDirectory, '')
       const realSlug = relativePath.replace(/(?:\/index)?\.mdx?$/, '')

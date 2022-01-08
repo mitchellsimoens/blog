@@ -1,10 +1,10 @@
 import fs from 'fs'
 import mimes from 'mime/lite'
 import path from 'path'
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
 import prism from 'remark-prism'
-import visit from 'unist-util-visit'
+import { visit } from 'unist-util-visit'
 
 const codeBlockFeatureRe = /(```\w+)(.*)$/gm
 const relativeUrlRe = /^\.{1,2}\//
@@ -54,7 +54,7 @@ const markdownToHtml = async (markdown: string, markdownPath: string) => {
         done()
       }
     })
-    .use(html)
+    .use(html as any)
     .use(prism)
     .process(
       markdown.replace(

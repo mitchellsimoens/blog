@@ -2,9 +2,9 @@ const { spacing, fontFamily } = require('tailwindcss/defaultTheme')
 const typography = require('@tailwindcss/typography')
 const aspectRatio = require('@tailwindcss/aspect-ratio')
 
-module.exports = {
+const config = {
   mode: 'jit',
-  purge: [
+  content: [
     './components/**/*.{js,ts,jsx,tsx}',
     './blog/**/*.{md,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,md,mdx}',
@@ -90,3 +90,6 @@ module.exports = {
   },
   plugins: [aspectRatio, typography],
 }
+
+// export default config
+module.exports = config
