@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { AppConfig } from '@/utils/AppConfig';
+import { AppConfig } from '@/utils/AppConfig'
 
 type IMainProps = {
-  meta: ReactNode;
-  children: ReactNode;
-};
+  meta: ReactNode
+  children: ReactNode
+}
 
 const Main = (props: IMainProps) => (
   <div className="antialiased w-full text-gray-700 px-1">
@@ -66,6 +66,6 @@ const Main = (props: IMainProps) => (
       </div>
     </div>
   </div>
-);
+)
 
-export { Main };
+export { Main }

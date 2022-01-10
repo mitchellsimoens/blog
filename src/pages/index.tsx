@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
-import { Meta } from '@/layout/Meta';
-import { Main } from '@/templates/Main';
+import { Meta } from '@/layout/Meta'
+import { Main } from '@/templates/Main'
 
 const Index = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <Main
@@ -180,7 +180,7 @@ const Index = () => {
         on our website to support this project.
       </p>
     </Main>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index
