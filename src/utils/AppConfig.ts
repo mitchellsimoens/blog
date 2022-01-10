@@ -1,6 +1,7 @@
 export const AppConfig = {
-  site_name: 'Blog',
-  title: 'Mitchell Simoens Blog',
-  description: 'Some thoughts on all things from Mitchell Simoens',
+  site_name: 'Mitchell Simoens',
+  title: 'Mitchell Simoens Site',
+  description:
+    'Some experiments and thoughts on all things from Mitchell Simoens',
   locale: 'en',
 }
