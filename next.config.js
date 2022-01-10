@@ -1,51 +1,14 @@
-// const emoji = require('remark-emoji')
-// const images = require('remark-images')
-const oembed = require('remark-oembed')
-const prism = require('remark-prism')
-const mdx = require('@next/mdx')
+/* eslint-disable import/no-extraneous-dependencies */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
-const withMDX = mdx({
-  extension: /\.mdx?$/,
-  commonmark: true,
-  gfm: true,
-  options: {
-    remarkPlugins: [
-      // emoji,
-      // images,
-      oembed,
-      [
-        prism,
-        {
-          transformInlineCode: true,
-          plugins: [
-            'autolinker',
-            'command-line',
-            'data-uri-highlight',
-            'diff-highlight',
-            'inline-color',
-            'line-numbers',
-            'treeview',
-          ],
-        },
-      ],
-    ],
-  },
-})
-
-exports.default = withMDX({
-  // productionBrowserSourceMaps: true,
-  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
-  images: {
-    loader: 'imgix',
-    path: '',
-  },
-  async redirects() {
-    return [
-      {
-        source: '/:slug(\\d{4}/\\d{2}/\\d{2}/.*)',
-        destination: '/post/:slug', // Matched parameters can be used in the destination
-        permanent: false,
-      },
-    ]
-  },
-})
+module.exports = withBundleAnalyzer({
+  poweredByHeader: false,
+  trailingSlash: true,
+  basePath: '',
+  // The starter code load resources from `public` folder with `router.basePath` in React components.
+  // So, the source code is "basePath-ready".
+  // You can remove `basePath` if you don't need it.
+  reactStrictMode: true,
+});

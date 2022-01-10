@@ -7,11 +7,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v2
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2with:
+          node-version: 16
       - name: Install
         run: npm ci
       - name: Build
-        run: npm run build
+        run: npm run build-prod
