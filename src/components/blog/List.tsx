@@ -44,8 +44,8 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
       <Pager
         page={page}
         total={totalPages}
-        uriPrefix="/post/page/"
-        firstPageUri="/"
+        uriPrefix="/blog/page/"
+        firstPageUri="/blog"
       />
     </>
   )

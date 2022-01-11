@@ -15,7 +15,7 @@ const Pager: FunctionComponent<Props> = ({
   total,
   uriPrefix,
 }) => {
-  let newerHref = page === 1 ? null : `${uriPrefix || '/page/'}${page - 1}`
+  let newerHref = page === 1 ? null : `${uriPrefix ?? '/page/'}${page - 1}`
 
   if (page === 2 && firstPageUri) {
     newerHref = firstPageUri

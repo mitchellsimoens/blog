@@ -12,9 +12,7 @@ import { BlogPost } from '../types/blog'
 
 const postsDirectory = join(process.cwd(), 'content')
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory)
-}
+export const getPostSlugs = () => fs.readdirSync(postsDirectory)
 
 const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
   let excerpt = remark()
@@ -74,7 +72,7 @@ const parseContentsToPost = (
   return items
 }
 
-export function getPostBySlug(slug: string | string[]): BlogPost {
+export const getPostBySlug = (slug: string | string[]): BlogPost => {
   const normalizedSlug = Array.isArray(slug) ? slug.join('/') : slug
   const realSlug = normalizedSlug.replace(/\.mdx?$/, '')
   let fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -104,7 +102,7 @@ export function getPostBySlug(slug: string | string[]): BlogPost {
   return parseContentsToPost(fileContents, realSlug, fullPath)
 }
 
-export function getAllPosts(): BlogPost[] {
+export const getAllPosts = (): BlogPost[] => {
   return globbySync([`${postsDirectory}/**/*.(md|mdx)`])
     .map((fullPath: string) => {
       const relativePath = fullPath.replace(postsDirectory, '')
@@ -116,7 +114,7 @@ export function getAllPosts(): BlogPost[] {
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
 }
 
-export function getAllTags(): string[] {
+export const getAllTags = (): string[] => {
   const posts = getAllPosts()
 
   const tags = posts.reduce((post_tags, post) => {
@@ -127,5 +125,5 @@ export function getAllTags(): string[] {
     return post_tags
   }, new Set<string>())
 
-  return Array.from(tags).sort()
+  return Array.from(tags).filter(Boolean).sort()
 }
