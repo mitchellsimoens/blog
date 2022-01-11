@@ -38,7 +38,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/public/*": ["./public/*"]
+      "@/content/*": ["./content/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/public/*": ["./public/*"],
+      "@/types/*": ["./types/*"]
     }
   },
   "exclude": ["./out/**/*", "./node_modules/**/*"],
