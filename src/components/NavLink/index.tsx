@@ -32,9 +32,16 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
     classes = `${classes} font-bold`
   }
 
+  const props = {
+    rawAsPath: router.asPath,
+    rawHref: href,
+  }
+
   return (
     <Link href={href}>
-      <a className={classes}>{children}</a>
+      <a className={classes} {...props}>
+        {children}
+      </a>
     </Link>
   )
 }
