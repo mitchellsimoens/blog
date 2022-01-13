@@ -25,10 +25,10 @@ export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
               <NavLink href="/">Home</NavLink>
             </li>
             <li className="mr-6">
-              <NavLink href="/blog/">Blog</NavLink>
+              <NavLink href="/blog">Blog</NavLink>
             </li>
             <li className="mr-6">
-              <NavLink href="/about/">About</NavLink>
+              <NavLink href="/about">About</NavLink>
             </li>
             <li className="mr-6">
               <NavLink href="https://github.com/mitchellsimoens/blog">
