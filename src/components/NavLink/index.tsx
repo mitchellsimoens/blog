@@ -26,6 +26,8 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   const active =
     href === '/' ? router.asPath === href : router.asPath.indexOf(href) === 0
 
+  console.log({ asPath: router.asPath, href })
+
   if (active) {
     classes = `${classes} font-bold`
   }
