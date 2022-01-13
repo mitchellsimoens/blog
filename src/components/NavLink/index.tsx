@@ -23,8 +23,8 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
     )
   }
 
-  // TODO checkout for relative links for header nav links?
-  const active = router.asPath === href
+  const active =
+    href === '/' ? router.asPath === href : router.asPath.indexOf(href) === 0
 
   if (active) {
     classes = `${classes} font-bold`
