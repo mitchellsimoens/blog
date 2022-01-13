@@ -12,13 +12,13 @@ import markdownToHtml from '@/lib/markdownToHtml'
 import { Main } from '@/templates/Main'
 import { BlogPost as BlogPostType } from '@/types/blog'
 
-// import 'prismjs/themes/prism-okaidia.css'
-// import 'prismjs/plugins/autolinker/prism-autolinker.css'
-// import 'prismjs/plugins/command-line/prism-command-line.css'
-// import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css'
-// import 'prismjs/plugins/inline-color/prism-inline-color.css'
-// import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-// import 'prismjs/plugins/treeview/prism-treeview.css'
+import 'prismjs/themes/prism-okaidia.css'
+import 'prismjs/plugins/autolinker/prism-autolinker.css'
+import 'prismjs/plugins/command-line/prism-command-line.css'
+import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css'
+import 'prismjs/plugins/inline-color/prism-inline-color.css'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+import 'prismjs/plugins/treeview/prism-treeview.css'
 
 interface Props {
   post: BlogPostType

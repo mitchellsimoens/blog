@@ -12,6 +12,21 @@ const relativeUrlRe = /^\.{1,2}\//
 
 const markdownToHtml = async (markdown: string, markdownPath: string) => {
   const markdownDir = path.dirname(markdownPath)
+  const parsed = markdown.replace(
+    codeBlockFeatureRe,
+    (_match: string, p1: string, p2: string) => {
+      switch (p1) {
+        case '```sh':
+          // shell we won't get line numbers so let's not give it the default
+          return p1
+
+        default:
+          return `${p1}${
+            p2 || '[class="line-numbers"][class="diff-highlight"]'
+          }`
+      }
+    },
+  )
   const result = await remark()
     .use(() => (tree: any, _file: any, done: any): void => {
       let count = 0
@@ -61,15 +76,22 @@ const markdownToHtml = async (markdown: string, markdownPath: string) => {
         done()
       }
     })
-    .use(html as any)
-    .use(prism as any)
-    .process(
-      markdown.replace(
-        codeBlockFeatureRe,
-        (_match: string, p1: string, p2: string) =>
-          `${p1}${p2 || '[class="line-numbers"][class="diff-highlight"]'}`,
-      ),
-    )
+    // @ts-ignore
+    .use(html, { sanitize: false })
+    // @ts-ignore
+    .use(prism, {
+      transformInlineCode: true,
+      plugins: [
+        'autolinker',
+        'command-line',
+        'data-uri-highlight',
+        'diff-highlight',
+        'inline-color',
+        'line-numbers',
+        'treeview',
+      ],
+    })
+    .process(parsed)
 
   return result.toString()
 }
