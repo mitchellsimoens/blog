@@ -42,7 +42,9 @@
       "@/lib/*": ["./lib/*"],
       "@/public/*": ["./public/*"],
       "@/types/*": ["./types/*"]
-    }
+    },
+
+    "types": ["@cloudflare/workers-types"]
   },
   "exclude": ["./out/**/*", "./node_modules/**/*"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
