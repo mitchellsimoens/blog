@@ -1,15 +1,22 @@
-interface Options {
-  cf: {
-    image: {
-      fit?: string | null
-      height?: string | null
-      quality?: string | null
-      width?: string | null
+type EnvVars = {}
+
+const hasAndValid = (
+  searchParams: URLSearchParams,
+  name: string,
+  options: RequestInitCfPropertiesImage,
+  isNumber = false,
+) => {
+  if (searchParams.has(name)) {
+    const value = searchParams.get(name)
+
+    if (value && options) {
+      const parsed = isNumber ? parseInt(value, 10) : value
+      const obj = options as any
+
+      obj[name] = parsed
     }
   }
 }
-
-type EnvVars = {}
 
 export async function onRequest({
   request,
@@ -36,26 +43,25 @@ export async function onRequest({
 
     url.pathname = name
 
-    const options: Options & RequestInit = {
+    const options: CfRequestInit = {
       cf: {
         image: {},
       },
     }
+    const imageOptions = options?.cf?.image as RequestInitCfPropertiesImage
 
-    if (url.searchParams.has('fit')) {
-      options.cf.image.fit = url.searchParams.get('fit')
-    }
+    hasAndValid(url.searchParams, 'fit', imageOptions)
+    hasAndValid(url.searchParams, 'height', imageOptions, true)
+    hasAndValid(url.searchParams, 'quality', imageOptions, true)
+    hasAndValid(url.searchParams, 'width', imageOptions, true)
 
-    if (url.searchParams.has('width')) {
-      options.cf.image.width = url.searchParams.get('width')
-    }
-
-    if (url.searchParams.has('height')) {
-      options.cf.image.height = url.searchParams.get('height')
-    }
-
-    if (url.searchParams.has('quality')) {
-      options.cf.image.quality = url.searchParams.get('quality')
+    const accept = request.headers.get('Accept')
+    if (accept) {
+      if (/image\/avif/.test(accept)) {
+        imageOptions.format = 'avif'
+      } else if (/image\/webp/.test(accept)) {
+        imageOptions.format = 'webp'
+      }
     }
 
     const imageRequest = new Request(url.href, {
