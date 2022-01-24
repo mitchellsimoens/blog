@@ -29,7 +29,7 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
                 <span className="text-xl">{post.title}</span>
               </Link>
 
-              <div className="flex my-2 text-xs">
+              <div className="my-2 flex text-xs">
                 <div>
                   <DateFormatter dateString={post.date} />
                 </div>

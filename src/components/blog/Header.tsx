@@ -17,7 +17,7 @@ const Header: FunctionComponent<Props> = ({
     <PostTitle>{title}</PostTitle>
 
     {coverImage ? (
-      <div className="mb-8 md:mb-16 sm:mx-0">
+      <div className="mb-8 sm:mx-0 md:mb-16">
         <CoverImage title={title} src={coverImage} height={620} width={1240} />
       </div>
     ) : null}

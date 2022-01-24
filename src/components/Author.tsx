@@ -10,15 +10,15 @@ interface Props {
 
 const Author: FunctionComponent<Props> = ({ author }) => (
   <div className="max-w-2xl">
-    <div className="hidden md:block md:mb-12">
-      <div className="flex items-start backdrop-blur p-4">
+    <div className="hidden md:mb-12 md:block">
+      <div className="flex items-start p-4 backdrop-blur">
         <Avatar
           alt={author.name}
           className="overflow-hidden rounded-3xl"
           picture={author.picture}
         />
 
-        <div className="flex-1 ml-7 text-lg">{author.shortBio}</div>
+        <div className="ml-7 flex-1 text-lg">{author.shortBio}</div>
       </div>
 
       {author.twitter ? (
@@ -29,15 +29,15 @@ const Author: FunctionComponent<Props> = ({ author }) => (
     </div>
 
     {
-      <div className="block md:hidden mb-6">
-        <div className="flex items-start backdrop-blur p-4">
+      <div className="mb-6 block md:hidden">
+        <div className="flex items-start p-4 backdrop-blur">
           <Avatar
             alt={author.name}
             className="overflow-hidden rounded-3xl"
             picture={author.picture}
           />
 
-          <div className="flex-1 ml-7 text-xl">{author.shortBio}</div>
+          <div className="ml-7 flex-1 text-xl">{author.shortBio}</div>
         </div>
 
         {author.twitter ? (
