@@ -24,7 +24,7 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
         {pagePosts
           .filter((post) => Boolean(post.slug))
           .map((post) => (
-            <li key={post.slug} className="mb-12 px-8 py-4 backdrop-blur">
+            <li key={post.slug} className="mb-12 px-8 py-4">
               <Link as={post.slug} href="/blog/[...slug]">
                 <span className="text-xl">{post.title}</span>
               </Link>
