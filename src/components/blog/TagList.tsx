@@ -12,7 +12,7 @@ const TagList: FunctionComponent<Props> = ({ tags }) => (
     <ul>
       {tags.map((tag, idx) => (
         <li key={tag} className={idx + 1 < tags.length ? 'mb-6' : ''}>
-          <Link as={`/post/list/${tag}`} href="/post/list/[...slug]">
+          <Link as={`/blog/list/${tag}`} href="/blog/list/[...slug]">
             <span className="text-base">{tag}</span>
           </Link>
         </li>
