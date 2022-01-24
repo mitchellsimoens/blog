@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react'
 
+import Image from './Image'
+
 interface Props {
   alt: string
   className?: string
@@ -7,7 +9,7 @@ interface Props {
 }
 
 const Avatar: FunctionComponent<Props> = ({ alt, className, picture }) => (
-  <img alt={alt} className={className} height={48} src={picture} width={48} />
+  <Image alt={alt} className={className} height={48} src={picture} width={48} />
 )
 
 export default Avatar

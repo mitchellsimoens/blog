@@ -15,10 +15,42 @@ import { useRouter } from 'next/router'
 //   return `${imageWorkersUrl}?width=${width}&quality=${quality}&image=${imageUrl.toString()}`
 // }
 
-const Image: FunctionComponent<ImageProps> = (props) => {
+const Image: FunctionComponent<ImageProps> = ({
+  alt,
+  className,
+  height,
+  quality = 75,
+  src,
+  width,
+}) => {
   const router = useRouter()
+  let url: URL
 
-  return <img src={`${router.basePath}/${props.src}`} alt={props.alt} />
+  try {
+    // src could be the full URI
+    url = new URL(src as string)
+  } catch {
+    // src was not full URI so let's build the relative path
+    url = new URL(`/api/image${src}`, router.basePath || 'http://example.com')
+  }
+
+  if (quality) {
+    url.searchParams.set('quality', `${quality}`)
+  }
+
+  if (width) {
+    url.searchParams.set('width', `${width}`)
+  }
+
+  return (
+    <img
+      src={`${url.pathname}${url.search}`}
+      alt={alt}
+      className={className}
+      height={height}
+      width={width}
+    />
+  )
 }
 // process.env.NODE_ENV === 'development' ? (
 //   <NextImage unoptimized={true} {...props} />
