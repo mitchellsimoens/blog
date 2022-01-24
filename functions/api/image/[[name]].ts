@@ -13,9 +13,29 @@ type EnvVars = {}
 
 export async function onRequest({
   request,
+  params,
 }: EventContext<EnvVars, string, void>) {
   try {
+    let { name } = params
+
+    if (name) {
+      if (Array.isArray(name)) {
+        name = name.join('/')
+      }
+
+      name = name.trim()
+
+      if (name[0] !== '/') {
+        name = `/${name}`
+      }
+    } else {
+      return new Response('Image not found', { status: 404 })
+    }
+
     const url = new URL(request.url)
+
+    url.pathname = name
+
     const options: Options & RequestInit = {
       cf: {
         image: {},
@@ -38,12 +58,13 @@ export async function onRequest({
       options.cf.image.quality = url.searchParams.get('quality')
     }
 
-    const imageURL = url.searchParams.get('image')
-    const imageRequest = new Request(imageURL as string, {
+    const imageRequest = new Request(url.href, {
       headers: request.headers,
     })
 
-    return await fetch(imageRequest, options)
+    const image = await fetch(imageRequest, options)
+
+    return image
   } catch (e: any) {
     return new Response(e.message)
   }
