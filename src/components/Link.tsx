@@ -9,7 +9,7 @@ interface Props {
 
 const Link: FunctionComponent<Props> = ({ as, children, href }) => (
   <NextLink as={as} href={href}>
-    <a className="hover:underline">{children}</a>
+    <a>{children}</a>
   </NextLink>
 )
 
