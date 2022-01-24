@@ -62,9 +62,7 @@ export async function onRequest({
       headers: request.headers,
     })
 
-    const image = await fetch(imageRequest, options)
-
-    return image
+    return await fetch(imageRequest, options)
   } catch (e: any) {
     return new Response(e.message)
   }
