@@ -43,5 +43,5 @@
     .map(({ from, dest }) => `${from} ${dest} 301`)
     .join('\n')
 
-  await writeFile(`./_redirects`, formatted)
+  await writeFile(`./public/_redirects`, formatted)
 })()

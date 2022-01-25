@@ -39,4 +39,4 @@ robots.txt
 sitemap*.xml
 
 # gen-redirects.js gets called for this
-/_redirects
+_redirects

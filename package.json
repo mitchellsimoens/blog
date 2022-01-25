@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-prod": "run-s clean build export redirects:gen redirects:copy sitemap:gen",
+    "build-prod": "run-s clean build redirects:gen sitemap:gen export",
     "start": "next start",
     "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
@@ -13,7 +13,6 @@
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
     "prepare": "husky install",
-    "redirects:copy": "cp _redirects out/_redirects",
     "redirects:gen": "node gen-redirects.js",
     "sitemap:gen": "next-sitemap"
   },
