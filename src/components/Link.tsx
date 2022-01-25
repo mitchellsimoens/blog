@@ -13,12 +13,15 @@ interface Props {
 const Link: FunctionComponent<Props> = ({
   as,
   children,
+  className,
   href,
   isRelative = href.search(/^^(?:https?:)/i) < 0,
   target = isRelative ? undefined : '_blank',
 }) => (
   <NextLink as={as} href={href}>
-    <a target={target}>{children}</a>
+    <a className={className} target={target}>
+      {children}
+    </a>
   </NextLink>
 )
 
