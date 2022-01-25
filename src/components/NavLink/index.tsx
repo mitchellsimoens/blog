@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 interface NavLinkProps {
   className?: string
   href: string
+  isRelative?: boolean
   target?: HTMLAttributeAnchorTarget
 }
 
@@ -13,10 +14,10 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   children,
   className,
   href,
-  target = '_self',
+  isRelative = href[0] === '/',
+  target = isRelative ? '_self' : '_blank',
 }) => {
   const router = useRouter()
-  const isRelative = href[0] === '/'
   let classes = 'text-gray-700 border-none hover:text-gray-900'
 
   if (className) {

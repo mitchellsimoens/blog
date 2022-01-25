@@ -41,21 +41,15 @@ export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
               <NavLink
                 className="mr-3"
                 href="https://github.com/mitchellsimoens/blog"
-                target="_blank"
               >
                 <FontAwesomeIcon icon={faGithub} />
               </NavLink>
-              <NavLink
-                className="mr-3"
-                href="https://twitter.com/LikelyMitch"
-                target="_blank"
-              >
+              <NavLink className="mr-3" href="https://twitter.com/LikelyMitch">
                 <FontAwesomeIcon icon={faTwitter} />
               </NavLink>
               <NavLink
                 className="mr-3"
                 href="https://www.linkedin.com/in/mitchellsimoens/"
-                target="_blank"
               >
                 <FontAwesomeIcon icon={faLinkedin} />
               </NavLink>
