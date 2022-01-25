@@ -1,5 +1,12 @@
 import { FunctionComponent, ReactNode } from 'react'
 
+import {
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { NavLink } from '@/components/NavLink'
 import { AppConfig } from '@/utils/AppConfig'
 
@@ -8,13 +15,13 @@ interface MainProps {
 }
 
 export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
-  <div className="antialiased w-full text-gray-700 px-1">
+  <div className="w-full px-1 text-gray-700 antialiased">
     {meta}
 
-    <div className="max-w-screen-md mx-auto">
+    <div className="mx-auto max-w-screen-md">
       <div className="border-b border-gray-300">
         <div className="pt-16 pb-8">
-          <div className="font-bold text-3xl text-gray-900">
+          <div className="text-3xl font-bold text-gray-900">
             {AppConfig.title}
           </div>
           <div className="text-xl">{AppConfig.description}</div>
@@ -30,18 +37,36 @@ export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
             <li className="mr-6">
               <NavLink href="/about">About</NavLink>
             </li>
-            <li className="mr-6">
-              <NavLink href="https://github.com/mitchellsimoens/blog">
-                GitHub
+            <li className="flex flex-1 flex-row justify-end">
+              <NavLink
+                className="mr-3"
+                href="https://github.com/mitchellsimoens/blog"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faGithub} />
+              </NavLink>
+              <NavLink
+                className="mr-3"
+                href="https://twitter.com/LikelyMitch"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faTwitter} />
+              </NavLink>
+              <NavLink
+                className="mr-3"
+                href="https://www.linkedin.com/in/mitchellsimoens/"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
               </NavLink>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="py-5 text-xl content">{children}</div>
+      <div className="content py-5 text-xl">{children}</div>
 
-      <div className="border-t border-gray-300 text-center py-8 text-sm">
+      <div className="border-t border-gray-300 py-8 text-center text-sm">
         © Copyright {new Date().getFullYear()} {AppConfig.title}.
       </div>
     </div>
