@@ -34,4 +34,9 @@ local
 # vercel
 .vercel
 
-_redirects
+# for next-sitemap
+robots.txt
+sitemap*.xml
+
+# gen-redirects.js gets called for this
+/_redirects
