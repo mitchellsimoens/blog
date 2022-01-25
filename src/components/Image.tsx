@@ -30,8 +30,13 @@ const Image: FunctionComponent<ImageProps> = ({
     // src could be the full URI
     url = new URL(src as string)
   } catch {
-    // src was not full URI so let's build the relative path
-    url = new URL(`/api/image${src}`, router.basePath || 'http://example.com')
+    if (process.env.NODE_ENV === 'development') {
+      // during development, we don't need to proxy thru worker
+      url = new URL(src as string, 'http://localhost:3000')
+    } else {
+      // src was not full URI so let's build the relative path
+      url = new URL(`/api/image${src}`, router.basePath || 'http://example.com')
+    }
   }
 
   if (quality) {
