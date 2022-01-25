@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-prod": "run-s clean build export redirects:gen redirects:copy",
+    "build-prod": "run-s clean build export redirects:gen redirects:copy sitemap:gen",
     "start": "next start",
     "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
