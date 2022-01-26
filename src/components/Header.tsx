@@ -44,7 +44,7 @@ export const Header: FunctionComponent = () => {
       </div>
 
       <Nav
-        className={`${navClassName} absolute inset-x-2 top-8 z-20 flex-col rounded-2xl bg-white p-6 shadow-lg dark:bg-slate-800 dark:shadow-none dark:shadow-slate-500 md:relative md:top-0 md:flex md:flex-row md:space-x-6 md:rounded-none md:bg-transparent md:p-0 md:shadow-none`}
+        className={`${navClassName} absolute inset-x-2 top-8 z-20 flex-col rounded-2xl bg-white p-6 shadow-lg dark:bg-slate-800 dark:shadow-none dark:shadow-slate-500 md:relative md:top-0 md:flex md:flex-row md:space-x-6 md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:dark:bg-transparent`}
       />
     </div>
   )
