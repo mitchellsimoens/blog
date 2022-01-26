@@ -18,7 +18,7 @@ const Button: FunctionComponent<ButtonProps> = ({ children, onClick }) => (
   </div>
 )
 
-const ThemeButton = () => {
+const ThemeButton: FunctionComponent = () => {
   const [theme, setTheme] = useTheme()
 
   const goDark = useCallback(

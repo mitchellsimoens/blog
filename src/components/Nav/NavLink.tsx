@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { useRouter } from 'next/router'
 
 import Link from '@/components/Link'
@@ -7,12 +8,14 @@ import Link from '@/components/Link'
 interface NavLinkProps {
   className?: string
   href: string
+  icon?: IconProp
 }
 
 export const NavLink: FunctionComponent<NavLinkProps> = ({
   children,
   className,
   href,
+  icon,
 }) => {
   const router = useRouter()
   let classes =
@@ -30,7 +33,7 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   }
 
   return (
-    <Link className={classes} href={href}>
+    <Link className={classes} href={href} icon={icon}>
       {children}
     </Link>
   )

@@ -36,10 +36,13 @@ const Index = () => (
         Dark mode (because I am a dark moder)
       </li>
       <li>
-        <span role="img" aria-label="nail_care">
-          💅
+        <span className="line-through">
+          <span role="img" aria-label="nail_care">
+            💅
+          </span>{' '}
+          Mobile
         </span>{' '}
-        Mobile
+        At least a start...
       </li>
       <li>
         <span role="img" aria-label="robot">
