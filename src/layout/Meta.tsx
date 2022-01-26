@@ -1,9 +1,10 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 
 import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { useTheme } from '@/state/theme/useTheme'
 import { AppConfig } from '@/utils/AppConfig'
 
 type MetaProps = {
@@ -14,6 +15,15 @@ type MetaProps = {
 
 const Meta: FunctionComponent<MetaProps> = (props) => {
   const router = useRouter()
+  const [theme] = useTheme()
+
+  useEffect(() => {
+    if (theme.mode === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme])
 
   return (
     <>

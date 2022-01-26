@@ -15,7 +15,8 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   href,
 }) => {
   const router = useRouter()
-  let classes = 'text-gray-700 border-none hover:text-gray-900'
+  let classes =
+    'border-none text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
 
   if (className) {
     classes = `${className} ${classes}`

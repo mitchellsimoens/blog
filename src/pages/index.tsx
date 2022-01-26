@@ -29,7 +29,7 @@ const Index = () => (
     <h2 className="text-lg font-semibold">Site TODO:</h2>
 
     <ul>
-      <li>
+      <li className="line-through">
         <span role="img" aria-label="fire">
           🔥
         </span>{' '}
