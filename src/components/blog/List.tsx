@@ -20,7 +20,7 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
 
   return (
     <>
-      <ul>
+      <ul className="!mt-0">
         {pagePosts
           .filter((post) => Boolean(post.slug))
           .map((post) => (
