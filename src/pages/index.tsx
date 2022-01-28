@@ -37,12 +37,18 @@ const Index = () => (
       </li>
       <li>
         <span className="line-through">
-          <span role="img" aria-label="nail_care">
-            💅
+          <span role="img" aria-label="phone">
+            📱
           </span>{' '}
           Mobile
         </span>{' '}
         At least a start...
+      </li>
+      <li>
+        <span role="img" aria-label="nail_care">
+          💅
+        </span>{' '}
+        An actual blog design, this is just too plain
       </li>
       <li>
         <span role="img" aria-label="robot">
