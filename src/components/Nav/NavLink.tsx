@@ -9,6 +9,7 @@ interface NavLinkProps {
   className?: string
   href: string
   icon?: IconProp
+  id?: string
 }
 
 export const NavLink: FunctionComponent<NavLinkProps> = ({
@@ -16,6 +17,7 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   className,
   href,
   icon,
+  id,
 }) => {
   const router = useRouter()
   let classes =
@@ -33,7 +35,7 @@ export const NavLink: FunctionComponent<NavLinkProps> = ({
   }
 
   return (
-    <Link className={classes} href={href} icon={icon}>
+    <Link className={classes} href={href} icon={icon} id={id}>
       {children}
     </Link>
   )
