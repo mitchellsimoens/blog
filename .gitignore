@@ -40,3 +40,5 @@ sitemap*.xml
 
 # gen-redirects.js gets called for this
 _redirects
+
+public/_headers
