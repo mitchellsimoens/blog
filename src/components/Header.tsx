@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import dynamic from 'next/dynamic'
 
 import { Nav } from '@/components/Nav'
-import { AppConfig } from '@/utils/AppConfig'
+import { siteDescription, siteTitle } from '@/constants'
 
 const ThemeButton = dynamic(() => import('@/components/ThemeButton'), {
   ssr: false,
@@ -36,11 +36,11 @@ export const Header: FunctionComponent = () => {
           </div>
 
           <div className="flex-1 text-2xl font-bold text-slate-600 dark:text-slate-300 md:text-3xl">
-            {AppConfig.title}
+            {siteTitle}
           </div>
         </div>
 
-        <div className="md:text-xl">{AppConfig.description}</div>
+        <div className="md:text-xl">{siteDescription}</div>
       </div>
 
       <Nav

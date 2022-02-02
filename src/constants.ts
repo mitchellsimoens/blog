@@ -1,2 +1,6 @@
-export const siteTitle = 'Mitchell Simoens Blog'
-export const siteDescription = 'Blog and other playings by Mitchell Simoens'
+export const siteName = 'Mitchell Simoens'
+export const siteTitle = 'Mitchell Simoens Site'
+export const siteDescription =
+  'Some experiments and thoughts on all things from Mitchell Simoens'
+
+export const locale = 'en'

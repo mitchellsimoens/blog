@@ -4,8 +4,8 @@ import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { locale, siteName } from '@/constants'
 import { useTheme } from '@/state/theme/useTheme'
-import { AppConfig } from '@/utils/AppConfig'
 
 type MetaProps = {
   title: string
@@ -64,11 +64,11 @@ const Meta: FunctionComponent<MetaProps> = (props) => {
         description={props.description}
         canonical={props.canonical}
         openGraph={{
-          title: props.title,
+          locale,
           description: props.description,
+          site_name: siteName,
+          title: props.title,
           url: props.canonical,
-          locale: AppConfig.locale,
-          site_name: AppConfig.site_name,
         }}
       />
     </>

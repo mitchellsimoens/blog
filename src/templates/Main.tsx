@@ -1,8 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react'
 
 import { Header } from '@/components/Header'
+import { siteTitle } from '@/constants'
 import Providers from '@/state/Providers'
-import { AppConfig } from '@/utils/AppConfig'
 
 interface MainProps {
   meta: ReactNode
@@ -19,7 +19,7 @@ export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
         <div className="content py-5 text-xl">{children}</div>
 
         <div className="border-t border-gray-300 py-8 text-center text-sm dark:border-slate-500">
-          © Copyright {new Date().getFullYear()} {AppConfig.title}.
+          © Copyright {new Date().getFullYear()} {siteTitle}
         </div>
       </div>
     </div>
