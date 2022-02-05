@@ -8,9 +8,9 @@ interface Props {
   as?: string
   className?: string
   href: string
-  id?: string
   icon?: IconProp
   isRelative?: boolean
+  label?: string
   target?: HTMLAttributeAnchorTarget
 }
 
@@ -20,14 +20,14 @@ const Link: FunctionComponent<Props> = ({
   className,
   href,
   icon,
-  id,
+  label,
   isRelative = href.search(/^^(?:https?:)/i) < 0,
   target = isRelative ? undefined : '_blank',
 }) => (
   <NextLink as={as} href={href}>
     <a
-      className={className}
-      id={id}
+      className={`${className} dark:text-slate-200`}
+      aria-label={label}
       target={target}
       rel={target === '_blank' ? 'noopener' : undefined}
     >

@@ -32,21 +32,21 @@ export const Nav: FunctionComponent<NavProps> = ({ className }) => (
           className="mr-3"
           href="https://github.com/mitchellsimoens/blog"
           icon={faGithub}
-          id="GitHub"
+          label="GitHub Profile Link"
         />
 
         <NavLink
           className="mr-3"
           href="https://twitter.com/LikelyMitch"
           icon={faTwitter}
-          id="Twitter"
+          label="Twitter Profile Link"
         />
 
         <NavLink
           className="mr-3"
           href="https://www.linkedin.com/in/mitchellsimoens/"
           icon={faLinkedin}
-          id="LinkedIn"
+          label="LinkedIn Profile Link"
         />
       </li>
     </ul>
