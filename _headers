@@ -3,4 +3,4 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
-  Content-Security-Policy: default-src 'self' https://cloudflareinsights.com/; base-uri 'self'; font-src 'self' https: data:; frame-ancestors 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com/ https://cloudflareinsights.com/ https://platform.twitter.com/widgets.js; script-src-attr 'none'; style-src 'self' https://cdnjs.cloudflare.com;
+  Content-Security-Policy: default-src 'self' https://cloudflareinsights.com/; base-uri 'self'; font-src 'self' https: data:; frame-ancestors 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com/ https://cloudflareinsights.com/ https://platform.twitter.com/; script-src-attr 'none'; style-src 'self' https://cdnjs.cloudflare.com;
