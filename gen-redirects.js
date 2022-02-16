@@ -40,7 +40,7 @@
   }, [])
 
   const formatted = unique
-    .map(({ from, dest }) => `${from} ${dest} 301`)
+    .map(({ from, dest }) => `${from}/ ${dest} 301`)
     .join('\n')
 
   await writeFile(`./public/_redirects`, formatted)
