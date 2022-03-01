@@ -12,6 +12,8 @@ import { BlogPost } from '../types/blog'
 
 const postsDirectory = join(process.cwd(), 'content')
 
+const EXCERPT_LENGTH = 140
+
 export const getPostSlugs = () => fs.readdirSync(postsDirectory)
 
 const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
@@ -24,8 +26,8 @@ const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
     .slice(0, 2)
     .join(' ')
 
-  if (excerpt.length > 140) {
-    excerpt = excerpt.substr(0, 140)
+  if (excerpt.length > EXCERPT_LENGTH) {
+    excerpt = excerpt.substr(0, EXCERPT_LENGTH)
   }
 
   if (excerpt.length < file.content.length) {
@@ -36,7 +38,11 @@ const parseExcerpt = (file: GrayMatterFile<string>, _options: any): void => {
       excerpt = excerpt.substr(0, excerpt.length - 1)
     }
 
-    excerpt = `${excerpt.trim()}...`
+    if (excerpt.length >= EXCERPT_LENGTH) {
+      // in case the excerpt was less than the
+      // requested length of excerpt
+      excerpt = `${excerpt.trim()}...`
+    }
   }
 
   // eslint-disable-next-line no-param-reassign

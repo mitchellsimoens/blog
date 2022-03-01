@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react'
 
 import { Header } from '@/components/Header'
+import Mermaid from '@/components/Mermaid'
 import { siteTitle } from '@/constants'
 import Providers from '@/state/Providers'
 
@@ -10,6 +11,8 @@ interface MainProps {
 
 export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
   <Providers>
+    <Mermaid />
+
     <div className="w-full px-1">
       {meta}
 
