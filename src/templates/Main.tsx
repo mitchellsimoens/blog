@@ -6,6 +6,7 @@ import { siteTitle } from '@/constants'
 import Providers from '@/state/Providers'
 
 interface MainProps {
+  children: React.ReactNode
   meta: ReactNode
 }
 

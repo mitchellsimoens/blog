@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTheme } from '@/state/theme/useTheme'
 
 interface ButtonProps {
+  children: React.ReactNode
   onClick?: MouseEventHandler<HTMLDivElement>
 }
 
