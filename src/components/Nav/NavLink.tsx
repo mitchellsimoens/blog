@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Link from '@/components/Link'
 
 interface NavLinkProps {
+  children?: React.ReactNode
   className?: string
   href: string
   icon?: IconProp

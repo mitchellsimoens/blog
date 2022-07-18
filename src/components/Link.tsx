@@ -6,6 +6,7 @@ import NextLink from 'next/link'
 
 interface Props {
   as?: string
+  children: React.ReactNode
   className?: string
   href: string
   icon?: IconProp

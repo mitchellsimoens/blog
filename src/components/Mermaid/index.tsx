@@ -1,9 +1,9 @@
 import { FunctionComponent, useEffect } from 'react'
 
 import mermaid from 'mermaid'
-import type mermaidAPI from 'mermaid/mermaidAPI'
 
-const DEFAULT_CONFIG: mermaidAPI.Config = {
+// TODO get mermaid typing back
+const DEFAULT_CONFIG: any = {
   startOnLoad: true,
   theme: 'dark',
   // stop user configs in the mermaid files from overriding these keys
@@ -16,11 +16,7 @@ const DEFAULT_CONFIG: mermaidAPI.Config = {
 }
 
 interface Props {
-  config?: Omit<
-    mermaidAPI.Config,
-    // stop user configs from overriding these keys
-    'secure' | 'securityLevel' | 'startOnLoad' | 'maxTextSize'
-  >
+  config?: any
 }
 
 const Mermaid: FunctionComponent<Props> = ({ config }) => {

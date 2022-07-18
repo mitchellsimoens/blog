@@ -2,7 +2,11 @@ import { FunctionComponent } from 'react'
 
 import { ThemeProvider } from './theme/Provider'
 
-const Providers: FunctionComponent = ({ children }) => (
+interface Props {
+  children: React.ReactNode
+}
+
+const Providers: FunctionComponent<Props> = ({ children }) => (
   <ThemeProvider>{children}</ThemeProvider>
 )
 

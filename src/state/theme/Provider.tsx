@@ -4,6 +4,10 @@ import { Theme } from '@/types/theme'
 
 import { ThemeContext } from './Context'
 
+interface Props {
+  children: React.ReactNode
+}
+
 const osSupportsDarkMode =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -13,7 +17,7 @@ const defaultTheme: Theme = {
   system: true,
 }
 
-export const ThemeProvider: FunctionComponent = ({ children }) => {
+export const ThemeProvider: FunctionComponent<Props> = ({ children }) => {
   const [theme, setTheme] = useState(defaultTheme)
 
   useEffect(() => {
