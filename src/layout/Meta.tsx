@@ -1,8 +1,8 @@
 import { FunctionComponent, useEffect } from 'react'
 
-import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 import { locale, siteName } from '@/constants'
 import { useTheme } from '@/state/theme/useTheme'

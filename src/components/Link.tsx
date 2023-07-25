@@ -25,16 +25,16 @@ const Link: FunctionComponent<Props> = ({
   isRelative = href.search(/^^(?:https?:)/i) < 0,
   target = isRelative ? undefined : '_blank',
 }) => (
-  <NextLink as={as} href={href}>
-    <a
-      className={`${className} dark:text-slate-200`}
-      aria-label={label}
-      target={target}
-      rel={target === '_blank' ? 'noopener' : undefined}
-    >
-      {children}
-      {icon && <FontAwesomeIcon icon={icon} />}
-    </a>
+  <NextLink
+    as={as}
+    href={href}
+    className={`${className} dark:text-slate-200`}
+    aria-label={label}
+    target={target}
+    rel={target === '_blank' ? 'noopener' : undefined}
+  >
+    {children}
+    {icon && <FontAwesomeIcon icon={icon} />}
   </NextLink>
 )
 

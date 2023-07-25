@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react'
 
+import Tags from './Tags'
 import { BlogPost } from '../../../types/blog'
 import DateFormatter from '../DateFormatter'
 import Link from '../Link'
 import Pager from '../Pager'
-import Tags from './Tags'
 
 interface Props {
   page: number

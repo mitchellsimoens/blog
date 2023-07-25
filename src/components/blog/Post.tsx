@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react'
 
 import Head from 'next/head'
 
-import { BlogPost as BlogPostType } from '../../../types/blog'
 import Body from './Body'
 import Footer from './Footer'
 import Header from './Header'
+import { BlogPost as BlogPostType } from '../../../types/blog'
 
 interface Props {
   post: BlogPostType

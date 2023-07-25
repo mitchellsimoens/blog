@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react'
 
+import PostTitle from './Title'
 import { BlogPost } from '../../../types/blog'
 import CoverImage from '../CoverImage'
 import DateFormatter from '../DateFormatter'
-import PostTitle from './Title'
 
 type Props = Pick<BlogPost, 'coverImage' | 'date' | 'timeToRead' | 'title'>
 
