@@ -78,7 +78,11 @@ const markdownToHtml = async (markdown: string, markdownPath: string) => {
   }
 
   const mermaidPlugin = (tree: any): void => {
-    const visitor: Visitor = (node: any, index: number | null, parent: any) => {
+    const visitor: Visitor = (
+      node: any,
+      index: number | undefined,
+      parent: any,
+    ) => {
       if (node.lang === 'mermaid') {
         parent.children.splice(index, 1, {
           type: 'html',

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 
-import { Author as AuthorType } from '../../types/blog'
 import Avatar from './Avatar'
 import TwitterFollow from './TwitterFollow'
+import { Author as AuthorType } from '../../types/blog'
 
 interface Props {
   author: AuthorType

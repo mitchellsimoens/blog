@@ -43,7 +43,7 @@ export async function onRequest({
 
     url.pathname = name
 
-    const options: CfRequestInit = {
+    const options: RequestInit = {
       cf: {
         image: {},
       },
