@@ -12,12 +12,13 @@ import {
   LinearScale,
   BarElement,
   Tooltip,
+  ChartOptions,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip)
 
-export const options = {
+const options: ChartOptions<'bar'> = {
   indexAxis: 'y' as const,
   elements: {
     bar: {
@@ -25,6 +26,13 @@ export const options = {
     },
   },
   responsive: true,
+  scales: {
+    x: {
+      ticks: {
+        callback: (value: number | string) => `${value} ms`,
+      },
+    },
+  },
 }
 
 const ServerTimingViz: FunctionComponent = () => {
