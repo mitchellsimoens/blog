@@ -22,7 +22,7 @@ export const Main: FunctionComponent<MainProps> = ({ meta, children }) => (
 
         <div className="content py-5 text-xl">{children}</div>
 
-        <div className="border-t border-gray-300 py-8 text-center text-sm dark:border-slate-500">
+        <div className="border-t border-divider py-8 text-center text-sm">
           © Copyright {new Date().getFullYear()} {siteTitle}
         </div>
       </div>

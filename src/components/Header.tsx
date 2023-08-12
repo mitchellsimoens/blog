@@ -1,52 +1,64 @@
-import { FunctionComponent, useCallback, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuToggle,
+} from '@nextui-org/react'
 import dynamic from 'next/dynamic'
 
-import { Nav } from '@/components/Nav'
-// import { ThemeSwitcher } from '@/components/ThemeSwitcher'
-import { siteDescription, siteTitle } from '@/constants'
+import { NavLink } from '@/components/NavLink'
+import { siteDescription } from '@/constants'
 
 const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {
   ssr: false,
 })
 
 export const Header: FunctionComponent = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  const onMenuClick = useCallback(
-    () => setMenuOpen(!menuOpen),
-    [menuOpen, setMenuOpen],
-  )
-
-  const navClassName = menuOpen ? 'flex' : 'hidden'
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <div className="border-b border-gray-300 dark:border-slate-500">
-      <div className="pb-8 md:pt-16 md:pb-8">
-        <div className="items-center md:flex">
-          <div className="flex items-center justify-end md:order-2">
+    <div className="border-b border-divider">
+      <Navbar isBordered onMenuOpenChange={setIsMenuOpen}>
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <p className="font-bold text-inherit">Mitchell Simoens</p>
+          </NavbarBrand>
+        </NavbarContent>
+
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/blog">Blog</NavLink>
+          <NavLink href="/about">About</NavLink>
+        </NavbarContent>
+
+        <NavbarContent justify="end">
+          <NavbarItem>
             <ThemeSwitcher />
+          </NavbarItem>
+        </NavbarContent>
 
-            <FontAwesomeIcon
-              className="cursor-pointer md:hidden"
-              icon={faBars}
-              onClick={onMenuClick}
-            />
-          </div>
+        <NavbarMenu>
+          <NavLink menu href="/">
+            Home
+          </NavLink>
+          <NavLink menu href="/blog">
+            Blog
+          </NavLink>
+          <NavLink menu href="/about">
+            About
+          </NavLink>
+        </NavbarMenu>
+      </Navbar>
 
-          <div className="flex-1 text-2xl font-bold text-slate-600 dark:text-slate-300 md:text-3xl">
-            {siteTitle}
-          </div>
-        </div>
-
-        <div className="md:text-xl">{siteDescription}</div>
-      </div>
-
-      <Nav
-        className={`${navClassName} absolute inset-x-2 top-8 z-20 flex-col rounded-2xl bg-white p-6 shadow-lg dark:bg-slate-800 dark:shadow-none dark:shadow-slate-500 md:relative md:top-0 md:flex md:flex-row md:space-x-6 md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:dark:bg-transparent`}
-      />
+      <div className="py-2 md:text-xl">{siteDescription}</div>
     </div>
   )
 }
