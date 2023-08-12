@@ -11,7 +11,8 @@ const Index = () => (
       this site has always been an arena that I can continue to push my skills.
       For example, I wanted to learn{' '}
       <Link href="https://nextjs.org/">Next.js</Link>,{' '}
-      <Link href="https://tailwindcss.com/">Tailwind CSS</Link> and{' '}
+      <Link href="https://tailwindcss.com/">Tailwind CSS</Link>,{' '}
+      <Link href="https://nextui.org/">NextUI</Link> and{' '}
       <Link href="https://www.cloudflare.com/">Cloudflare</Link> more... so I
       built it. I will be honest, I love it. It feels like the DX of many of the
       tools I am using is exciting me more to keep pushing myself. Much{' '}

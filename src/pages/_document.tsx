@@ -8,7 +8,8 @@ class MyDocument extends Document {
     return (
       <Html lang={locale}>
         <Head />
-        <body className="bg-gray-100 px-4 text-slate-500 antialiased dark:bg-slate-900 dark:text-slate-400">
+
+        <body>
           <Main />
           <NextScript />
         </body>

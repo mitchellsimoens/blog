@@ -1,13 +1,18 @@
 import { FunctionComponent } from 'react'
 
-import { ThemeProvider } from './theme/Provider'
+import { NextUIProvider } from '@nextui-org/react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 interface Props {
   children: React.ReactNode
 }
 
 const Providers: FunctionComponent<Props> = ({ children }) => (
-  <ThemeProvider>{children}</ThemeProvider>
+  <NextUIProvider>
+    <NextThemesProvider attribute="class" defaultTheme="dark">
+      {children}
+    </NextThemesProvider>
+  </NextUIProvider>
 )
 
 export default Providers

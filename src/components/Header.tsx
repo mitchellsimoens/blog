@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import dynamic from 'next/dynamic'
 
 import { Nav } from '@/components/Nav'
+// import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { siteDescription, siteTitle } from '@/constants'
 
-const ThemeButton = dynamic(() => import('@/components/ThemeButton'), {
+const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {
   ssr: false,
 })
 
@@ -26,7 +27,7 @@ export const Header: FunctionComponent = () => {
       <div className="pb-8 md:pt-16 md:pb-8">
         <div className="items-center md:flex">
           <div className="flex items-center justify-end md:order-2">
-            <ThemeButton />
+            <ThemeSwitcher />
 
             <FontAwesomeIcon
               className="cursor-pointer md:hidden"
