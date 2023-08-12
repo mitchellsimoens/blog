@@ -25,11 +25,3 @@ a:hover {
     @apply text-xl;
   }
 }
-
-.content p {
-  @apply my-6;
-}
-
-.content ul {
-  @apply my-6;
-}
