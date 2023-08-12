@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
-import Avatar from './Avatar'
+import { Avatar } from '@nextui-org/react'
+
 import TwitterFollow from './TwitterFollow'
 import { Author as AuthorType } from '../../types/blog'
 
@@ -13,9 +14,10 @@ const Author: FunctionComponent<Props> = ({ author }) => (
     <div className="hidden md:mb-12 md:block">
       <div className="flex items-start p-4">
         <Avatar
-          alt={author.name}
-          className="overflow-hidden rounded-3xl"
-          picture={author.picture}
+          src={author.picture}
+          imgProps={{
+            alt: author.name,
+          }}
         />
 
         <div className="ml-7 flex-1 text-lg">{author.shortBio}</div>
@@ -32,9 +34,10 @@ const Author: FunctionComponent<Props> = ({ author }) => (
       <div className="mb-6 block md:hidden">
         <div className="flex items-start p-4">
           <Avatar
-            alt={author.name}
-            className="overflow-hidden rounded-3xl"
-            picture={author.picture}
+            src={author.picture}
+            imgProps={{
+              alt: author.name,
+            }}
           />
 
           <div className="ml-7 flex-1 text-xl">{author.shortBio}</div>

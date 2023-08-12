@@ -11,8 +11,10 @@ import {
 } from '@nextui-org/react'
 import { useRouter } from 'next/router'
 
+import DateFormatter from '@/components/DateFormatter'
+import Link from '@/components/Link'
+
 import { BlogPost } from '../../../types/blog'
-import DateFormatter from '../DateFormatter'
 
 interface Props {
   page: number
@@ -45,9 +47,15 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
           <Card key={post.slug} fullWidth className="mb-4">
             <CardHeader className="flex">
               <div className="flex flex-col">
-                <p className="text-md">{post.title}</p>
-                <p className="text-small text-default-500">
+                <p className="text-md">
+                  <Link as={post.slug} href="/blog/[...slug]">
+                    {post.title}
+                  </Link>
+                </p>
+                <p className="flex text-small text-default-500">
                   <DateFormatter dateString={post.date} />
+
+                  <div className="ml-8">{post.timeToRead}</div>
                 </p>
               </div>
             </CardHeader>
@@ -58,11 +66,19 @@ const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
               <p>{post.excerpt}</p>
             </CardBody>
 
-            <Divider />
+            {post.tags && post.tags.length > 0 && (
+              <>
+                <Divider />
 
-            <CardFooter>
-              {post.tags?.map((tag) => <Chip key={tag}>#{tag}</Chip>)}
-            </CardFooter>
+                <CardFooter>
+                  {post.tags.map((tag) => (
+                    <Chip key={tag} className="mr-1">
+                      #{tag}
+                    </Chip>
+                  ))}
+                </CardFooter>
+              </>
+            )}
           </Card>
         ))}
 

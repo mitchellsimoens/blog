@@ -6,7 +6,7 @@ import Author from '../Author'
 type Props = Pick<BlogPost, 'author'>
 
 const Footer: FunctionComponent<Props> = ({ author }) => (
-  <div className="mt-12 border-t pt-12">
+  <div className="mt-12 border-t border-divider pt-12">
     <Author author={author} />
   </div>
 )
