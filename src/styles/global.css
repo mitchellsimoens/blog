@@ -26,10 +26,10 @@ a:hover {
   }
 }
 
-.content p {
+.content article p {
   @apply my-6;
 }
 
-.content ul {
+.content article ul {
   @apply my-6;
 }

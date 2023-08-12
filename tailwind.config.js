@@ -1,5 +1,10 @@
+const { nextui } = require('@nextui-org/react')
+
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     fontSize: {
@@ -42,5 +47,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [nextui()],
 }

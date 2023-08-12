@@ -40,7 +40,7 @@ const Blog: FunctionComponent<Props> = ({ allPosts, allTags }) => {
           <IndexList allPosts={allPosts} />
         </div>
         {hasTags && (
-          <div className="mt-12 ml-0 border-t border-gray-300 px-8 py-4 dark:border-slate-500 md:ml-12 md:mt-0 md:border-0">
+          <div className="mt-12 ml-0 border-t border-divider px-8 py-4 md:ml-12 md:mt-0 md:border-0">
             <TagList tags={allTags} />
           </div>
         )}

@@ -1,10 +1,20 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useCallback } from 'react'
 
-import Tags from './Tags'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Chip,
+  Divider,
+  Pagination,
+} from '@nextui-org/react'
+import { useRouter } from 'next/router'
+
+import DateFormatter from '@/components/DateFormatter'
+import Link from '@/components/Link'
+
 import { BlogPost } from '../../../types/blog'
-import DateFormatter from '../DateFormatter'
-import Link from '../Link'
-import Pager from '../Pager'
 
 interface Props {
   page: number
@@ -14,48 +24,70 @@ interface Props {
 }
 
 const List: FunctionComponent<Props> = ({ page, perPage, posts, total }) => {
+  const router = useRouter()
   const pageNum = page > 0 ? page : 1
   const offset = (pageNum - 1) * perPage
   const pagePosts = posts.slice(offset, offset + perPage)
   const totalPages = Math.ceil(total / perPage)
 
+  const onChange = useCallback(
+    (newPage: number) => {
+      const url = newPage === 1 ? '/blog' : `/blog/page/${newPage}`
+
+      router.push(url)
+    },
+    [router],
+  )
+
   return (
     <>
-      <ul className="!mt-0">
-        {pagePosts
-          .filter((post) => Boolean(post.slug))
-          .map((post) => (
-            <li
-              key={post.slug}
-              className="mb-12 rounded bg-white px-8 py-4 shadow dark:bg-slate-800"
-            >
-              <Link as={post.slug} href="/blog/[...slug]">
-                <span className="text-xl">{post.title}</span>
-              </Link>
-
-              <div className="my-2 flex border-b border-gray-200 pb-4 text-xs">
-                <div>
+      {pagePosts
+        .filter((post) => Boolean(post.slug))
+        .map((post) => (
+          <Card key={post.slug} fullWidth className="mb-4">
+            <CardHeader className="flex">
+              <div className="flex flex-col">
+                <p className="text-md">
+                  <Link as={post.slug} href="/blog/[...slug]">
+                    {post.title}
+                  </Link>
+                </p>
+                <p className="flex text-small text-default-500">
                   <DateFormatter dateString={post.date} />
-                </div>
 
-                <div className="ml-8">{post.timeToRead}</div>
+                  <div className="ml-8">{post.timeToRead}</div>
+                </p>
               </div>
+            </CardHeader>
 
-              <div className="text-base">{post.excerpt}</div>
+            <Divider />
 
-              {post.tags?.length && (
-                <div className="mt-4">
-                  <Tags tags={post.tags} />
-                </div>
-              )}
-            </li>
-          ))}
-      </ul>
-      <Pager
+            <CardBody>
+              <p>{post.excerpt}</p>
+            </CardBody>
+
+            {post.tags && post.tags.length > 0 && (
+              <>
+                <Divider />
+
+                <CardFooter>
+                  {post.tags.map((tag) => (
+                    <Chip key={tag} className="mr-1">
+                      #{tag}
+                    </Chip>
+                  ))}
+                </CardFooter>
+              </>
+            )}
+          </Card>
+        ))}
+
+      <Pagination
+        disableAnimation
         page={page}
         total={totalPages}
-        uriPrefix="/blog/page/"
-        firstPageUri="/blog"
+        onChange={onChange}
+        className="mt-5 mb-1"
       />
     </>
   )
