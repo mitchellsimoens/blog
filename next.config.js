@@ -35,6 +35,7 @@ const withMDX = mdx({
 
 module.exports = withBundleAnalyzer(
   withMDX({
+    output: 'export',
     pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
     poweredByHeader: false,
     basePath: '',

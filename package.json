@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-prod": "NODE_ENV=production run-s clean build redirects:gen sitemap:gen headers:copy export",
+    "build-prod": "NODE_ENV=production run-s clean build redirects:gen sitemap:gen headers:copy",
     "start": "next start",
     "build-stats": "cross-env ANALYZE=true npm run build",
-    "export": "next export",
     "clean": "rimraf .next out",
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
